@@ -53,9 +53,8 @@
 											</select>
 										</td>
 									</tr>
-																		<tr>
+									<tr>
 										<th width="20%">Kode Toko</th>
-
 										<td>
 											<select name="kd_toko" class="form-control" required="required">
 												<option value="">-Pilih</option>	

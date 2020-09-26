@@ -21,7 +21,7 @@
 							<form action="admin_update.php" method="post">
 								<?php
 								$id = $_GET['id'];
-								$data = mysqli_query($config,"select * from admin where id='$id'");		
+								$data = mysqli_query($config,"select * from admin inner join toko on admin.kd_toko=toko.kd_toko where id='$id'");		
 								while($d=mysqli_fetch_array($data)){
 									?>
 									<table class="table table-bordered">
@@ -60,7 +60,17 @@
 													<option <?php if($d['level']=="setting"){echo "selected='selected'";} ?> value="setting">setting</option>												
 												</select>
 											</td>
-										</tr>																		
+										</tr>
+										<tr>
+											<th width="20%">Toko</th>
+											<td>
+												<select name="kd_toko" class="form-control" required="required">
+													<option value="">-Pilih</option>												
+													<option <?php if($d['kd_toko']=="faskal01"){echo "selected='selected'";} ?> value="faskal01">Faskal Pusat</option>
+													<option <?php if($d['kd_toko']=="faskal02"){echo "selected='selected'";} ?> value="faskal02">Faskal Cabang</option>			
+												</select>
+											</td>
+										</tr>																	
 										<tr>
 											<th></th>
 											<td><input type="submit" value="Simpan" class="btn btn-primary btn-sm"></td>
