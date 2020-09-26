@@ -26,7 +26,7 @@
 									</tr>
 									<tr>
 										<th width="20%">Password</th>
-										<td><input type="text" class="form-control" name="password" required="required"></td>
+										<td><input type="password" class="form-control" name="password" required="required"></td>
 									</tr>
 									<tr>
 										<th width="20%">Nama</th>
@@ -50,6 +50,24 @@
 												<option value="produksi">produksi</option>												
 												<option value="owner">owner</option>												
 												<option value="setting">setting</option>												
+											</select>
+										</td>
+									</tr>
+																		<tr>
+										<th width="20%">Kode Toko</th>
+
+										<td>
+											<select name="kd_toko" class="form-control" required="required">
+												<option value="">-Pilih</option>	
+											<?php 
+											$sql="select * from toko";
+											$hasil=mysqli_query($config,$sql);
+											while ($data = mysqli_fetch_array($hasil)) {
+											   ?>
+											    <option value="<?php echo $data['kd_toko'];?>"><?php echo $data['ket_toko'];?></option>
+											  <?php 
+												}
+											  ?>																							
 											</select>
 										</td>
 									</tr>																		

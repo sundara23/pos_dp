@@ -11,7 +11,7 @@
 				<!-- Traffic sources -->
 				<div class="panel panel-flat">
 					<div class="panel-heading">
-						<h4 class="panel-title">Design & Setting Layout</h4>						
+						<h4 class="panel-title">Setting / Design</h4>						
 					</div>
 					<div class="panel-body">
 						<a href="wo_tambah.php" class="btn btn-sm btn-primary"><i class="icon-plus22"></i> Add W.O</a>						
