@@ -19,8 +19,7 @@
 							<table class="table table-bordered table-hover table-datatable">
 								<thead>
 									<tr>
-										<th width="1%">No</th>									
-										<th>ID ORDER</th>		
+										<th>No</th>
 										<th>Date</th>		
 										<th>Kostumer</th>												
 										<th>Total</th>		
@@ -38,13 +37,16 @@
 										?>
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo $d['invoice_id'] ?></td>
 											<td><?php echo date('d-m-Y',strtotime($d['invoice_tgl'])); ?></td>
 											<td><?php echo $d['kostumer_nama'] ?></td>
 											<td>
 												Rp. <?php echo number_format($d['invoice_total']);?>
 												<br/>
-												<small class="text-muted">Payment : <?php echo $d['invoice_payment']; ?></small>
+												<small class="text-muted">Diskon : <?php echo $d['invoice_diskon']; ?> %</small>
+                                                <br>
+												<small class="text-muted">DP : Rp. <?php echo number_format($d['invoice_dp']); ?></small>
+                                                <br>
+												<small class="text-muted"><?php if($d['invoice_ar']==0){echo "Lunas";}else{echo "Piutang : Rp. ".number_format($d['invoice_ar']);} ?></small>
 											</td>
 											<td>Rp. <?php echo number_format($d['invoice_ar']);?></td>											
 											<td>

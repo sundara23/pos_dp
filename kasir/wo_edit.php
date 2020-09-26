@@ -175,7 +175,13 @@
 										</tr>
 										<tr>
 											<th>Grand Total</th>
-											<td><input type="number" readonly="readonly" min="0" value="<?php echo $in['invoice_total']; ?>" name="grand_total" class="form-control grand_total"></td>
+                                            <?php
+                                            $diskon = $in['invoice_diskon'];
+                                            $total =  $in['invoice_total'];
+                                            $totaldiskon = $total*$diskon/100;
+                                            $grandtotal = $total - $totaldiskon;
+                                            ?>
+											<td><input type="number" readonly="readonly" min="0" value="<?php if($in['invoice_diskon']==0){echo $in['invoice_total'];}else{echo $grandtotal;} ?>" name="grand_total" class="form-control grand_total"></td>
 											<td></td>
 										</tr>
 										<tr>
@@ -185,7 +191,12 @@
 										</tr>
 										<tr>
 											<th>Sisa Pembayaran</th>
-											<td><input type="number" min="0" value="<?php if($in['invoice_ar']=="0"){echo $in['invoice_total'];}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar" disabled></td>
+<!--                                            --><?php
+//                                            if($in['invoice_total'] == 0){
+//
+//                                            }
+//                                            ?>
+											<td><input type="number" min="0" value="<?php if($in['invoice_total']==$in['invoice_dp'] ){echo "0";}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar"></td>
 											<td></td>
 										</tr>										
 										<tr>
@@ -242,7 +253,7 @@
 			var total = $('.total').val();			
 			var disc = $('.disc').val();	
 			var grand_total = $('.grand_total').val();			
-			var ar = $('.ar').val();			
+			var ar = $('.ar').val();
 
 			var x = total*disc/100;		
 			var xx = total-x;		
@@ -265,43 +276,43 @@
 		});
 
 
-		$('body').on("click",".btn-update-harga",function(){
-						
-			var id_invoice = $(".id_invoice").val();
-
-			var n = <?php echo $n; ?>;
-			
-			for(x=1;x<=n;x++){
-								
-				var x_harga_satuan = $(".x_harga_satuan"+x).val();
-				var x_qty = $(".x_qty"+x).val();				
-				var x_id_order = $(".x_id_order"+x).val();				
-				
-
-				if(x_qty!="0"&&x_id_order!="0"&&x_id_order!="0"){
-					var data = "id_invoice="+id_invoice+"&harga_satuan="+x_harga_satuan+"&qty="+x_qty+"&id_order="+x_id_order;
-					$.ajax({
-						data : data,
-						url : 'wo_update_jumlah.php',
-						method : "POST",
-						success:function(html){				
-						// $(".kostumer-terpilih").val(html);
-						// var url = "wo_tambah_ajax2.php?id="+html;
-						// $(".xxx").load(url);	
-						// alert(html);	
-						// console.log(html);				
-					}
-				});
-				}else{
-					alert("Isi data dengan benar.");
-				}
-			}
-					
-			// 2x reload
-			location.reload(); 
-			location.reload(); 
-		
-		});
+		//$('body').on("click",".btn-update-harga",function(){
+		//
+		//	var id_invoice = $(".id_invoice").val();
+        //
+		//	var n = <?php //echo $n; ?>//;
+		//
+		//	for(x=1;x<=n;x++){
+		//
+		//		var x_harga_satuan = $(".x_harga_satuan"+x).val();
+		//		var x_qty = $(".x_qty"+x).val();
+		//		var x_id_order = $(".x_id_order"+x).val();
+		//
+        //
+		//		if(x_qty!="0"&&x_id_order!="0"&&x_id_order!="0"){
+		//			var data = "id_invoice="+id_invoice+"&harga_satuan="+x_harga_satuan+"&qty="+x_qty+"&id_order="+x_id_order;
+		//			$.ajax({
+		//				data : data,
+		//				url : 'wo_update_jumlah.php',
+		//				method : "POST",
+		//				success:function(html){
+		//				// $(".kostumer-terpilih").val(html);
+		//				// var url = "wo_tambah_ajax2.php?id="+html;
+		//				// $(".xxx").load(url);
+		//				// alert(html);
+		//				// console.log(html);
+		//			}
+		//		});
+		//		}else{
+		//			alert("Isi data dengan benar.");
+		//		}
+		//	}
+		//
+		//	// 2x reload
+		//	location.reload();
+		//	location.reload();
+		//
+		//});
 
 
 	});
