@@ -35,6 +35,7 @@
 	<script type="text/javascript" src="../assets/js/core/app.js"></script>
 	<!-- <script type="text/javascript" src="../assets/js/pages/dashboard.js"></script> -->
 	<!-- /theme JS files -->
+
 	<?php 
 	session_start();
 	if($_SESSION['level'] != "setting"){
