@@ -3,7 +3,7 @@ include 'config.php';
 $username = $_POST['username'];
 $password = sha1($_POST['password']);
 
-$cek = mysqli_query($config,"select * from admin inner join user_level on admin.level=user_level.kd_level where username='$username' and password='$password'");
+$cek = mysqli_query($config,"select * from admin inner join user_level on admin.level=user_level.kd_level inner join toko on admin.kd_toko=toko.kd_toko where username='$username' and password='$password'");
 
 
 if(mysqli_num_rows($cek) > 0){
@@ -16,6 +16,7 @@ if(mysqli_num_rows($cek) > 0){
 	$_SESSION['nama'] = $c['nama'];
 	$_SESSION['level'] = $c['level'];
 	$_SESSION['level_name'] = $c['level_name'];
+	$_SESSION['ket_toko'] = $c['ket_toko'];
 	$_SESSION['status'] = "login";
 	
 	if($c['level']=="bm"){		

@@ -27,14 +27,15 @@
 									<th>Nama</th>		
 									<th>Handphone</th>		
 									<th>Alamat</th>		
-									<th>Level</th>		
+									<th>Level</th>
+									<th>Toko</th>		
 									<th width="22%">OPSI</th>
 								</tr>
 							</thead>
 							<tbody>
 							<?php
 							$no = 1; 
-							$data = mysqli_query($config,"select * from admin inner join user_level on admin.level=user_level.kd_level");
+							$data = mysqli_query($config,"select * from admin inner join user_level on admin.level=user_level.kd_level inner join toko on admin.kd_toko=toko.kd_toko");
 							while($d=mysqli_fetch_array($data)){
 								?>
 								<tr
@@ -59,6 +60,7 @@
 									<td><?php echo $d['handphone'] ?></td>			
 									<td><?php echo $d['alamat'] ?></td>			
 									<td><?php echo $d['level_name'] ?></td>
+									<td><?php echo $d['ket_toko'] ?></td>
 									<td>									
 										<a class="btn border-teal text-teal btn-flat btn-icon btn-xs" href="admin_password.php?id=<?php echo $d['id'];?>"><i class="icon-lock"></i> Update Password</a>
 										<a class="btn border-teal text-teal btn-flat btn-icon btn-xs" href="admin_edit.php?id=<?php echo $d['id'];?>"><i class="icon-wrench3"></i></a>

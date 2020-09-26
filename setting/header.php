@@ -53,7 +53,7 @@
 	<div class="navbar navbar-default header-highlight">
 		<div class="navbar-header">		
 			<a class="navbar-brand" href="index.php" style="color: #fff">
-				FASKAL
+				<?php echo $_SESSION['ket_toko']; ?>
 			</a>
 			<ul class="nav navbar-nav visible-xs-block">
 				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
