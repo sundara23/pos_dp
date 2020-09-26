@@ -31,8 +31,9 @@
 								</thead>
 								<tbody>
 									<?php
-									$no = 1; 
-									$data = mysqli_query($config,"select * from invoice,kostumer where invoice_kostumer=kostumer_id order by invoice_id desc");		
+									$no = 1;
+									$kdtoko = $_SESSION['kd_toko'];
+									$data = mysqli_query($config,"select * from invoice,kostumer where invoice_kostumer=kostumer_id and invoice.kd_toko='$kdtoko' order by invoice_id desc");
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr>
