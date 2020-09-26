@@ -113,21 +113,16 @@
 													<td><?php echo $d['order_keterangan'] ?></td>																						
 													<td>																										
 														<input type="hidden" value="<?php echo $d['order_id'] ?>" class="form-control x_id_order<?php echo $n; ?>">
-														<input type="number" value="<?php echo $d['order_qty'] ?>" min="1" class="form-control x_qty<?php echo $n; ?>" style="width: 80px">
+														<input type="number" value="<?php echo $d['order_qty'] ?>" min="1" class="form-control x_qty<?php echo $n; ?>" style="width: 80px" disabled>
 													</td>																						
 													<td>													
-														<input type="number" value="<?php echo $d['order_harga_satuan'] ?>" min="1" class="form-control x_harga_satuan<?php echo $n; ?>" style="width: 110px">													
+														<input type="number" value="<?php echo $d['order_harga_satuan'] ?>" min="1" class="form-control x_harga_satuan<?php echo $n; ?>" style="width: 110px" disabled>
 													</td>																						
 													<td><?php echo $d['order_harga_sub_total'] ?></td>																																		
 												</tr>
 												<?php
 											}
-											?>			
-											<tr>
-												<td colspan="7"></td>																																													
-												<td><a class="btn btn-warning btn-update-harga btn-xs"><i class="icon-spinner11"></i> &nbsp; UPDATE QTY & HARGA</a></td>	
-												<td></td>																																												
-											</tr>																								
+											?>
 										</tbody>
 									</table>
 							
@@ -189,8 +184,8 @@
 											<td></td>
 										</tr>
 										<tr>
-											<th>AR</th>
-											<td><input type="number" min="0" value="<?php if($in['invoice_ar']=="0"){echo $in['invoice_total'];}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar"></td>
+											<th>Sisa Pembayaran</th>
+											<td><input type="number" min="0" value="<?php if($in['invoice_ar']=="0"){echo $in['invoice_total'];}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar" disabled></td>
 											<td></td>
 										</tr>										
 										<tr>

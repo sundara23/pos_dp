@@ -24,7 +24,7 @@
 										<th>Date</th>		
 										<th>Kostumer</th>												
 										<th>Total</th>		
-										<th>AR</th>		
+										<th>Sisa Pembayaran</th>
 										<th>Status</th>												
 										<th width="18%">OPSI</th>
 									</tr>
