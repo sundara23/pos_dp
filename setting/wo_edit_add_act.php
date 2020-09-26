@@ -10,13 +10,15 @@ $sub_total = $_POST['sub_total'];
 $jumlah = $_POST['jumlah'];
 $panjang = $_POST['panjang'];
 $lebar = $_POST['lebar'];
+$kd_toko = $_POST['kd_toko'];
+
 
 $datetime = date('Y-m-d H:i:s');
 
 
 $keterangan = "Ukuran : ".$panjang."x".$lebar."<br/>Luas : ".$lebar." (Meter Persegi)";
 
-mysqli_query($config,"INSERT INTO orderan VALUES ('','$id_invoice','$id_hj','$keterangan','$jumlah','$harga_satuan','$sub_total','$datetime')");
+mysqli_query($config,"INSERT INTO orderan VALUES ('','$kd_toko','$id_invoice','$id_hj','$keterangan','$jumlah','$harga_satuan','$sub_total','$datetime')");
 
 
 // update total

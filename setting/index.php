@@ -22,18 +22,19 @@
 								<thead>
 									<tr>
 										<th width="1%">No</th>									
-										<th>ID ORDER</th>		
+										<!-- <th>ID ORDER</th>	 -->	
 										<th>Date</th>		
 										<th>Kostumer</th>		
 										<th>Total Order</th>		
 										<th>Status</th>												
-										<th width="20%">OPSI</th>
+										<th width="22%">OPSI</th>
 									</tr>
 								</thead>
 								<tbody>
 									<?php
+									$id_admin = $_SESSION['id'];
 									$no = 1; 
-									$data = mysqli_query($config,"select * from invoice,kostumer where invoice_kostumer=kostumer_id order by invoice_id desc");		
+									$data = mysqli_query($config,"select * from invoice,kostumer where invoice_kostumer=kostumer_id and id_admin='$id_admin' order by invoice_id desc");		
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr 
@@ -51,7 +52,7 @@
 										?>
 										 >
 											<td><?php echo $no++; ?></td>
-											<td><?php echo $d['invoice_id'] ?></td>
+											<!-- <td><?php echo $d['invoice_id'] ?></td> -->
 											<td><?php echo date('d-m-Y',strtotime($d['invoice_tgl'])); ?></td>
 											<td><?php echo $d['kostumer_nama'] ?></td>
 											<td>
@@ -79,7 +80,7 @@
 												<?php 												
 												if($d['invoice_status']=="0"){													
 													?>
-													<a class="btn border-green text-green btn-flat btn-icon btn-xs" href="wo_detail.php?id=<?php echo $d['invoice_id'];?>"><i class="icon-list3"></i> View</a>
+													<!-- <a class="btn border-green text-green btn-flat btn-icon btn-xs" href="wo_detail.php?id=<?php echo $d['invoice_id'];?>"><i class="icon-list3"></i> View</a> -->
 													<a class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['invoice_id'];?>"><i class="icon-wrench3"></i> Edit</a>
 													<a class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="wo_cancel.php?id=<?php echo $d['invoice_id'];?>"><i class="icon-trash-alt"></i> Cancel</a>
 													<?php												

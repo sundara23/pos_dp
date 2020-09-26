@@ -47,6 +47,7 @@
 												<th>Email</th>		
 												<td>
 													<input type="text" name="email" class="form-control form-email">
+													<input type="hidden" name="email" class="form-control form-toko" value="<?php echo $_SESSION['kd_toko']; ?>">
 												</td>
 											</tr>	
 											<tr>																		
@@ -102,6 +103,8 @@
 												<input type="hidden" class="id_hj" name="id_hj">
 												<input type="hidden" class="harga_satuan" name="harga_satuan">
 												<input type="hidden" class="sub_total" name="sub_total">
+												<input type="hidden" class="kd_toko" name="kd_toko" value="<?php echo $_SESSION['kd_toko'];?>">
+												<input type="hidden" class="id_admin" name="id_admin" value="<?php echo $_SESSION['id'];?>">
 												<div class="table-responsive">
 													<table class="table table-bordered">
 														<tr class="">
@@ -230,9 +233,10 @@
 			var telp = $(".form-telp").val();
 			var alamat = $(".form-alamat").val();
 			var email = $(".form-email").val();
+			var kd_toko = $(".form-toko").val();
 
 			if(nama!=""&&telp!=""&&alamat!=""&&email!=""){
-				var data = "nama="+nama+"&telp="+telp+"&alamat="+alamat+"&email="+email;
+				var data = "nama="+nama+"&telp="+telp+"&alamat="+alamat+"&email="+email+"&kd_toko="+kd_toko;
 				$.ajax({
 					data : data,
 					url : 'wo_tambah_ajax.php',

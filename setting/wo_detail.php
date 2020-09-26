@@ -111,6 +111,8 @@ if(isset($_GET['id'])){
 				</thead>
 				<tbody>
 					<?php
+					$kd_toko = $_SESSION['kd_toko'];
+					$id_admin = $_SESSION['id'];
 					$no = 1; 									
 					$data = mysqli_query($config,"select * from orderan,harga_jual,produk,bahan,mesin,jenis_finishing,jenis_potong,jenis_display where hj_produk=produk_id and hj_bahan=bahan_id and hj_mesin=mesin_id and hj_finishing=jenis_finishing_id and hj_potong=jenis_potong_id and hj_display=jenis_display_id and order_hj=hj_id and order_invoice='$id_invoice'");		
 					while($d=mysqli_fetch_array($data)){										

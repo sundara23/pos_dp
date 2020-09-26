@@ -343,7 +343,7 @@
 		$("body").on("change", ".pilih-produk", function(){
 
 			var produk = $(this).val();			
-			var site_url = 'wo_load_forp.php?id=' + produk;
+			var site_url = 'wo_load_form.php?id=' + produk;
 			$(".tampil-form").load(site_url);			
 			
 		});
