@@ -55,7 +55,7 @@
 				<li><a href="index.php" class="sidebar-control bg-blue"><i class="glyphicon glyphicon-arrow-left"></i> KEMBALI</a></li>				
 			</ul>
 
-			<p class="navbar-text"><span class=""><b>FASKAL</b> | Printing & Advertising</span></p>
+			<p class="navbar-text"><span class=""><b><?php echo $_SESSION['ket_toko']; ?></b> | Printing & Advertising</span></p>
 			
 		</div>
 	</div>
