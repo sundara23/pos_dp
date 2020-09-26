@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 4.8.5
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 26 Sep 2020 pada 18.02
--- Versi server: 10.4.11-MariaDB
--- Versi PHP: 7.2.30
+-- Generation Time: Sep 26, 2020 at 08:00 PM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 5.6.40
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -24,7 +25,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `admin`
+-- Table structure for table `admin`
 --
 
 CREATE TABLE `admin` (
@@ -39,20 +40,22 @@ CREATE TABLE `admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `admin`
+-- Dumping data for table `admin`
 --
 
 INSERT INTO `admin` (`id`, `nama`, `username`, `password`, `handphone`, `alamat`, `level`, `kd_toko`) VALUES
-(4, 'Branch Manager', 'manager', '1a8565a9dc72048ba03b4156be3e569f22771f23', '0', 'Rangkasbitung', 'bm', ''),
-(5, 'Kasir', 'kasir', '8691e4fc53b99da544ce86e22acba62d13352eff', '0', 'Rangkasbitung', 'kasir', ''),
-(6, 'Produksi', 'produksi', '6e3bf9569d685dc740285417951b943b2452c2b5', '0', 'Rangkasbitung', 'produksi', ''),
-(7, 'Designer', 'setting', 'd6df1ab7ac275f8c7aff9d010ccfd0db08bbe2d8', '0', 'Rangkasbitung', 'setting', ''),
-(8, 'Owner', 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', '0', 'Rangkasbitung', 'owner', '');
+(4, 'Branch Manager', 'manager', '1a8565a9dc72048ba03b4156be3e569f22771f23', '087776345663', 'Rangkasbitung', 'bm', 'faskal01'),
+(5, 'Ani', 'kasir1', '8cb2237d0679ca88db6464eac60da96345513964', '089647367634', 'Rangkasbitung', 'kasir', 'faskal01'),
+(6, 'Produksi', 'produksi', '6e3bf9569d685dc740285417951b943b2452c2b5', '097123674743', 'Rangkasbitung', 'produksi', 'faskal01'),
+(7, 'Ahmad', 'designer1', '8cb2237d0679ca88db6464eac60da96345513964', '089887897874', 'Rangkasbitung', 'setting', 'faskal01'),
+(8, 'Owner', 'owner', '579233b2c479241523cba5e3af55d0f50f2d6414', '089473467254', 'Rangkasbitung', 'owner', 'faskal01'),
+(9, 'Badri', 'designer2', '8cb2237d0679ca88db6464eac60da96345513964', '083147827426', 'Rangkasbitung', 'setting', 'faskal02'),
+(10, 'Tati', 'kasir2', '8cb2237d0679ca88db6464eac60da96345513964', '0892876728361', 'Rangkasbitung', 'setting', 'faskal02');
 
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `bahan`
+-- Table structure for table `bahan`
 --
 
 CREATE TABLE `bahan` (
@@ -63,7 +66,7 @@ CREATE TABLE `bahan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `bahan`
+-- Dumping data for table `bahan`
 --
 
 INSERT INTO `bahan` (`bahan_id`, `bahan_nama`, `bahan_kategori`, `bahan_hpp`) VALUES
@@ -83,7 +86,7 @@ INSERT INTO `bahan` (`bahan_id`, `bahan_nama`, `bahan_kategori`, `bahan_hpp`) VA
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `harga_jual`
+-- Table structure for table `harga_jual`
 --
 
 CREATE TABLE `harga_jual` (
@@ -102,7 +105,7 @@ CREATE TABLE `harga_jual` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `harga_jual`
+-- Dumping data for table `harga_jual`
 --
 
 INSERT INTO `harga_jual` (`hj_id`, `hj_produk`, `hj_bahan`, `hj_mesin`, `hj_finishing`, `hj_potong`, `hj_ukuran`, `hj_display`, `hj_harga`, `hj_min_qty`, `hj_sisi`, `hj_sisi_finishing`) VALUES
@@ -120,7 +123,7 @@ INSERT INTO `harga_jual` (`hj_id`, `hj_produk`, `hj_bahan`, `hj_mesin`, `hj_fini
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `invoice`
+-- Table structure for table `invoice`
 --
 
 CREATE TABLE `invoice` (
@@ -136,7 +139,7 @@ CREATE TABLE `invoice` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `invoice`
+-- Dumping data for table `invoice`
 --
 
 INSERT INTO `invoice` (`invoice_id`, `invoice_tgl`, `invoice_kostumer`, `invoice_status`, `invoice_diskon`, `invoice_dp`, `invoice_ar`, `invoice_total`, `invoice_payment`) VALUES
@@ -146,7 +149,7 @@ INSERT INTO `invoice` (`invoice_id`, `invoice_tgl`, `invoice_kostumer`, `invoice
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_display`
+-- Table structure for table `jenis_display`
 --
 
 CREATE TABLE `jenis_display` (
@@ -156,7 +159,7 @@ CREATE TABLE `jenis_display` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_display`
+-- Dumping data for table `jenis_display`
 --
 
 INSERT INTO `jenis_display` (`jenis_display_id`, `jenis_display_nama`, `jenis_display_hpp`) VALUES
@@ -168,7 +171,7 @@ INSERT INTO `jenis_display` (`jenis_display_id`, `jenis_display_nama`, `jenis_di
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_finishing`
+-- Table structure for table `jenis_finishing`
 --
 
 CREATE TABLE `jenis_finishing` (
@@ -179,7 +182,7 @@ CREATE TABLE `jenis_finishing` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_finishing`
+-- Dumping data for table `jenis_finishing`
 --
 
 INSERT INTO `jenis_finishing` (`jenis_finishing_id`, `jenis_finishing_nama`, `jenis_finishing_kategori`, `jenis_finishing_hpp`) VALUES
@@ -192,7 +195,7 @@ INSERT INTO `jenis_finishing` (`jenis_finishing_id`, `jenis_finishing_nama`, `je
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `jenis_potong`
+-- Table structure for table `jenis_potong`
 --
 
 CREATE TABLE `jenis_potong` (
@@ -203,7 +206,7 @@ CREATE TABLE `jenis_potong` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `jenis_potong`
+-- Dumping data for table `jenis_potong`
 --
 
 INSERT INTO `jenis_potong` (`jenis_potong_id`, `jenis_potong_nama`, `jenis_potong_kategori`, `jenis_potong_hpp`) VALUES
@@ -216,7 +219,7 @@ INSERT INTO `jenis_potong` (`jenis_potong_id`, `jenis_potong_nama`, `jenis_poton
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `kostumer`
+-- Table structure for table `kostumer`
 --
 
 CREATE TABLE `kostumer` (
@@ -228,7 +231,7 @@ CREATE TABLE `kostumer` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `kostumer`
+-- Dumping data for table `kostumer`
 --
 
 INSERT INTO `kostumer` (`kostumer_id`, `kostumer_nama`, `kostumer_telp`, `kostumer_alamat`, `kostumer_email`) VALUES
@@ -243,7 +246,7 @@ INSERT INTO `kostumer` (`kostumer_id`, `kostumer_nama`, `kostumer_telp`, `kostum
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `mesin`
+-- Table structure for table `mesin`
 --
 
 CREATE TABLE `mesin` (
@@ -255,7 +258,7 @@ CREATE TABLE `mesin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `mesin`
+-- Dumping data for table `mesin`
 --
 
 INSERT INTO `mesin` (`mesin_id`, `mesin_nama`, `mesin_tipe`, `mesin_kategori`, `mesin_hpp`) VALUES
@@ -267,7 +270,7 @@ INSERT INTO `mesin` (`mesin_id`, `mesin_nama`, `mesin_tipe`, `mesin_kategori`, `
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `orderan`
+-- Table structure for table `orderan`
 --
 
 CREATE TABLE `orderan` (
@@ -282,7 +285,7 @@ CREATE TABLE `orderan` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `orderan`
+-- Dumping data for table `orderan`
 --
 
 INSERT INTO `orderan` (`order_id`, `order_invoice`, `order_hj`, `order_keterangan`, `order_qty`, `order_harga_satuan`, `order_harga_sub_total`, `order_datetime`) VALUES
@@ -292,7 +295,7 @@ INSERT INTO `orderan` (`order_id`, `order_invoice`, `order_hj`, `order_keteranga
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `produk`
+-- Table structure for table `produk`
 --
 
 CREATE TABLE `produk` (
@@ -301,7 +304,7 @@ CREATE TABLE `produk` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data untuk tabel `produk`
+-- Dumping data for table `produk`
 --
 
 INSERT INTO `produk` (`produk_id`, `produk_nama`) VALUES
@@ -314,7 +317,7 @@ INSERT INTO `produk` (`produk_id`, `produk_nama`) VALUES
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `toko`
+-- Table structure for table `toko`
 --
 
 CREATE TABLE `toko` (
@@ -326,7 +329,7 @@ CREATE TABLE `toko` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `toko`
+-- Dumping data for table `toko`
 --
 
 INSERT INTO `toko` (`id_toko`, `kd_toko`, `nama_toko`, `alamat_toko`, `ket_toko`) VALUES
@@ -336,7 +339,7 @@ INSERT INTO `toko` (`id_toko`, `kd_toko`, `nama_toko`, `alamat_toko`, `ket_toko`
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `user_level`
+-- Table structure for table `user_level`
 --
 
 CREATE TABLE `user_level` (
@@ -346,14 +349,14 @@ CREATE TABLE `user_level` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data untuk tabel `user_level`
+-- Dumping data for table `user_level`
 --
 
 INSERT INTO `user_level` (`id_user`, `kd_level`, `level_name`) VALUES
 (1, 'bm', 'Branch Manager'),
 (2, 'kasir', 'Kasir'),
 (3, 'produksi', 'Produksi'),
-(4, 'setting', 'Setting / Designer'),
+(4, 'setting', 'Setting / Design'),
 (5, 'owner', 'Owner'),
 (6, 'gudang', 'Gudang ATK');
 
@@ -362,161 +365,161 @@ INSERT INTO `user_level` (`id_user`, `kd_level`, `level_name`) VALUES
 --
 
 --
--- Indeks untuk tabel `admin`
+-- Indexes for table `admin`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indeks untuk tabel `bahan`
+-- Indexes for table `bahan`
 --
 ALTER TABLE `bahan`
   ADD PRIMARY KEY (`bahan_id`);
 
 --
--- Indeks untuk tabel `harga_jual`
+-- Indexes for table `harga_jual`
 --
 ALTER TABLE `harga_jual`
   ADD PRIMARY KEY (`hj_id`);
 
 --
--- Indeks untuk tabel `invoice`
+-- Indexes for table `invoice`
 --
 ALTER TABLE `invoice`
   ADD PRIMARY KEY (`invoice_id`);
 
 --
--- Indeks untuk tabel `jenis_display`
+-- Indexes for table `jenis_display`
 --
 ALTER TABLE `jenis_display`
   ADD PRIMARY KEY (`jenis_display_id`);
 
 --
--- Indeks untuk tabel `jenis_finishing`
+-- Indexes for table `jenis_finishing`
 --
 ALTER TABLE `jenis_finishing`
   ADD PRIMARY KEY (`jenis_finishing_id`);
 
 --
--- Indeks untuk tabel `jenis_potong`
+-- Indexes for table `jenis_potong`
 --
 ALTER TABLE `jenis_potong`
   ADD PRIMARY KEY (`jenis_potong_id`);
 
 --
--- Indeks untuk tabel `kostumer`
+-- Indexes for table `kostumer`
 --
 ALTER TABLE `kostumer`
   ADD PRIMARY KEY (`kostumer_id`);
 
 --
--- Indeks untuk tabel `mesin`
+-- Indexes for table `mesin`
 --
 ALTER TABLE `mesin`
   ADD PRIMARY KEY (`mesin_id`);
 
 --
--- Indeks untuk tabel `orderan`
+-- Indexes for table `orderan`
 --
 ALTER TABLE `orderan`
   ADD PRIMARY KEY (`order_id`);
 
 --
--- Indeks untuk tabel `produk`
+-- Indexes for table `produk`
 --
 ALTER TABLE `produk`
   ADD PRIMARY KEY (`produk_id`);
 
 --
--- Indeks untuk tabel `toko`
+-- Indexes for table `toko`
 --
 ALTER TABLE `toko`
   ADD PRIMARY KEY (`id_toko`);
 
 --
--- Indeks untuk tabel `user_level`
+-- Indexes for table `user_level`
 --
 ALTER TABLE `user_level`
   ADD PRIMARY KEY (`id_user`);
 
 --
--- AUTO_INCREMENT untuk tabel yang dibuang
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT untuk tabel `admin`
+-- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
--- AUTO_INCREMENT untuk tabel `bahan`
+-- AUTO_INCREMENT for table `bahan`
 --
 ALTER TABLE `bahan`
   MODIFY `bahan_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
--- AUTO_INCREMENT untuk tabel `harga_jual`
+-- AUTO_INCREMENT for table `harga_jual`
 --
 ALTER TABLE `harga_jual`
   MODIFY `hj_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
--- AUTO_INCREMENT untuk tabel `invoice`
+-- AUTO_INCREMENT for table `invoice`
 --
 ALTER TABLE `invoice`
   MODIFY `invoice_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_display`
+-- AUTO_INCREMENT for table `jenis_display`
 --
 ALTER TABLE `jenis_display`
   MODIFY `jenis_display_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_finishing`
+-- AUTO_INCREMENT for table `jenis_finishing`
 --
 ALTER TABLE `jenis_finishing`
   MODIFY `jenis_finishing_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `jenis_potong`
+-- AUTO_INCREMENT for table `jenis_potong`
 --
 ALTER TABLE `jenis_potong`
   MODIFY `jenis_potong_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT untuk tabel `kostumer`
+-- AUTO_INCREMENT for table `kostumer`
 --
 ALTER TABLE `kostumer`
   MODIFY `kostumer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `mesin`
+-- AUTO_INCREMENT for table `mesin`
 --
 ALTER TABLE `mesin`
   MODIFY `mesin_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT untuk tabel `orderan`
+-- AUTO_INCREMENT for table `orderan`
 --
 ALTER TABLE `orderan`
   MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `produk`
+-- AUTO_INCREMENT for table `produk`
 --
 ALTER TABLE `produk`
   MODIFY `produk_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
--- AUTO_INCREMENT untuk tabel `toko`
+-- AUTO_INCREMENT for table `toko`
 --
 ALTER TABLE `toko`
   MODIFY `id_toko` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
--- AUTO_INCREMENT untuk tabel `user_level`
+-- AUTO_INCREMENT for table `user_level`
 --
 ALTER TABLE `user_level`
   MODIFY `id_user` int(100) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
