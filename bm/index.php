@@ -53,8 +53,8 @@
 							<div class="panel bg-blue-400">
 								<div class="panel-body">									
 									<?php $orderan=mysqli_query($config,"select * from orderan"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " Orderan"; ?></h3>
-									Jumlah orderan								
+									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " Transaksi"; ?></h3>
+									Jumlah Transaksi
 								</div>
 
 								<div id="today-revenue"></div>
@@ -165,8 +165,8 @@
 <!--											</div>-->
 <!--											<input name="from" class="form-control pull-right tanggal" value="" type="text">-->
 <!--										</div>-->
-<!--										<!-- /.input group -->-->
-<!--									</div></div>-->
+<!--
+<!-									</div></div>-->
 <!--									<div class="col-md-6">-->
 <!--										<div class="form-group">-->
 <!--											<label>Date finish:</label>-->
@@ -176,7 +176,7 @@
 <!--												</div>-->
 <!--												<input name="to" class="form-control pull-right tanggal" value="" type="text">-->
 <!--											</div>-->
-<!--											<!-- /.input group -->-->
+<!--											/.input group -->
 <!--										</div>-->
 <!--									</div>-->
 <!--								</div>-->

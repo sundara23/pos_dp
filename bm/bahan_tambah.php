@@ -42,7 +42,11 @@
 									<tr>
 										<th width="20%">HPP</th>
 										<td><input type="number" class="form-control" name="hpp" required="required"></td>
-									</tr>																				
+									</tr>
+                                    <tr>
+                                        <th width="20%">HPP</th>
+                                        <td><input type="number" class="form-control" name="jual" required="required"></td>
+                                    </tr>
 									<tr>
 										<th></th>
 										<td><input type="submit" value="Simpan" class="btn btn-primary btn-sm"></td>

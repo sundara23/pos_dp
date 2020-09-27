@@ -46,7 +46,11 @@
 										<tr>
 											<th width="20%">HPP</th>
 											<td><input type="number" class="form-control" name="hpp" required="required" value="<?php echo $d['bahan_hpp']; ?>"></td>
-										</tr>																				
+										</tr>
+                                        <tr>
+                                            <th width="20%">Harga Jual</th>
+                                            <td><input type="number" class="form-control" name="jual" required="required" value="<?php echo $d['bahan_jual']; ?>"></td>
+                                        </tr>
 										<tr>
 											<th></th>
 											<td><input type="submit" value="Simpan" class="btn btn-primary btn-sm"></td>

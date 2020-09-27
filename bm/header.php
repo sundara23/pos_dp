@@ -112,7 +112,6 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li><a href="index.php"><i class="icon-chart"></i> <span>Data Transaksi</span></a></li>
                                 <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon fas fa-box-open"></i>
@@ -173,26 +172,42 @@
                                     <a href="#" class="nav-link">
                                         <i class="nav-icon icon-chart"></i>
                                         <p>
-                                            Laporan
+                                            Laporan Digital printing
                                         </p>
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="produk_dp.php" class="nav-link">
+                                            <a href="index.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Daftar Produk</p>
+                                                <p>Laporan Transaksi</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="ma.php" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Daftar Bahan</p>
+                                                <p>Laporan Piutang</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon icon-chart"></i>
+                                        <p>
+                                            Laporan ATK
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Laporan Transaksi</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="satuan_bahan.php" class="nav-link">
+                                            <a href="#" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Satuan Bahan</p>
+                                                <p>Laporan Piutang</p>
                                             </a>
                                         </li>
                                     </ul>
