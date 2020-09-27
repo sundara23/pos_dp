@@ -37,7 +37,7 @@
 										?>
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo date('d-m-Y',strtotime($d['invoice_tgl'])); ?></td>
+											<td><?php echo date('d M Y',strtotime($d['invoice_tgl'])); ?></td>
 											<td><?php echo $d['kostumer_nama'] ?></td>
 											<td>
 												Rp. <?php echo number_format($d['invoice_total']);?>

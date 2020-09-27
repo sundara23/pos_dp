@@ -191,14 +191,14 @@
 										</tr>
 										<tr>
 											<th>Sisa Pembayaran</th>
-<!--                                            --><?php
-//                                            if($in['invoice_total'] == 0){
-//
-//                                            }
-//                                            ?>
-											<td><input type="number" min="0" value="<?php if($in['invoice_total']==$in['invoice_dp'] ){echo "0";}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar"></td>
+											<td><input type="number" min="0" value="<?php if($in['invoice_total']==$in['invoice_dp'] ){echo "0";}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar" readonly></td>
 											<td></td>
-										</tr>										
+										</tr>
+                                        <tr>
+                                            <th>Uang Kembalian</th>
+                                            <td><input type="number" min="0" value="" class="form-control cb"></td>
+                                            <td></td>
+                                        </tr>
 										<tr>
 											<th>Payment Method</th>
 											<td>
@@ -270,9 +270,22 @@
 			
 			var dp = $('.dp').val();			
 			var ar = $('.ar').val();			
-			var grand_total = $('.grand_total').val();			
+			var cb = $('.cb').val();
+			var grand_total = $('.grand_total').val();
 			var x = grand_total-dp;
-			$('.ar').val(x);								
+			if (x < 0){
+                xr = 0
+                $('.ar').val(xr);
+            }else {
+                $('.ar').val(x);
+            }
+			var xcb = dp - grand_total;
+            if (xcb < 0){
+                xcbr = 0
+                $('.cb').val(xcbr);
+            } else {
+                $('.cb').val(xcb);
+            }
 		});
 
 

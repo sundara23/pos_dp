@@ -29,9 +29,13 @@
 										<th width="20%">Kategori</th>
 										<td>
 											<select name="kategori" class="form-control" required="required">
-												<option value="">-Pilih</option>												
-												<option value="meter">meter</option>												
-												<option value="lembar">lembar</option>																																		
+                                                <option value="">-Pilih-</option>
+                                                <?php
+                                                    $data = mysqli_query($config,"select * from satuan_bahan");
+                                                    while($d=mysqli_fetch_array($data)){
+                                                ?>
+												<option value="<?php echo $d['nama_satuan']?>"><?php echo $d['nama_satuan']?></option>
+                                                <?php } ?>
 											</select>
 										</td>
 									</tr>			

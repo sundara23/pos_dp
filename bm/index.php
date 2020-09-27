@@ -36,8 +36,8 @@
 							<div class="panel bg-pink-400">
 								<div class="panel-body">
 									<?php $kostumer=mysqli_query($config,"select * from kostumer"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($kostumer) . " kostumer"; ?></h3>
-									Jumlah kostumer
+									<h3 class="no-margin"><?php echo mysqli_num_rows($kostumer) . " Pelanggan"; ?></h3>
+									Jumlah Pelanggan
 									
 								</div>
 
@@ -53,7 +53,7 @@
 							<div class="panel bg-blue-400">
 								<div class="panel-body">									
 									<?php $orderan=mysqli_query($config,"select * from orderan"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " orderan"; ?></h3>
+									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " Orderan"; ?></h3>
 									Jumlah orderan								
 								</div>
 
@@ -151,127 +151,120 @@
 
 					</div>
 				</div>
-
-
-
-
+                <!--  HPP-->
 				<div class="row">
-					<div class="col-md-6">
-						<form action="index_tgl.php" method="get">
-							<div class="row">
-								<div class="col-md-6">
-									<div class="form-group">
-										<label>Date start:</label>
-										<div class="input-group date">
-											<div class="input-group-addon">
-												<i class="icon-calendar"></i>
-											</div>
-											<input name="from" class="form-control pull-right tanggal" value="2020-01-01" type="text">
-										</div>
-										<!-- /.input group -->
-									</div></div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label>Date finish:</label>
-											<div class="input-group date">
-												<div class="input-group-addon">
-													<i class="icon-calendar"></i>
-												</div>
-												<input name="to" class="form-control pull-right tanggal" value="" type="text">
-											</div>
-											<!-- /.input group -->
-										</div>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-md-offset-8 col-md-4">
-										<div class="form-group">
-											<input class="btn btn-primary form-control" value="Submit Date" type="submit">
-										</div>
-									</div>
-								</div>
-							</form>
-						</div>
-						<div class="col-md-6">
-							<table class="table table-bordered table-condensed table-hovered" style="background: white;" width="100%">
-								<thead>
-									<tr>
-										<th colspan="3" class="text-center">Data Keuangan</th>
-									</tr>
-									<tr class="info">
-										<th>HPP (Rp)</th>
-										<th>PROFIT (Rp)</th>
-										<th>TOTAL OMSET (Rp)</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<td align="right">
-											<h3>
-												<b>
-													<?php  												
-													$jenis_display = mysqli_query($config,"select sum(jenis_display_hpp) as hpp from jenis_display");
-													$jd = mysqli_fetch_assoc($jenis_display);																										
-													?>	
-													<?php  												
-													$jenis_finishing = mysqli_query($config,"select sum(jenis_finishing_hpp) as hpp from jenis_finishing");
-													$jf = mysqli_fetch_assoc($jenis_finishing);																										
-													?>	
-													<?php  												
-													$jenis_potong = mysqli_query($config,"select sum(jenis_potong_hpp) as hpp from jenis_potong");
-													$jp = mysqli_fetch_assoc($jenis_potong);																										
-													?>	
-													<?php  												
-													$bahan = mysqli_query($config,"select sum(bahan_hpp) as hpp from bahan");
-													$b = mysqli_fetch_assoc($bahan);																										
-													?>	
-													<?php  												
-													$mesin = mysqli_query($config,"select sum(mesin_hpp) as hpp from mesin");
-													$m = mysqli_fetch_assoc($mesin);																										
-													?>	
-													<?php 
-													$total_hpp = $jd['hpp']+$jf['hpp']+$jp['hpp']+$b['hpp']+$m['hpp'];
-													echo number_format($total_hpp);
-													?>
-												</b>		
-											</h3>
-										</td>
-										<td align="right">
-											<h3>
-												<b>
-													<?php  												
-													$jumlah = mysqli_query($config,"select sum(hj_harga) as total from harga_jual");
-													$j = mysqli_fetch_assoc($jumlah);
-													if($j['total']>0){
-														$b = $j['total'];
-
-													}else{
-														$b=0;
-														echo $b;
-													}
-													?>	
-													<?php echo number_format($b-$total_hpp); ?>
-												</b>		
-											</h3>
-										</td>
-										<td align="right">
-											<h3>
-												<b>
-													<?php echo number_format($b); ?>
-												</b>												
-											</h3>
-										</td>
-
-									</tr>
-								</tbody>
-							</table>
-							<br>
-						</div>
-					</div>
-
-
-
-
+<!--					<div class="col-md-6">-->
+<!--						<form action="index_tgl.php" method="get">-->
+<!--							<div class="row">-->
+<!--								<div class="col-md-6">-->
+<!--									<div class="form-group">-->
+<!--										<label>Date start:</label>-->
+<!--										<div class="input-group date">-->
+<!--											<div class="input-group-addon">-->
+<!--												<i class="icon-calendar"></i>-->
+<!--											</div>-->
+<!--											<input name="from" class="form-control pull-right tanggal" value="" type="text">-->
+<!--										</div>-->
+<!--										<!-- /.input group -->-->
+<!--									</div></div>-->
+<!--									<div class="col-md-6">-->
+<!--										<div class="form-group">-->
+<!--											<label>Date finish:</label>-->
+<!--											<div class="input-group date">-->
+<!--												<div class="input-group-addon">-->
+<!--													<i class="icon-calendar"></i>-->
+<!--												</div>-->
+<!--												<input name="to" class="form-control pull-right tanggal" value="" type="text">-->
+<!--											</div>-->
+<!--											<!-- /.input group -->-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--								<div class="row">-->
+<!--									<div class="col-md-offset-8 col-md-4">-->
+<!--										<div class="form-group">-->
+<!--											<input class="btn btn-primary form-control" value="Submit Date" type="submit">-->
+<!--										</div>-->
+<!--									</div>-->
+<!--								</div>-->
+<!--							</form>-->
+<!--						</div>-->
+<!--                    <div class="col-md-6">-->
+<!--							<table class="table table-bordered table-condensed table-hovered" style="background: white;" width="100%">-->
+<!--								<thead>-->
+<!--									<tr>-->
+<!--										<th colspan="3" class="text-center">Data Keuangan</th>-->
+<!--									</tr>-->
+<!--									<tr class="info">-->
+<!--										<th>HPP (Rp)</th>-->
+<!--										<th>PROFIT (Rp)</th>-->
+<!--										<th>TOTAL OMSET (Rp)</th>-->
+<!--									</tr>-->
+<!--								</thead>-->
+<!--								<tbody>-->
+<!--									<tr>-->
+<!--										<td align="right">-->
+<!--											<h3>-->
+<!--												<b>-->
+<!--													--><?php //
+//													$jenis_display = mysqli_query($config,"select sum(jenis_display_hpp) as hpp from jenis_display");
+//													$jd = mysqli_fetch_assoc($jenis_display);
+//													?><!--	-->
+<!--													--><?php //
+//													$jenis_finishing = mysqli_query($config,"select sum(jenis_finishing_hpp) as hpp from jenis_finishing");
+//													$jf = mysqli_fetch_assoc($jenis_finishing);
+//													?><!--	-->
+<!--													--><?php //
+//													$jenis_potong = mysqli_query($config,"select sum(jenis_potong_hpp) as hpp from jenis_potong");
+//													$jp = mysqli_fetch_assoc($jenis_potong);
+//													?><!--	-->
+<!--													--><?php //
+//													$bahan = mysqli_query($config,"select sum(bahan_hpp) as hpp from bahan");
+//													$b = mysqli_fetch_assoc($bahan);
+//													?><!--	-->
+<!--													--><?php //
+//													$mesin = mysqli_query($config,"select sum(mesin_hpp) as hpp from mesin");
+//													$m = mysqli_fetch_assoc($mesin);
+//													?><!--	-->
+<!--													--><?php //
+//													$total_hpp = $jd['hpp']+$jf['hpp']+$jp['hpp']+$b['hpp']+$m['hpp'];
+//													echo number_format($total_hpp);
+//													?>
+<!--												</b>		-->
+<!--											</h3>-->
+<!--										</td>-->
+<!--										<td align="right">-->
+<!--											<h3>-->
+<!--												<b>-->
+<!--													--><?php //
+//													$jumlah = mysqli_query($config,"select sum(hj_harga) as total from harga_jual");
+//													$j = mysqli_fetch_assoc($jumlah);
+//													if($j['total']>0){
+//														$b = $j['total'];
+//
+//													}else{
+//														$b=0;
+//														echo $b;
+//													}
+//													?><!--	-->
+<!--													--><?php //echo number_format($b-$total_hpp); ?>
+<!--												</b>		-->
+<!--											</h3>-->
+<!--										</td>-->
+<!--										<td align="right">-->
+<!--											<h3>-->
+<!--												<b>-->
+<!--													--><?php //echo number_format($b); ?>
+<!--												</b>												-->
+<!--											</h3>-->
+<!--										</td>-->
+<!---->
+<!--									</tr>-->
+<!--								</tbody>-->
+<!--							</table>-->
+<!--							<br>-->
+<!--						</div>-->
+                </div>
 
 
 					<div class="col-lg-12">					

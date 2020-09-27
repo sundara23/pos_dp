@@ -108,8 +108,52 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li><a href="index.php"><i class="icon-circle"></i> <span>Percetakan</span></a></li>
-								<li><a href="index.php"><i class="icon-circle"></i> <span>ATK</span></a></li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Digital Printing
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="index.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Transaksi</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Piutang</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <?php if($_SESSION['kd_toko']=="faskal01"){?>
+                                <li class="nav-item has-treeview">
+                                        <a href="#" class="nav-link">
+                                            <i class="nav-icon fas fa-book"></i>
+                                            <p>
+                                                ATK
+                                            </p>
+                                        </a>
+                                        <ul class="nav nav-treeview">
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Transaksi ATK</p>
+                                                </a>
+                                            </li>
+                                            <li class="nav-item">
+                                                <a href="#" class="nav-link">
+                                                    <i class="far fa-circle nav-icon"></i>
+                                                    <p>Piutang ATK</p>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                <?php } ?>
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>
 							</ul>
 						</div>

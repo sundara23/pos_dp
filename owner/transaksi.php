@@ -17,7 +17,7 @@
 											<div class="input-group-addon">
 												<i class="icon-calendar"></i>
 											</div>
-											<input name="from" class="form-control pull-right tanggal" value="2018-01-01" type="text">
+											<input name="from" class="form-control pull-right tanggal" value="" type="text">
 										</div>
 
 									</div>
@@ -29,7 +29,7 @@
 											<div class="input-group-addon">
 												<i class="icon-calendar"></i>
 											</div>
-											<input name="to" class="form-control pull-right tanggal" value="2019-01-31" type="text">
+											<input name="to" class="form-control pull-right tanggal" value="" type="text">
 										</div>
 										<!-- /.input group -->
 									</div>

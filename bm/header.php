@@ -112,9 +112,93 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li><a href="index.php"><i class="icon-chart"></i> <span>Data Transaksi</span></a></li>							
-								<li><a href="harga_jual.php"><i class="icon-price-tag"></i> <span>Harga Jual Produk</span></a></li>
-								<li><a href="ma.php"><i class="icon-briefcase"></i> <span>Material & Alat</span></a></li>								
+								<li><a href="index.php"><i class="icon-chart"></i> <span>Data Transaksi</span></a></li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-box-open"></i>
+                                        <p>
+                                            Digital Printing
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="produk_dp.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Daftar Produk</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="ma.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Daftar Bahan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="satuan_bahan.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Satuan Bahan</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-boxes"></i>
+                                        <p>
+                                            Produk ATK
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Kategori Produk</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Data Produk</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="#" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Data Stok</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon icon-chart"></i>
+                                        <p>
+                                            Laporan
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="produk_dp.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Daftar Produk</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="ma.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Daftar Bahan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="satuan_bahan.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Satuan Bahan</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+<!--								<li><a href="harga_jual.php"><i class="icon-price-tag"></i> <span>Harga Jual Produk</span></a></li>-->
+<!--								<li><a href="ma.php"><i class="icon-briefcase"></i> <span>Material & Alat</span></a></li>								-->
 								<li><a href="admin.php"><i class="icon-user-plus"></i> <span>Pengguna</span></a></li>
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>								
 							</ul>

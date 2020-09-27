@@ -20,7 +20,12 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/bm" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pos_dp\bm" />
+    </key>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -46,7 +51,8 @@
       <updated>1601088941656</updated>
       <workItem from="1601088943230" duration="12631000" />
       <workItem from="1601140237719" duration="77000" />
-      <workItem from="1601140316241" duration="14631000" />
+      <workItem from="1601140316241" duration="14900000" />
+      <workItem from="1601187346967" duration="20174000" />
     </task>
     <servers />
   </component>

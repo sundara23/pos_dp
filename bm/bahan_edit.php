@@ -37,9 +37,9 @@
 											<th width="20%">Kategori</th>
 											<td>
 												<select name="kategori" class="form-control" required="required">
-													<option value="">-Pilih</option>												
-													<option <?php if($d['bahan_kategori']=="meter"){echo "selected='selected'";} ?> value="meter">meter</option>												
-													<option <?php if($d['bahan_kategori']=="lembar"){echo "selected='selected'";} ?> value="lembar">lembar</option>																																		
+													<option value="">-Pilih-</option>
+													<option <?php if($d['bahan_kategori']=="Meter"){echo "selected='selected'";} ?> value="Meter">meter</option>
+													<option <?php if($d['bahan_kategori']=="Lembar"){echo "selected='selected'";} ?> value="Lembar">lembar</option>
 												</select>
 											</td>
 										</tr>			

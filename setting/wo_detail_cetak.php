@@ -22,7 +22,7 @@ if(isset($_GET['id'])){
 <table width="100%" border="0">
   <tr>
     <th ><img src="../images/a.jpeg" width="100" ></th>
-    <th ><h1>JAVAS PRINTING</h1></th>    
+    <th ><h1>FASKAL PRINTING & ADVERTISING</h1></th>
   </tr>
 </table>
 <hr>
