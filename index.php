@@ -23,6 +23,13 @@
 
 	<script type="text/javascript" src="assets/js/core/app.js"></script>
 	<script type="text/javascript" src="assets/js/pages/login.js"></script>
+    <style>
+        body{
+            background-image: url("images/background.jpg");
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
 </head>
 <body class="login-container">
 	<!-- Page container -->
@@ -42,11 +49,7 @@
 							<div class="row">
 
 								<div class="panel panel-body">
-									<br/>
-                                    <img src="images/faskallogo.png" width="100" height="100" class="center-block">
-									<h2 style="text-align: center; font-weight: bold;">FASKAL</h2>
-									<h4 class="text-muted text-center">Printing & Advertising</h4>
-									<br/>
+                                    <img src="images/faskallogo.png" width="300" height="150" class="center-block">
 									<?php 
 
 									if(isset($_GET['alert'])){
