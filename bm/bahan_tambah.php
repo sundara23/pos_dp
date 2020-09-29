@@ -17,10 +17,23 @@
 							<a href="ma.php" class="btn btn-sm btn-primary"><i class="icon-arrow-left12"></i> KEMBALI</a>
 						</div>
 					</div>
+                    <?php
+                    $query = mysqli_query($config, "SELECT max(bahan_id) as kodeTerbesar FROM bahan");
+                    $data = mysqli_fetch_array($query);
+                    $kodeProduk = $data['kodeTerbesar'];
+                    $urutan = (int) substr($kodeProduk, 3, 3);
+                    $urutan++;
+                    $huruf = "BHN";
+                    $kodeProduk = $huruf . sprintf("%03s", $urutan);
+                    ?>
 					<div class="panel-body">
 						<div class="table-responsive">
 							<form action="bahan_add_act.php" method="post">
 								<table class="table table-bordered">
+                                    <tr>
+                                        <th width="20%">Kode Bahan</th>
+                                        <td><input type="text" class="form-control" name="kd_bhn" value="<?php echo $kodeProduk; ?>" required="required" readonly></td>
+                                    </tr>
 									<tr>
 										<th width="20%">Nama Bahan</th>
 										<td><input type="text" class="form-control" name="nama" required="required"></td>

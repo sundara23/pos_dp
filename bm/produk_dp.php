@@ -23,6 +23,7 @@
 								<thead>
 									<tr>
 										<th>No</th>
+										<th>Kode Produk</th>
 										<th>Nama Produk</th>
 										<th width="13%">OPSI</th>
 									</tr>
@@ -35,8 +36,9 @@
 										?>
 										<tr>
 											<td><?php echo $no++; ?></td>
+											<td><?php echo $d['produk_id'] ?></td>
 											<td><?php echo $d['produk_nama'] ?></td>
-											<td>																					
+											<td>
 												<a class="btn border-teal text-teal btn-flat btn-icon btn-xs" href="produk_dp_edit.php?id=<?php echo $d['produk_id'];?>"><i class="icon-wrench3"></i></a>
 												<a class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="produk_dp_hapus.php?id=<?php echo $d['produk_id'];?>"><i class="icon-trash-alt"></i></a>
 											</td>

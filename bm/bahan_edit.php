@@ -26,10 +26,15 @@
 								while($d=mysqli_fetch_array($data)){
 									?>
 									<table class="table table-bordered">
+                                        <tr>
+                                            <th width="20%">Kode Bahan</th>
+                                            <td>
+                                                <input type="text" class="form-control" name="id" required="required" value="<?php echo $d['bahan_id']; ?>" readonly>
+                                            </td>
+                                        </tr>
 										<tr>
 											<th width="20%">Nama Bahan</th>
 											<td>
-												<input type="hidden" class="form-control" name="id" required="required" value="<?php echo $d['bahan_id']; ?>">
 												<input type="text" class="form-control" name="nama" required="required" value="<?php echo $d['bahan_nama']; ?>">
 											</td>
 										</tr>

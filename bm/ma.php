@@ -23,8 +23,9 @@
 								<thead>
 									<tr>
 										<th width="1%">No</th>
-										<th>Nama Bahan</th>		
-										<th>Kategori</th>		
+										<th>Kode Bahan</th>
+										<th>Nama Bahan</th>
+										<th>Kategori</th>
 										<th>HPP</th>												
 										<th>Harga Jual</th>
 										<th width="15%">OPSI</th>
@@ -38,8 +39,9 @@
 										?>
 										<tr>
 											<td><?php echo $no++; ?></td>
+											<td><?php echo $d['bahan_id'] ?></td>
 											<td><?php echo $d['bahan_nama'] ?></td>
-											<td><?php echo $d['bahan_kategori'] ?></td>			
+											<td><?php echo $d['bahan_kategori'] ?></td>
 											<td>Rp. <?php echo number_format($d['bahan_hpp']); ?></td>														
 											<td>Rp. <?php echo number_format($d['bahan_jual']); ?></td>
 											<td>

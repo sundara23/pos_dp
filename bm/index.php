@@ -52,7 +52,7 @@
 							<!-- Today's revenue -->
 							<div class="panel bg-blue-400">
 								<div class="panel-body">									
-									<?php $orderan=mysqli_query($config,"select * from orderan"); ?>
+									<?php $orderan=mysqli_query($config,"select * from transaksi"); ?>
 									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " Transaksi"; ?></h3>
 									Jumlah Transaksi
 								</div>
@@ -67,9 +67,10 @@
 							<!-- Today's revenue -->
 							<div class="panel bg-orange-400">
 								<div class="panel-body">
-									<?php $invoice=mysqli_query($config,"select * from invoice"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($invoice) . " W.O"; ?></h3>
-									Jumlah W.O								
+                                    <a href="#mAntrian" data-toggle="modal"><span class="alpaca-float-right" style="font-size: 35px; color: #FFFFFF;"><i class="fas fa-sign-out-alt"></i></span></a>
+									<?php $invoice=mysqli_query($config,"select * from transaksi where trx_status='0'"); ?>
+									<h3 class="no-margin"><?php echo mysqli_num_rows($invoice) . " Dalam Antrian"; ?></h3>
+									Orderan Dalam Antrian
 								</div>
 
 								<div id="today-revenue"></div>
@@ -78,17 +79,18 @@
 						</div>				
 
 					</div>
-					<!-- /quick stats boxes -->			
+					<!-- /quick stats boxes -->
+
 					<div class="row">
 						<div class="col-lg-3">
 
 							<!-- Members online -->
 							<div class="panel bg-slate-400">
 								<div class="panel-body">
-                                    <a href="#"><span class="alpaca-float-right" style="font-size: 35px; color: #FFFFFF;"><i class="fas fa-sign-out-alt"></i></span></a>
-									<?php $admin=mysqli_query($config,"select * from invoice where invoice_status='0'"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($admin) . " W.O Order"; ?></h3>
-									W.O Berstatus Order
+                                    <a href="#mPembayaran" data-toggle="modal"><span class="alpaca-float-right" style="font-size: 35px; color: #FFFFFF;"><i class="fas fa-sign-out-alt"></i></span></a>
+									<?php $admin=mysqli_query($config,"select * from transaksi where trx_status='1'"); ?>
+									<h3 class="no-margin"><?php echo mysqli_num_rows($admin) . " Pembayaran"; ?></h3>
+									Orderan Dalam Pembayaran
 									
 								</div>
 
@@ -105,10 +107,10 @@
 							<!-- Current server load -->
 							<div class="panel bg-brown-400">
 								<div class="panel-body">
-                                    <a href="#"><span class="alpaca-float-right" style="font-size: 35px; color: #FFFFFF;"><i class="fas fa-sign-out-alt"></i></span></a>
-									<?php $kostumer=mysqli_query($config,"select * from invoice where invoice_status='1'"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($kostumer) . " W.O Payment"; ?></h3>
-									W.O Berstatus Payment
+                                    <a href="#mPrint" data-toggle="modal"><span class="alpaca-float-right" style="font-size: 35px; color: #FFFFFF;"><i class="fas fa-sign-out-alt"></i></span></a>
+									<?php $kostumer=mysqli_query($config,"select * from transaksi where trx_status='2'"); ?>
+									<h3 class="no-margin"><?php echo mysqli_num_rows($kostumer) . " Print"; ?></h3>
+									Orderan Sedang Di Cetak
 									
 								</div>
 
@@ -123,10 +125,9 @@
 							<!-- Today's revenue -->
 							<div class="panel bg-purple-400">
 								<div class="panel-body">
-                                    <a href="#"><span class="alpaca-float-right" style="font-size: 35px; color: #FFFFFF;"><i class="fas fa-sign-out-alt"></i></span></a>
-									<?php $orderan=mysqli_query($config,"select * from invoice where invoice_status='2'"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " W.O Print"; ?></h3>
-                                    W.O Berstatus Print
+									<?php $orderan=mysqli_query($config,"select * from transaksi where trx_ar>'0'"); ?>
+									<h3 class="no-margin"><?php echo mysqli_num_rows($orderan) . " Piutang"; ?></h3>
+                                    Transaksi Piutang
 								</div>
 
 								<div id="today-revenue"></div>
@@ -139,9 +140,9 @@
 							<!-- Today's revenue -->
 							<div class="panel bg-success-400">
 								<div class="panel-body">									
-									<?php $invoice=mysqli_query($config,"select * from invoice where invoice_status='3'"); ?>
-									<h3 class="no-margin"><?php echo mysqli_num_rows($invoice) . " W.O Done"; ?></h3>
-									W.0 Berstatus Done						
+									<?php $invoice=mysqli_query($config,"select * from transaksi where trx_status='3'"); ?>
+									<h3 class="no-margin"><?php echo mysqli_num_rows($invoice) . " Sudah Selesai"; ?></h3>
+									Orderan Sudah Selesai dan LUNAS
 								</div>
 
 								<div id="today-revenue"></div>
@@ -151,6 +152,69 @@
 
 					</div>
 				</div>
+                <!-- Modal Dalam Antrian-->
+                <div id="mAntrian" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Orderan Dalam Antrian</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--  modal end-->
+                <!-- Modal Pembayaran-->
+                <div id="mPembayaran" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Orderan Dalam Proses Pembayaran</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--  modal end-->
+                <!-- Modal Print-->
+                <div id="mPrint" class="modal fade" role="dialog">
+                    <div class="modal-dialog modal-lg">
+
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h4 class="modal-title">Orderan Sedang Di Cetak</h4>
+                            </div>
+                            <div class="modal-body">
+                                <p>Some text in the modal.</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <!--  modal end-->
                 <!--  HPP-->
 				<div class="row">
 <!--					<div class="col-md-6">-->
@@ -271,7 +335,7 @@
 						<!-- Daily sales -->
 						<div class="panel panel-flat">
 							<div class="panel-heading">	
-								<h5><i class="icon-chart"></i> Persentasi Omset per Mesin</h5>						
+								<h5><i class="icon-chart"></i> Persentasi Omset per Produk</h5>
 							</div>
 
 							<div class="panel-body">
@@ -284,20 +348,18 @@
 											<table class="table table-bordered table-hover table-striped">
 												<thead>
 													<tr>				
-														<th>Mesin</th>		
-														<th>Tipe</th>		
+														<th>Produk</th>
 														<th>Jumlah</th>	
 														<th>Pendapatan</th>	
 													</tr>
 												</thead>
 												<tbody>
 													<?php											
-													$data = mysqli_query($config,"select * from mesin order by mesin_id desc");		
+													$data = mysqli_query($config,"select * from produk");
 													while($d=mysqli_fetch_array($data)){
 														?>
 														<tr>																										
-															<td><?php echo $d['mesin_nama'] ?></td>
-															<td><?php echo $d['mesin_tipe'] ?></td>			
+															<td><?php echo $d['produk_nama'] ?></td>
 															<td>
 																<?php  
 																$id_mesin = $d['mesin_id'];
