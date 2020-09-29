@@ -100,8 +100,7 @@
 											
 											<form action="wo_add_act.php" method="post">
 												<input type="hidden" class="kostumer-terpilih" name="kostumer">
-												<input type="hidden" class="id_hj" name="id_hj">
-												<input type="hidden" class="harga_satuan" name="harga_satuan">
+												<input type="hidden" class="bahan_jual" name="bahan_jual">
 												<input type="hidden" class="sub_total" name="sub_total">
 												<input type="hidden" class="kd_toko" name="kd_toko" value="<?php echo $_SESSION['kd_toko'];?>">
 												<input type="hidden" class="id_admin" name="id_admin" value="<?php echo $_SESSION['id'];?>">
@@ -267,7 +266,7 @@
 		$("body").on("change", ".pilih-produk", function(){
 
 			var produk = $(this).val();			
-			var site_url = 'wo_load_form.php?id=' + produk;
+			var site_url = 'wo_load_form.php';
 			$(".tampil-form").load(site_url);			
 			
 		});
@@ -275,24 +274,15 @@
 
 
 		$("body").on("click", ".btnhitung", function(){
-			
-			// kartu nama
-			// alert('asd');
-			var produk = $("#produk").val();			
-			if(produk==1){
-			
+						
 				var jumlah = $("#jumlah").val();							
-				var id_mesin = $("#id_mesin").val();
 				var id_bahan = $("#id_bahan").val();
-				var sisi = $("#sisi").val();
-				var id_finishing = $("#id_finishing").val();
-				var sisi_finishing = $("#sisi_finishing").val();
 
 				
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_potong!=""){
+				if(id_bahan!=""){
 
 
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&sisi="+sisi+"&sisi_finishing="+sisi_finishing;
+					var data = "bahan="+id_bahan;
 					$.ajax({
 						data : data,
 						url : 'wo_hitung_harga.php',
@@ -303,244 +293,20 @@
 								$(".btn-submit").removeClass("tampil");																	
 							}else{								
 								var c = html*jumlah;
-							
 								var total = c;
-								$("#tots").html("RM."+c);	
-								$(".harga_satuan").val(html);
+								$("#tots").html("Rp."+total);	
+								$(".bahan_jual").val(html);
+								$(".id_bahan").val(id_bahan);
 								$(".sub_total").val(c);
 								$(".btn-submit").addClass("tampil");													
 							}
 						}
 					});
 
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
 				}else{
 					alert("data harus di isi dengan lengkap.");
 				}
 
-
-
-
-
-
-
-			}else if(produk==2){
-				var jumlah = $("#jumlah").val();
-				var id_mesin = $("#id_mesin").val();
-				var ukuran = $("#ukuran").val();				
-				var id_bahan = $("#id_bahan").val();
-				var sisi = $("#sisi").val();							
-				
-				
-				if(id_mesin!=""&&id_bahan!=""&&ukuran!=""&&sisi!=""){
-
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&ukuran="+id_ukuran+"&produk="+produk+"&sisi="+sisi;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");	
-								$(".btn-submit").removeClass("tampil");																	
-							}else{								
-								var c = html*jumlah;
-							
-								var total = c;
-								$("#tots").html("RM."+c);	
-								$(".harga_satuan").val(html);
-								$(".sub_total").val(c);
-								$(".btn-submit").addClass("tampil");													
-							}
-						}
-					});
-
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-
-
-
-			}else if(produk==3){
-				var jumlah = $("#jumlah").val();
-				var id_display = $("#id_display").val();
-				var panjang = $("#panjang").val();				
-				var lebar = $("#lebar").val();					
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();
-				var id_finishing = $("#id_finishing").val();				
-				
-				
-				if(id_mesin!=""&&id_bahan!=""&&jumlah!=""){
-
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&display="+id_display;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");	
-								$(".btn-submit").removeClass("tampil");																	
-							}else{								
-								var c = html*jumlah;
-							
-								var total = c;
-								$("#tots").html("RM."+c);	
-								$(".harga_satuan").val(html);
-								$(".sub_total").val(c);
-								$(".btn-submit").addClass("tampil");													
-							}
-						}
-					});
-
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-
-
-
-
-			}else if(produk==4){			
-				var jumlah = $("#jumlah").val();							
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();
-				var sisi = $("#sisi").val();
-				var id_finishing = $("#id_finishing").val();
-				var sisi_finishing = $("#sisi_finishing").val();
-				var id_potong = $("#id_potong").val();				
-
-
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_potong!=""&&jumlah!=""){
-
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&sisi="+sisi+"&sisi_finishing="+sisi_finishing+"&potong="+id_potong;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");	
-								$(".btn-submit").removeClass("tampil");																	
-							}else{								
-								var c = html*jumlah;
-							
-								var total = c;
-								$("#tots").html("RM."+c);	
-								$(".harga_satuan").val(html);
-								$(".sub_total").val(c);
-								$(".btn-submit").addClass("tampil");													
-							}
-						}
-					});
-
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-
-
-			}else if(produk==5){
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();				
-				var id_finishing = $("#id_finishing").val();											
-				var id_potong = $("#id_potong").val();				
-				var panjang = $("#panjang").val();				
-				var lebar = $("#lebar").val();				
-				var jumlah = $("#jumlah").val();				
-				
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_potong!=""&&hargajual!=""){
-
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&display="+id_display+"&potong="+id_potong;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");	
-								$(".btn-submit").removeClass("tampil");																	
-							}else{	
-								var a = html*panjang;
-								var b = a*lebar;
-								var c = b*jumlah;
-							
-
-								// var total = c;
-								$("#tots").html("RM."+c);	
-								$(".harga_satuan").val(html);
-								$(".sub_total").val(c);
-								$(".btn-submit").addClass("tampil");						
-							}
-						}
-					});
-
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-			}
 		});
 
 	$('body').on("click",".btn-submit",function(e){	
@@ -549,19 +315,6 @@
 			e.preventDefault();		
 			alert("data kostumer belum di pilih");
 		}
-		// else{
-		// 	e.preventDefault();	
-		// 	var produk = $("#produk").val();
-		// 	var id_mesin = $("#id_mesin").val();
-		// 	var id_bahan = $("#id_bahan").val();				
-		// 	var id_finishing = $("#id_finishing").val();											
-		// 	var id_potong = $("#id_potong").val();				
-		// 	var panjang = $("#panjang").val();				
-		// 	var lebar = $("#lebar").val();				
-		// 	var jumlah = $("#jumlah").val();	
-		// 	alert(produk);	
-		// 	var order_table = "<tr></tr>";
-		// }	
 
 	});
 
