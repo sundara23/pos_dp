@@ -108,7 +108,6 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
-								<li><a href="index.php"><i class="icon-circle"></i> <span>Setting</span></a></li>															
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>								
 							</ul>
 						</div>

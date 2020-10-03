@@ -102,10 +102,26 @@
 												<input type="hidden" class="kostumer-terpilih" name="kostumer">
 												<input type="hidden" class="bahan_jual" name="bahan_jual">
 												<input type="hidden" class="sub_total" name="sub_total">
+												<input type="hidden" class="jenis_barang" name="jenis_barang" value="CTK">
 												<input type="hidden" class="kd_toko" name="kd_toko" value="<?php echo $_SESSION['kd_toko'];?>">
 												<input type="hidden" class="id_admin" name="id_admin" value="<?php echo $_SESSION['id'];?>">
 												<div class="table-responsive">
+                                                    <?php
+                                                    $query = mysqli_query($config, "SELECT max(trx_invoice) as kodeTerbesar FROM transaksi");
+                                                    $data = mysqli_fetch_array($query);
+                                                    $kodeInv = $data['kodeTerbesar'];
+                                                    $urutan = (int) substr($kodeInv, 9, 9);
+                                                    $urutan++;
+                                                    $huruf = "INV";
+                                                    $kodeInv = $huruf . sprintf("%09s", $urutan);
+                                                    ?>
 													<table class="table table-bordered">
+                                                        <tr class="">
+                                                            <th width="30%">No. Invoice</th>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="trx_id" value="<?php echo $kodeInv;?>" readonly>
+                                                            </td>
+                                                        </tr>
 														<tr class="">
 															<th width="30%">Pilih Produk</th>
 															<td>										
@@ -294,7 +310,8 @@
 							}else{								
 								var c = html*jumlah;
 								var total = c;
-								$("#tots").html("Rp."+total);	
+								$("#hrg_satuan").html("Rp."+html);
+								$("#tots").html("Rp."+total);
 								$(".bahan_jual").val(html);
 								$(".id_bahan").val(id_bahan);
 								$(".sub_total").val(c);

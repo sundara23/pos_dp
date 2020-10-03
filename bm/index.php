@@ -360,35 +360,37 @@
 														?>
 														<tr>																										
 															<td><?php echo $d['produk_nama'] ?></td>
-															<td>
-																<?php  
-																$id_mesin = $d['mesin_id'];
-																$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
-																$j = mysqli_num_rows($jumlah);
-																echo $j;
-																?>																									
+															<td> 0
+<!--																--><?php //
+//																$id_mesin = $d['mesin_id'];
+//																$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
+//																$j = mysqli_num_rows($jumlah);
+//																echo $j;
+//																?><!--																									-->
 															</td>
-															<td>
-																<?php  
-																$xxx = 0;
-																$id_mesin = $d['mesin_id'];
-																$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
-																$j = mysqli_fetch_assoc($jumlah);
-																if($j['total']>0){
-																	$xxx+=$j['total'];
-																	echo number_format($j['total']);															
-																}else{
-																	echo "0";
-																}
-																?>	
-															</td>
+                                                            <td>0</td>
+<!--															<td>-->
+<!--																--><?php //
+//																$xxx = 0;
+//																$id_mesin = $d['mesin_id'];
+//																$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
+//																$j = mysqli_fetch_assoc($jumlah);
+//																if($j['total']>0){
+//																	$xxx+=$j['total'];
+//																	echo number_format($j['total']);
+//																}else{
+//																	echo "0";
+//																}
+//																?><!--	-->
+<!--															</td>-->
 														</tr>
 														<?php
 													}
 													?>
 													<tr>																										
-														<td colspan="3">TOTAL</td>
-														<td><b><?php echo number_format($xxx); ?></b></td>																
+														<td colspan="2">TOTAL</td>
+														<td>0</td>
+<!--														<td><b>--><?php //echo number_format($xxx); ?><!--</b></td>																-->
 													</tr>
 												</tbody>
 											</table>

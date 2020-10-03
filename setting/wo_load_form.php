@@ -27,18 +27,33 @@ include '../config.php';
 							?>		
 						</select>
 					</td>
-				</tr>			
+				</tr>
+                <tr>
+                    <th width="30%">Keterangan</th>
+                    <td>
+                        <textarea class="form-control" name="ket_produk" required="required"></textarea>
+                    </td>
+                </tr>
 				<tr>
 					<th></th>
 					<td>
-						<div class="col-md-6">
+						<div class="col-md-12" style="margin-bottom: 10px">
 							<button class="btn btn-success btnhitung btn-sm" type="button">Hitung</button>	
 						</div>
-						<div class="col-md-6">
-							<div class="col-md-12 btn btn-default btn-sm" id="tots">----</div>
-						</div>						
 					</td>
 				</tr>
+                <tr>
+                    <th>Harga Satuan</th>
+                    <td>
+                        <div class="col-md-10 btn btn-default btn-sm" id="hrg_satuan">----</div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>Total</th>
+                    <td>
+                        <div class="col-md-10 btn btn-default btn-sm" id="tots">----</div>
+                    </td>
+                </tr>
 				<tr>
 					<th></th>
 					<td>						

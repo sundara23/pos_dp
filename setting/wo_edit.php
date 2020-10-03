@@ -79,7 +79,7 @@
 											<br/>
 											<br/>
 											<?php 
-											$kos = mysqli_query($config,"select * from invoice,kostumer where invoice_id='$id_invoice' and invoice_kostumer=kostumer_id");
+											$kos = mysqli_query($config,"select * from transaksi,kostumer where trx_invoice='$id_invoice' and trx_customer=kostumer_id");
 											$k=mysqli_fetch_assoc($kos);
 											?>
 											<table class="xxx">
@@ -110,13 +110,19 @@
 										<div class="col-md-7">										
 											
 											<form action="wo_edit_add_act.php" method="post">
-												<input type="hidden" class="id_invoice" name="id_invoice" value="<?php echo $id_invoice; ?>">
-												<input type="hidden" class="kostumer-terpilih" name="kostumer" value="<?php echo $k['kostumer_id']; ?>">
-												<input type="hidden" class="id_hj" name="id_hj">
-												<input type="hidden" class="harga_satuan" name="harga_satuan">
-												<input type="hidden" class="sub_total" name="sub_total">
+                                                <input type="hidden" class="kostumer-terpilih" name="kostumer" value="<?php echo $k['kostumer_id']; ?>">
+                                                <input type="hidden" class="bahan_jual" name="bahan_jual">
+                                                <input type="hidden" class="sub_total" name="sub_total">
+                                                <input type="hidden" class="jenis_barang" name="jenis_barang" value="CTK">
+                                                <input type="hidden" class="kd_toko" name="kd_toko" value="<?php echo $_SESSION['kd_toko'];?>">
 												<div class="table-responsive">
 													<table class="table table-bordered">
+                                                        <tr>
+                                                            <th width="30%">No. Invoice</th>
+                                                            <td>
+                                                                <input type="text" class="form-control" name="id_invoice" value="<?php echo $id_invoice; ?>" readonly>
+                                                            </td>
+                                                        </tr>
 														<tr class="">
 															<th width="30%">Pilih Produk</th>
 															<td>										
@@ -171,9 +177,7 @@
 										<tr>
 											<th width="1%">No</th>									
 											<th>PRODUK</th>				
-											<th>BAHAN</th>				
-											<th>MESIN</th>				
-											<th>FINISHING</th>				
+											<th>BAHAN</th>
 											<th>KETERANGAN</th>				
 											<th>QTY</th>				
 											<th>HARGA SATUAN</th>				
@@ -184,23 +188,21 @@
 									<tbody>
 										<?php
 										$no = 1; 									
-										$data = mysqli_query($config,"select * from orderan,harga_jual,produk,bahan,mesin,jenis_finishing,jenis_potong,jenis_display where hj_produk=produk_id and hj_bahan=bahan_id and hj_mesin=mesin_id and hj_finishing=jenis_finishing_id and hj_potong=jenis_potong_id and hj_display=jenis_display_id and order_hj=hj_id and order_invoice='$id_invoice'");		
+										$data = mysqli_query($config,"select * from orderan inner join bahan on orderan.order_bahan_id=bahan.bahan_id inner join produk on orderan.order_produk_id=produk.produk_id where order_invoice='$id_invoice'");
 										while($d=mysqli_fetch_array($data)){										
 											?>
 											<tr>
 												<td><?php echo $no++; ?></td>
 												<td><?php echo $d['produk_nama'] ?></td>
 												<td><?php echo $d['bahan_nama'] ?></td>
-												<td><?php echo $d['mesin_nama'] ?></td>
-												<td><?php echo $d['jenis_finishing_nama'] ?></td>																						
 												<td><?php echo $d['order_keterangan'] ?></td>																						
 												<td>													
 													<input type="hidden" name="harga_satuan[]" value="<?php echo $d['order_harga_satuan'] ?>" class="form-control">
 													<input type="hidden" name="id_order[]" value="<?php echo $d['order_id'] ?>" class="form-control">
 													<input type="number" name="qty[]" value="<?php echo $d['order_qty'] ?>" min="1" class="form-control" style="width: 80px">
 												</td>																						
-												<td><?php echo $d['order_harga_satuan'] ?></td>																						
-												<td><?php echo $d['order_harga_sub_total'] ?></td>																						
+												<td>Rp. <?php echo number_format( $d['order_harga_satuan']) ?></td>
+												<td>Rp. <?php echo number_format( $d['order_harga_sub_total']) ?></td>
 												<td>																					
 													<a href="wo_hapus.php?id=<?php echo $d['order_id']; ?>&id_invoice=<?php echo $id_invoice; ?>" class="btn btn-danger btn-icon btn-xs" data-dismiss="modal" ><i class="icon-trash"></i> Hapus</a>										
 												</td>
@@ -209,13 +211,12 @@
 										}
 										?>		
 										<?php																
-										$data = mysqli_query($config,"select * from invoice where invoice_id='$id_invoice'");		
+										$data = mysqli_query($config,"select * from transaksi where trx_invoice='$id_invoice'");
 										while($d=mysqli_fetch_array($data)){										
 											?>							
 											<tr>										
-												<td colspan="8"><b>TOTAL</b></td>																																																														
-												<td>Rp. <?php echo number_format($d['invoice_total']); ?></td>																						
-												<td></td>
+												<td colspan="6"><b>TOTAL</b></td>
+												<td colspan="2">Rp. <?php echo number_format($d['trx_total_pembayaran']); ?></td>
 											</tr>	
 											<?php
 										}
@@ -225,7 +226,7 @@
 							<br/>
 							<div class="col-md-4 col-md-offset-8">
 								<a type="submit" onclick="document.getElementById('form-ini').submit()" class="btn btn-primary btn-icon btn-xs"><i class="icon-spinner11"></i> Update Harga</a>											
-								<a href="wo_detail.php?id=<?php echo $id_invoice; ?>" class="btn btn-success btn-icon btn-xs"><i class="icon-cart"></i> Check Out / Selesai</a>											
+								<a href="index.php" class="btn btn-success btn-icon btn-xs"><i class="icon-cart"></i> Check Out / Selesai</a>
 							</div>
 							</form>
 						</div>	
@@ -297,280 +298,106 @@
 
 	</div>
 </div>
+ <script type="text/javascript">
+        $(document).ready(function(){
+            $('body').on("click",".pilih-kostumer",function(){
+                $('.modal-kostumer').modal();
+            });
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('body').on("click",".pilih-kostumer",function(){
-			$('.modal-kostumer').modal();
-		});
+            $('body').on("click",".btn-simpan-kostumer",function(){
+                // $('.modal-kostumer').modal();
+                var nama = $(".form-nama").val();
+                var telp = $(".form-telp").val();
+                var alamat = $(".form-alamat").val();
+                var email = $(".form-email").val();
+                var kd_toko = $(".form-toko").val();
 
-		$('body').on("click",".btn-simpan-kostumer",function(){
-			// $('.modal-kostumer').modal();
-			var nama = $(".form-nama").val();
-			var telp = $(".form-telp").val();
-			var alamat = $(".form-alamat").val();
-			var email = $(".form-email").val();
-
-			if(nama!=""&&telp!=""&&alamat!=""&&email!=""){
-				var data = "nama="+nama+"&telp="+telp+"&alamat="+alamat+"&email="+email;
-				$.ajax({
-					data : data,
-					url : 'wo_tambah_ajax.php',
-					method : "POST",
-					success:function(html){				
-						$(".kostumer-terpilih").val(html);
-						var url = "wo_tambah_ajax2.php?id="+html;
-						$(".xxx").load(url);						
-					}
-				});
-			}else{
-				alert("Isi data dengan lengkap.");
-			}
-		});
-
-
-		$('body').on("click",".tentukan-kostumer",function(){			
-			var id = $(this).attr('id');
-
-			$(".kostumer-terpilih").val(id);
-			var url = "wo_tambah_ajax2.php?id="+id;
-			$(".xxx").load(url);
-
-		});
+                if(nama!=""&&telp!=""&&alamat!=""&&email!=""){
+                    var data = "nama="+nama+"&telp="+telp+"&alamat="+alamat+"&email="+email+"&kd_toko="+kd_toko;
+                    $.ajax({
+                        data : data,
+                        url : 'wo_tambah_ajax.php',
+                        method : "POST",
+                        success:function(html){
+                            $(".kostumer-terpilih").val(html);
+                            var url = "wo_tambah_ajax2.php?id="+html;
+                            $(".xxx").load(url);
+                        }
+                    });
+                }else{
+                    alert("Isi data dengan lengkap.");
+                }
+            });
 
 
+            $('body').on("click",".tentukan-kostumer",function(){
+                var id = $(this).attr('id');
 
-		$("body").on("change", ".pilih-produk", function(){
+                $(".kostumer-terpilih").val(id);
+                var url = "wo_tambah_ajax2.php?id="+id;
+                $(".xxx").load(url);
 
-			var produk = $(this).val();			
-			var site_url = 'wo_load_form.php?id=' + produk;
-			$(".tampil-form").load(site_url);			
-			
-		});
+            });
 
 
 
-		$("body").on("click", ".btnhitung", function(){
-			
-			// kartu nama
-			// alert('asd');
-			var produk = $("#produk").val();			
-			if(produk==1){
-				var jumlah = $("#jumlah").val();							
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();
-				var sisi = $("#sisi").val();
-				var id_finishing = $("#id_finishing").val();
-				var sisi_finishing = $("#sisi_finishing").val();
+            $("body").on("change", ".pilih-produk", function(){
 
-				
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_potong!=""){
+                var produk = $(this).val();
+                var site_url = 'wo_load_form.php';
+                $(".tampil-form").load(site_url);
 
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&sisi="+sisi+"&sisi_finishing="+sisi_finishing;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");	
-								$(".btn-submit").removeClass("tampil");																	
-							}else{								
-								var c = html*jumlah;
-							
-								var total = c;
-								$("#tots").html("Rp."+c);	
-								$(".harga_satuan").val(html);
-								$(".sub_total").val(c);
-								$(".btn-submit").addClass("tampil");													
-							}
-						}
-					});
-
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
+            });
 
 
 
-			}else if(produk==2){
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();
-				var ukuran = $("#ukuran").val();				
-				var sisi = $("#sisi").val();				
-				var hargajual = $("#hargajual").val();
-				var minimum_qty = $("#minimum_qty").val();
+            $("body").on("click", ".btnhitung", function(){
 
-				if(id_mesin!=""&&id_bahan!=""&&ukuran!=""&&hargajual!=""){
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&ukuran="+ukuran+"&produk="+produk+"&sisi="+sisi;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");						
-								$(".btn-submit").addClass("tampil");						
-							}else{
-								$("#tots").html("Rp."+html+" ( Harga sudah ada. )");						
-							}
-						}
-					});
-
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-			}else if(produk==3){
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();
-				var id_finishing = $("#id_finishing").val();				
-				var id_display = $("#id_display").val();				
-				var hargajual = $("#hargajual").val();
-				var minimum_qty = $("#minimum_qty").val();
-
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_display!=""&&hargajual!=""){
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&display="+id_display;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");						
-								$(".btn-submit").addClass("tampil");						
-							}else{
-								$("#tots").html("Rp."+html+" ( Harga sudah ada. )");						
-							}
-						}
-					});
-
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-
-			}else if(produk==4){
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();
-				var sisi = $("#sisi").val();
-				var id_finishing = $("#id_finishing").val();				
-				var sisi_finishing = $("#sisi_finishing").val();				
-				var id_display = $("#id_display").val();				
-				var id_potong = $("#id_potong").val();				
-				var hargajual = $("#hargajual").val();
-				var minimum_qty = $("#minimum_qty").val();
-
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_display!=""&&id_potong!=""&&hargajual!=""){
-
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&display="+id_display+"&potong="+id_potong+"&sisi="+sisi+"&sisi_finishing="+sisi_finishing;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");						
-								$(".btn-submit").addClass("tampil");						
-							}else{
-								$("#tots").html("Rp."+html+" ( Harga sudah ada. )");						
-							}
-						}
-					});
-
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-			}else if(produk==5){
-				var id_mesin = $("#id_mesin").val();
-				var id_bahan = $("#id_bahan").val();				
-				var id_finishing = $("#id_finishing").val();											
-				var id_potong = $("#id_potong").val();				
-				var panjang = $("#panjang").val();				
-				var lebar = $("#lebar").val();				
-				var jumlah = $("#jumlah").val();				
-				
-				if(id_mesin!=""&&id_bahan!=""&&id_finishing!=""&&id_potong!=""&&hargajual!=""){
+                var jumlah = $("#jumlah").val();
+                var id_bahan = $("#id_bahan").val();
 
 
-					var data = "mesin="+id_mesin+"&bahan="+id_bahan+"&finishing="+id_finishing+"&produk="+produk+"&display="+id_display+"&potong="+id_potong;
-					$.ajax({
-						data : data,
-						url : 'wo_hitung_harga.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$("#tots").html("Harga tidak terdefinisi");	
-								$(".btn-submit").removeClass("tampil");																	
-							}else{	
-								var a = html*panjang;
-								var b = a*lebar;
-								var c = b*jumlah;
+                if(id_bahan!=""){
 
 
-								// var total = c;
-								$("#tots").html("Rp."+c);	
-								$(".harga_satuan").val(html);
-								$(".sub_total").val(c);
-								$(".btn-submit").addClass("tampil");						
-							}
-						}
-					});
+                    var data = "bahan="+id_bahan;
+                    $.ajax({
+                        data : data,
+                        url : 'wo_hitung_harga.php',
+                        method : "POST",
+                        success:function(html){
+                            if(html=="belum"){
+                                $("#tots").html("Harga tidak terdefinisi");
+                                $(".btn-submit").removeClass("tampil");
+                            }else{
+                                var c = html*jumlah;
+                                var total = c;
+                                $("#hrg_satuan").html("Rp."+html);
+                                $("#tots").html("Rp."+total);
+                                $(".bahan_jual").val(html);
+                                $(".id_bahan").val(id_bahan);
+                                $(".sub_total").val(c);
+                                $(".btn-submit").addClass("tampil");
+                            }
+                        }
+                    });
 
-					$.ajax({
-						data : data,
-						url : 'wo_get_id.php',
-						method : "POST",
-						success:function(html){				
-							if(html=="belum"){						
-								$(".id_hj").val('');																							
-							}else{	
-								$(".id_hj").val(html);																																			
-							}
-						}
-					});
-				}else{
-					alert("data harus di isi dengan lengkap.");
-				}
-			}
-		});
+                }else{
+                    alert("data harus di isi dengan lengkap.");
+                }
 
-$('body').on("click",".btn-submit",function(e){	
-	var kostumer = $(".kostumer-terpilih").val();
-	if(kostumer == ""){
-		e.preventDefault();		
-		alert("data kostumer belum di pilih");
-	}
-		// else{
-		// 	e.preventDefault();	
-		// 	var produk = $("#produk").val();
-		// 	var id_mesin = $("#id_mesin").val();
-		// 	var id_bahan = $("#id_bahan").val();				
-		// 	var id_finishing = $("#id_finishing").val();											
-		// 	var id_potong = $("#id_potong").val();				
-		// 	var panjang = $("#panjang").val();				
-		// 	var lebar = $("#lebar").val();				
-		// 	var jumlah = $("#jumlah").val();	
-		// 	alert(produk);	
-		// 	var order_table = "<tr></tr>";
-		// }	
+            });
 
-	});
+            $('body').on("click",".btn-submit",function(e){
+                var kostumer = $(".kostumer-terpilih").val();
+                if(kostumer == ""){
+                    e.preventDefault();
+                    alert("data kostumer belum di pilih");
+                }
 
-});
-</script>
+            });
+
+        });
+    </script>
 
 <?php include 'footer.php'; ?>
