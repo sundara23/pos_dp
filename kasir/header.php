@@ -130,7 +130,7 @@
                                         </li>
                                     </ul>
                                 </li>
-                                <?php if($_SESSION['kd_toko']=="faskal01"){?>
+                                <?php if($_SESSION['kd_toko']=="faskal02"){?>
                                 <li class="nav-item has-treeview">
                                         <a href="#" class="nav-link">
                                             <i class="nav-icon fas fa-book"></i>

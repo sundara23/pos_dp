@@ -35,7 +35,7 @@
 									$id_admin = $_SESSION['id'];
 									$kd_toko = $_SESSION['kd_toko'];
 									$no = 1;
-									$data = mysqli_query($config,"select * from transaksi,kostumer where trx_customer=kostumer_id order by id desc");
+									$data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='$kd_toko' order by id desc");
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr 

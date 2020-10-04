@@ -163,7 +163,70 @@
                                 <h4 class="modal-title">Orderan Dalam Antrian</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Some text in the modal.</p>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped table-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5"class="text-center bg-blue-300">FASKAL PUSAT</th>
+                                            </tr>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Pelanggan</th>
+                                                <th>No. Invoice</th>
+                                                <th>Total Pembayaran</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='faskal01' and transaksi.trx_status='0' ");
+                                            while($d=mysqli_fetch_array($data)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no++; ?></td>
+                                                    <td><?php echo $d['trx_date'] ?></td>
+                                                    <td><?php echo $d['kostumer_nama'] ?> <br> <small class="text-muted"><?php echo $d['kostumer_telp'] ?></small></td>
+                                                    <td><?php echo $d['trx_invoice'] ?></td>
+                                                    <td>Rp. <?php echo number_format($d['trx_total_pembayaran']) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped table-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5"class="text-center bg-green-800">FASKAL CABANG</th>
+                                            </tr>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Pelanggan</th>
+                                                <th>No. Invoice</th>
+                                                <th>Total Pembayaran</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='faskal02' and transaksi.trx_status='0' ");
+                                            while($d=mysqli_fetch_array($data)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no++; ?></td>
+                                                    <td><?php echo $d['trx_date'] ?></td>
+                                                    <td><?php echo $d['kostumer_nama'] ?> <br> <small class="text-muted"><?php echo $d['kostumer_telp'] ?></small></td>
+                                                    <td><?php echo $d['trx_invoice'] ?></td>
+                                                    <td>Rp. <?php echo number_format( $d['trx_total_pembayaran']) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -184,7 +247,70 @@
                                 <h4 class="modal-title">Orderan Dalam Proses Pembayaran</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Some text in the modal.</p>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped table-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5"class="text-center bg-blue-300">FASKAL PUSAT</th>
+                                            </tr>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Pelanggan</th>
+                                                <th>No. Invoice</th>
+                                                <th>Total Pembayaran</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='faskal01' and transaksi.trx_status='1' ");
+                                            while($d=mysqli_fetch_array($data)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no++; ?></td>
+                                                    <td><?php echo $d['trx_date'] ?></td>
+                                                    <td><?php echo $d['kostumer_nama'] ?> <br> <small class="text-muted"><?php echo $d['kostumer_telp'] ?></small></td>
+                                                    <td><?php echo $d['trx_invoice'] ?></td>
+                                                    <td>Rp. <?php echo number_format($d['trx_total_pembayaran']) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped table-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5"class="text-center bg-green-800">FASKAL CABANG</th>
+                                            </tr>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Pelanggan</th>
+                                                <th>No. Invoice</th>
+                                                <th>Total Pembayaran</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='faskal02' and transaksi.trx_status='1' ");
+                                            while($d=mysqli_fetch_array($data)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no++; ?></td>
+                                                    <td><?php echo $d['trx_date'] ?></td>
+                                                    <td><?php echo $d['kostumer_nama'] ?> <br> <small class="text-muted"><?php echo $d['kostumer_telp'] ?></small></td>
+                                                    <td><?php echo $d['trx_invoice'] ?></td>
+                                                    <td>Rp. <?php echo number_format( $d['trx_total_pembayaran']) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -205,7 +331,70 @@
                                 <h4 class="modal-title">Orderan Sedang Di Cetak</h4>
                             </div>
                             <div class="modal-body">
-                                <p>Some text in the modal.</p>
+                                <div class="panel-body">
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped table-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5"class="text-center bg-blue-300">FASKAL PUSAT</th>
+                                            </tr>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Pelanggan</th>
+                                                <th>No. Invoice</th>
+                                                <th>Total Pembayaran</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='faskal01' and transaksi.trx_status='2' ");
+                                            while($d=mysqli_fetch_array($data)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no++; ?></td>
+                                                    <td><?php echo $d['trx_date'] ?></td>
+                                                    <td><?php echo $d['kostumer_nama'] ?> <br> <small class="text-muted"><?php echo $d['kostumer_telp'] ?></small></td>
+                                                    <td><?php echo $d['trx_invoice'] ?></td>
+                                                    <td>Rp. <?php echo number_format($d['trx_total_pembayaran']) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div class="table-responsive">
+                                        <table class="table table-bordered table-hover table-striped table-datatable">
+                                            <thead>
+                                            <tr>
+                                                <th colspan="5"class="text-center bg-green-800">FASKAL CABANG</th>
+                                            </tr>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Tanggal Order</th>
+                                                <th>Pelanggan</th>
+                                                <th>No. Invoice</th>
+                                                <th>Total Pembayaran</th>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            <?php
+                                            $no = 1;
+                                            $data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id and transaksi.kd_toko='faskal02' and transaksi.trx_status='2' ");
+                                            while($d=mysqli_fetch_array($data)){
+                                                ?>
+                                                <tr>
+                                                    <td><?php echo $no++; ?></td>
+                                                    <td><?php echo $d['trx_date'] ?></td>
+                                                    <td><?php echo $d['kostumer_nama'] ?> <br> <small class="text-muted"><?php echo $d['kostumer_telp'] ?></small></td>
+                                                    <td><?php echo $d['trx_invoice'] ?></td>
+                                                    <td>Rp. <?php echo number_format( $d['trx_total_pembayaran']) ?></td>
+                                                </tr>
+                                            <?php } ?>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -330,7 +519,6 @@
 <!--						</div>-->
                 </div>
 
-
 					<div class="col-lg-12">					
 						<!-- Daily sales -->
 						<div class="panel panel-flat">
@@ -341,7 +529,7 @@
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-6">
-										<div id="chart-per-mesin"></div>
+										<div id="chart-per-produk"></div>
 									</div>
 									<div class="col-md-6">
 										<div class="table-responsive">							
@@ -354,43 +542,44 @@
 													</tr>
 												</thead>
 												<tbody>
-													<?php											
+													<?php
+                                                    $xxx=0;
 													$data = mysqli_query($config,"select * from produk");
 													while($d=mysqli_fetch_array($data)){
 														?>
 														<tr>																										
 															<td><?php echo $d['produk_nama'] ?></td>
-															<td> 0
-<!--																--><?php //
-//																$id_mesin = $d['mesin_id'];
-//																$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
-//																$j = mysqli_num_rows($jumlah);
-//																echo $j;
-//																?><!--																									-->
+															<td>
+																<?php
+																$id_produk = $d['produk_id'];
+																$jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where orderan.order_produk_id='$id_produk'");
+																$j = mysqli_fetch_assoc($jumlah);
+                                                                if($j['qty']== null){
+                                                                    $j['qty']=0;
+                                                                }
+																echo $j['qty'];
+																?>
 															</td>
-                                                            <td>0</td>
-<!--															<td>-->
-<!--																--><?php //
-//																$xxx = 0;
-//																$id_mesin = $d['mesin_id'];
-//																$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
-//																$j = mysqli_fetch_assoc($jumlah);
-//																if($j['total']>0){
-//																	$xxx+=$j['total'];
-//																	echo number_format($j['total']);
-//																}else{
-//																	echo "0";
-//																}
-//																?><!--	-->
-<!--															</td>-->
+															<td>Rp.
+																<?php
+																$id_produk = $d['produk_id'];
+																$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan where orderan.order_produk_id='$id_produk'");
+																$j = mysqli_fetch_assoc($jumlah);
+																if($j['total']>0){
+																	$xxx += $j['total'];
+																	echo number_format($j['total']);
+																}else{
+																	echo "0";
+																}
+																?>
+															</td>
 														</tr>
 														<?php
 													}
 													?>
-													<tr>																										
+													<tr>
 														<td colspan="2">TOTAL</td>
-														<td>0</td>
-<!--														<td><b>--><?php //echo number_format($xxx); ?><!--</b></td>																-->
+														<td><b>Rp. <?php echo number_format($xxx); ?></b></td>
 													</tr>
 												</tbody>
 											</table>
@@ -419,131 +608,6 @@
 					</div>
 
 
-					<div class="col-md-6">
-						<div class="panel">
-							<div class="panel-heading">
-								<h5><i class="icon-chart"></i> Chart Bahan Meter</h5>
-							</div>
-							<div class="panel-body">
-								<div id="chart-bahan-meter"></div>
-							</div>
-							<div class="panel-footer">
-								<table class="table table-bordered table-condensed table-hovered" width="100%">
-									<thead>
-										<tr>
-											<th>Bahan</th>
-											<th>Jumlah</th>
-											<th>Pendapatan</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php	
-										$xxxx = 0;										
-										$data = mysqli_query($config,"select * from bahan where bahan_kategori='meter'");		
-										while($d=mysqli_fetch_array($data)){
-											?>
-											<tr>																										
-												<td><?php echo $d['bahan_nama'] ?></td>														
-												<td>
-													<?php  
-													$id_bahan = $d['bahan_id'];
-													$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_bahan='$id_bahan'");
-													$j = mysqli_num_rows($jumlah);
-													echo $j;
-													?>																									
-												</td>
-												<td>
-													<?php  
-													
-													$id_bahan = $d['bahan_id'];
-													$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan,harga_jual where order_hj=hj_id and hj_bahan='$id_bahan'");
-													$j = mysqli_fetch_assoc($jumlah);
-													if($j['total']>0){
-														$xxxx+=$j['total'];
-														echo number_format($j['total']);															
-													}else{
-														echo "0";
-													}
-													?>	
-												</td>
-											</tr>
-											<?php
-										}
-										?>
-									</tbody>
-									<tfoot>
-										<tr style="background: lightgrey; font-weight: bold;">
-											<td colspan="2"></td>
-											<td align="right"><?php echo number_format($xxxx); ?></td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-6">
-						<div class="panel">
-							<div class="panel-heading">
-								<h5><i class="icon-chart"></i> Chart Bahan Lembar</h5>
-							</div>
-							<div class="panel-body">
-								<div id="chart-bahan-lembar"></div>
-							</div>
-							<div class="panel-footer">
-								<table class="table table-bordered table-condensed table-hovered" width="100%">
-									<thead>
-										<tr>
-											<th>Bahan</th>
-											<th>Jumlah</th>
-											<th>Pendapatan</th>
-										</tr>
-									</thead>
-									<tbody>
-										<?php	
-										$xxxx = 0;										
-										$data = mysqli_query($config,"select * from bahan where bahan_kategori='lembar'");		
-										while($d=mysqli_fetch_array($data)){
-											?>
-											<tr>																										
-												<td><?php echo $d['bahan_nama'] ?></td>														
-												<td>
-													<?php  
-													$id_bahan = $d['bahan_id'];
-													$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_bahan='$id_bahan'");
-													$j = mysqli_num_rows($jumlah);
-													echo $j;
-													?>																									
-												</td>
-												<td>
-													<?php  
-													
-													$id_bahan = $d['bahan_id'];
-													$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan,harga_jual where order_hj=hj_id and hj_bahan='$id_bahan'");
-													$j = mysqli_fetch_assoc($jumlah);
-													if($j['total']>0){
-														$xxxx+=$j['total'];
-														echo number_format($j['total']);															
-													}else{
-														echo "0";
-													}
-													?>	
-												</td>
-											</tr>
-											<?php
-										}
-										?>
-									</tbody>
-									<tfoot>
-										<tr style="background: lightgrey; font-weight: bold;">
-											<td colspan="2"></td>
-											<td align="right"><?php echo number_format($xxxx); ?></td>
-										</tr>
-									</tfoot>
-								</table>
-							</div>
-						</div>
-					</div>
 
 				</div>
 				<!-- Footer -->
@@ -568,288 +632,149 @@
 		<!-- /main content -->
 
 
-		<script type="text/javascript">
-			Highcharts.chart('chart-per-mesin', {
-				chart: {
-					plotBackgroundColor: null,
-					plotBorderWidth: null,
-					plotShadow: false,
-					type: 'pie'
-				},
-				title: {
-					text: ''
-				},
-				tooltip: {
-					pointFormat: '{series.name} <br/> <b>{point.percentage:.0f}%</b>'
-				},
-				plotOptions: {
-					pie: {
-						allowPointSelect: true,
-						cursor: 'pointer',
-						dataLabels: {
-							enabled: true,
-							format: '<b>{point.name}</b> <br/> {point.percentage:.0f} %',
-							style: {
-								color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-							}
-						}
-					}
-				},
-				series: [{
-					name: 'Mesin',
-					colorByPoint: true,
-					data: 
-					[
+    <script type="text/javascript">
+        Highcharts.chart('chart-per-produk', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name} <br/> <b>{point.percentage:.0f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.0f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Produk',
+                type: 'pie',
+                colorByPoint: true,
+                data:
+                    [
+                        <?php
+                        $data = mysqli_query($config,"select * from produk order by produk_id desc");
+                        while($d=mysqli_fetch_array($data)){
+                        ?>
 
 
-					<?php											
-					$data = mysqli_query($config,"select * from mesin order by mesin_id desc");		
-					while($d=mysqli_fetch_array($data)){
-						?>
-
-
-						<?php
-						$nama_mesin = $d['mesin_nama'];
-						$id_mesin = $d['mesin_id'];
-						$jumlah_mesin = mysqli_query($config,"select * from mesin");
-						$jj_mesin = mysqli_num_rows($jumlah_mesin);
-						$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_mesin='$id_mesin'");
-						$j = mysqli_num_rows($jumlah);								
-						?>																									
-						{
-							name: '<?php echo $nama_mesin; ?>',
-							y: <?php echo $jj_mesin*$j/100; ?>
-						},
-						<?php
-					}
-					?>
-
-
-
-					]
-				}]
-			});
+                        <?php
+                        $nama_produk = $d['produk_nama'];
+                        $id_produk = $d['produk_id'];
+                        $jumlah_produk = mysqli_query($config,"select * from produk");
+                        $jj_produk = mysqli_num_rows($jumlah_produk);
+                        $jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where order_produk_id='$id_produk'");
+                        $j = mysqli_fetch_assoc($jumlah);
+                        if($j['qty']== null){
+                            $j['qty']=0;
+                        }
+                        ?>
+                        {
+                            name: '<?php echo $nama_produk; ?>',
+                            y: <?php echo $j['qty']; ?>
+                        },
+                        <?php
+                        }
+                        ?>
 
 
 
-
-			Highcharts.chart('chart-omset-per-mesin', {
-				chart: {
-					type: 'line'
-				},
-				title: {
-					text: ''
-				},
-				subtitle: {
-					text: ''
-				},
-				xAxis: {
-					type: 'category',
-					labels: {
-						rotation: -45,
-						style: {
-							fontSize: '11px',
-							fontFamily: 'Verdana, sans-serif'
-						}
-					}
-				},
-				yAxis: {
-					min: 0,
-					title: {
-						text: ''
-					}
-				},
-				legend: {
-					enabled: false
-				},
-				tooltip: {
-					pointFormat: '<b>{point.y:.0f}</b>'
-				},
-				series: [{
-					name: 'Population',
-					data: 
-					[
-					<?php	
-					$xxxx = 0;										
-					$data = mysqli_query($config,"select * from invoice");		
-					while($d=mysqli_fetch_array($data)){
-						?>
-						
-						<?php  
-						$tgl = $d['invoice_tgl'];
-						$jumlah = mysqli_query($config,"select * from invoice where invoice_tgl='$tgl' order by date(invoice_tgl) desc");
-						$j = mysqli_num_rows($jumlah);						
-						?>																															
-						['<?php echo $d['invoice_tgl'] ?>', <?php echo $j; ?>],
-						<?php
-					}
-					?>
-					
-					]
-
-					,
-					dataLabels: {
-						enabled: true,
-						rotation: -90,
-						color: '#FFFFFF',
-						align: 'right',
-						format: '{point.y:.0f}',
-						y: 10,
-						style: {
-							fontSize: '13px',
-							fontFamily: 'Verdana, sans-serif'
-						}
-					}
-				}]
-
-				});
+                    ]
+            }]
+        });
 
 
 
 
-			Highcharts.chart('chart-bahan-lembar', {
-				chart: {
-					type: 'column'
-				},
-				title: {
-					text: ''
-				},
-				subtitle: {
-					text: ''
-				},
-				xAxis: {
-					type: 'category',
-					labels: {
-						rotation: -45,
-						style: {
-							fontSize: '13px',
-							fontFamily: 'Verdana, sans-serif'
-						}
-					}
-				},
-				yAxis: {
-					min: 0,
-					title: {
-						text: ''
-					}
-				},
-				legend: {
-					enabled: false
-				},
-				tooltip: {
-					pointFormat: '<b>{point.y:.0f}</b>'
-				},
-				series: [{
-					name: 'Population',
-					data: 
-					[
-					<?php	
-					$xxxx = 0;										
-					$data = mysqli_query($config,"select * from bahan where bahan_kategori='lembar'");		
-					while($d=mysqli_fetch_array($data)){
-						?>
-						
-						<?php  
-						$id_bahan = $d['bahan_id'];
-						$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_bahan='$id_bahan'");
-						$j = mysqli_num_rows($jumlah);						
-						?>																															
-						['<?php echo $d['bahan_nama'] ?>', <?php echo $j; ?>],
-						<?php
-					}
-					?>
-					
-					]
+        Highcharts.chart('chart-omset-per-mesin', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45,
+                    style: {
+                        fontSize: '11px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '<b>{point.y:.0f}</b>'
+            },
+            series: [{
+                name: 'Population',
+                data:
+                    [
+                        <?php
+                        $xxxx = 0;
+                        $data = mysqli_query($config,"select * from transaksi");
+                        while($d=mysqli_fetch_array($data)){
+                        ?>
 
-					,
-					dataLabels: {
-						enabled: true,
-						rotation: -90,
-						color: '#FFFFFF',
-						align: 'right',
-						format: '{point.y:.0f}',
-						y: 10,
-						style: {
-							fontSize: '13px',
-							fontFamily: 'Verdana, sans-serif'
-						}
-					}
-				}]
-			});
+                        <?php
+                        $tgl = $d['trx_date'];
+                        $jumlah = mysqli_query($config,"select * from transaksi where trx_date='$tgl' order by date(trx_date) desc");
+                        $j = mysqli_num_rows($jumlah);
+                        ?>
+                        ['<?php echo $d['trx_date'] ?>', <?php echo $j; ?>],
+                        <?php
+                        }
+                        ?>
 
-			Highcharts.chart('chart-bahan-meter', {
-				chart: {
-					type: 'column'
-				},
-				title: {
-					text: ''
-				},
-				subtitle: {
-					text: ''
-				},
-				xAxis: {
-					type: 'category',
-					labels: {
-						rotation: -45,
-						style: {
-							fontSize: '13px',
-							fontFamily: 'Verdana, sans-serif'
-						}
-					}
-				},
-				yAxis: {
-					min: 0,
-					title: {
-						text: ''
-					}
-				},
-				legend: {
-					enabled: false
-				},
-				tooltip: {
-					pointFormat: '<b>{point.y:.0f}</b>'
-				},
-				series: [{
-					name: 'Population',
-					data: 
-					[
-					<?php	
-					$xxxx = 0;										
-					$data = mysqli_query($config,"select * from bahan where bahan_kategori='meter'");		
-					while($d=mysqli_fetch_array($data)){
-						?>
-						
-						<?php  
-						$id_bahan = $d['bahan_id'];
-						$jumlah = mysqli_query($config,"select * from orderan,harga_jual where order_hj=hj_id and hj_bahan='$id_bahan'");
-						$j = mysqli_num_rows($jumlah);						
-						?>																															
-						['<?php echo $d['bahan_nama'] ?>', <?php echo $j; ?>],
-						<?php
-					}
-					?>
-					
-					]
+                    ]
 
-					,
-					dataLabels: {
-						enabled: true,
-						rotation: -90,
-						color: '#FFFFFF',
-						align: 'right',
-						format: '{point.y:.0f}',
-						y: 10,
-						style: {
-							fontSize: '13px',
-							fontFamily: 'Verdana, sans-serif'
-						}
-					}
-				}]
-			});
+                ,
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:.0f}',
+                    y: 10,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }]
+
+        });
 
 
-					//  Chart Day to Day
 
 
-				</script>				
-				<?php include 'footer.php'; ?>
+        //  Chart Day to Day
+
+
+    </script>
+    <?php include 'footer.php'; ?>

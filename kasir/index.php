@@ -47,9 +47,9 @@
 												<small class="text-muted">DP : Rp. <?php echo number_format($d['trx_dp']); ?></small>
                                                 <br>
 												<small class="text-muted">
-                                                    <?php if($d['trx_ar']==0 && $d['trx_status']==0){
+                                                    <?php if($d['trx_dp']==0){
                                                         echo "Belum Dibayar";
-                                                    }else if($d['trx_ar']==0 && $d['trx_status']==1) {
+                                                    }else if($d['trx_ar']==0 && $d['trx_dp'] > 0) {
                                                         echo "Lunas";
                                                     }else{
                                                         echo "Piutang : Rp. ".number_format($d['trx_ar']);
@@ -60,13 +60,13 @@
 											<td>
 												<?php 												
 												if($d['trx_status']=="0"){
-													echo "Order";
+													echo "Belum Dibayar";
 												}else if($d['trx_status']=="1"){
-													echo "Payment";
+													echo "Proses Pembayaran";
 												}else if($d['trx_status']=="2"){
-													echo "Print";
+													echo "Sedang Diproses";
 												}else if($d['trx_status']=="3"){
-													echo "Done";
+													echo "Selesai";
 												}
 												?>
 											</td>																										
@@ -74,7 +74,7 @@
 												<?php 												
 												if($d['trx_status']=="0"){
 													?>													
-													<a class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-pencil"></i> Update</a>
+													<a class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-pencil"></i> Bayar</a>
 													<a class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="wo_cancel.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-trash-alt"></i> Cancel</a>
 													<?php												
 												}else if($d['trx_status']=="1"){

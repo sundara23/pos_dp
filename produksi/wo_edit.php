@@ -28,40 +28,43 @@
 				<div class="panel">
 					<div class="panel-body">																	
 						<?php 
-						$inv = mysqli_query($config,"select * from invoice where invoice_id='$id_invoice'");
+						$inv = mysqli_query($config,"select * from transaksi where trx_invoice='$id_invoice'");
 						$in = mysqli_fetch_assoc($inv);
 						?>
 						<div class="row">		
 							<div class="col-md-8">
 								<h4>Detail Order</h4>
-							</div>					
-							<div class="col-md-4">
-								<h5>
-									Status : 
-									<b>
-										<?php 										
-										if($in['invoice_status']=="0"){
-											echo "Order";
-										}else if($in['invoice_status']=="1"){
-											echo "Payment";
-										}else if($in['invoice_status']=="2"){
-											echo "Cancel";
-										}else if($in['invoice_status']=="3"){
-											echo "Done";
-										}
-										?>
-									</b>
-
-									| 
-
-									ID Order / NO.WO :
-									<b>
-										<?php echo $in['invoice_id']; ?>
-									</b> 
-
-								</h5>
-								<br/>													
 							</div>
+                            <div class="col-md-4">
+                                <h5>
+                                    Status :
+                                    <b>
+                                        <?php
+                                        if($in['trx_status']=="0"){
+                                            echo "Belum Dibayar";
+                                        }else if($in['trx_status']=="1" && $in['trx_ar']==0){
+                                            echo "Lunas";
+                                        }else if($in['trx_status']=="2"){
+                                            echo "Cancel";
+                                        }else if($in['trx_status']=="3"){
+                                            echo "Selesai";
+                                        }else{
+                                            echo "Belum Lunas";
+                                        }
+                                        ?>
+                                    </b>
+
+                                </h5>
+                                <h5>
+
+                                    No. Invoice :
+                                    <b>
+                                        <?php echo $in['trx_invoice']; ?>
+                                    </b>
+
+                                </h5>
+                                <br/>
+                            </div>
 						</div>
 						<br/>
 						<div class="table-responsive">
@@ -72,9 +75,7 @@
 									<tr>
 										<th width="1%">No</th>									
 										<th>PRODUK</th>																					
-										<th>BAHAN</th>																					
-										<th>MESIN</th>																					
-										<th>JENIS</th>																																
+										<th>BAHAN</th>
 										<th>KETERANGAN</th>																					
 										<th>QTY</th>																																																												
 									</tr>
@@ -82,7 +83,7 @@
 								<tbody>
 									<?php
 									$no = 1; 									
-									$data = mysqli_query($config,"select * from orderan,harga_jual,produk,bahan,mesin,jenis_finishing,jenis_potong,jenis_display where hj_produk=produk_id and hj_bahan=bahan_id and hj_mesin=mesin_id and hj_finishing=jenis_finishing_id and hj_potong=jenis_potong_id and hj_display=jenis_display_id and order_hj=hj_id and order_invoice='$id_invoice'");		
+									$data = mysqli_query($config,"select * from orderan,produk,bahan where orderan.order_produk_id=produk.produk_id and orderan.order_bahan_id=bahan.bahan_id  and order_invoice='$id_invoice'");
 									while($d=mysqli_fetch_array($data)){
 										$n = $no++;										
 										?>
@@ -91,16 +92,9 @@
 											<td>
 												<?php echo $d['produk_nama'] ?>
 												<br/>
-												<small class="text-muted"><?php echo date('H:i:s | d-m-Y',strtotime($d['order_datetime'])); ?></small>
+												<small class="text-muted"><?php echo date('d M Y',strtotime($d['order_datetime'])); ?></small>
 											</td>
 											<td><?php echo $d['bahan_nama'] ?></td>
-											<td><?php echo $d['mesin_nama'] ?></td>
-											<td>
-												Jenis Finishing : <?php echo $d['jenis_finishing_nama'] ?><br/>
-												Jenis Potong : <?php echo $d['jenis_potong_nama'] ?><br/>
-												Jenis Display : <?php echo $d['jenis_display_nama'] ?><br/>
-
-											</td>																																																				
 											<td><?php echo $d['order_keterangan'] ?></td>																						
 											<td>																										
 												<?php echo $d['order_qty'] ?>

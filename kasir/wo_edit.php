@@ -28,7 +28,7 @@
 					<div class="panel">
 						<div class="panel-body">																	
 							<?php 
-							$inv = mysqli_query($config,"select * from invoice where invoice_id='$id_invoice'");
+							$inv = mysqli_query($config,"select * from transaksi where trx_invoice='$id_invoice'");
 							$in = mysqli_fetch_assoc($inv);
 							?>
 							<div class="row">		
@@ -37,41 +37,31 @@
 								</div>					
 								<div class="col-md-4">
 									<h5>
-										Status : 
+										Status :
 										<b>
 											<?php 										
-											if($in['invoice_status']=="0"){
-												echo "Order";
-											}else if($in['invoice_status']=="1"){
-												echo "Payment";
-											}else if($in['invoice_status']=="2"){
-												echo "Cancel";
-											}else if($in['invoice_status']=="3"){
+											if($in['trx_status']=="0"){
+												echo "Belum Dibayar";
+											}else if($in['trx_status']=="1" && $in['trx_ar']==0){
+												echo "Lunas";
+											}else if($in['trx_status']=="2"){
+												echo "Sedang Proses Cetak";
+											}else if($in['trx_status']=="3"){
 												echo "Done";
 											}
 											?>
 										</b>
 
-										| 
+                                    </h5>
+                                    <h5>
 
-										ID Order / NO.WO :
+										No. Invoice :
 										<b>
-											<?php echo $in['invoice_id']; ?>
+											<?php echo $in['trx_invoice']; ?>
 										</b> 
 
 									</h5>
 									<br/>
-									<table class="xxx">
-										<tr>
-											<th>Update Status</th>
-											<td>
-												<select class="form-control" name="status">
-													<option value="1">Payment</option>
-													<option value="3">Done</option>
-												</select>
-											</td>
-										</tr>
-									</table>								
 								</div>
 							</div>
 							<br/>
@@ -83,9 +73,7 @@
 											<tr>
 												<th width="1%">No</th>									
 												<th>PRODUK</th>																					
-												<th>BAHAN</th>																					
-												<th>MESIN</th>																					
-												<th>JENIS</th>																																
+												<th>BAHAN</th>
 												<th>KETERANGAN</th>																					
 												<th>QTY</th>																					
 												<th>HARGA SATUAN</th>																					
@@ -95,7 +83,7 @@
 										<tbody>
 											<?php
 											$no = 1; 									
-											$data = mysqli_query($config,"select * from orderan,harga_jual,produk,bahan,mesin,jenis_finishing,jenis_potong,jenis_display where hj_produk=produk_id and hj_bahan=bahan_id and hj_mesin=mesin_id and hj_finishing=jenis_finishing_id and hj_potong=jenis_potong_id and hj_display=jenis_display_id and order_hj=hj_id and order_invoice='$id_invoice'");		
+											$data = mysqli_query($config,"select * from orderan,produk,bahan where orderan.order_produk_id=produk.produk_id and orderan.order_bahan_id=bahan.bahan_id  and order_invoice='$id_invoice'");
 											while($d=mysqli_fetch_array($data)){
 												$n = $no++;										
 												?>
@@ -103,22 +91,15 @@
 													<td><?php echo $n; ?></td>
 													<td><?php echo $d['produk_nama'] ?></td>
 													<td><?php echo $d['bahan_nama'] ?></td>
-													<td><?php echo $d['mesin_nama'] ?></td>
-													<td>
-														Jenis Finishing : <?php echo $d['jenis_finishing_nama'] ?><br/>
-														Jenis Potong : <?php echo $d['jenis_potong_nama'] ?><br/>
-														Jenis Display : <?php echo $d['jenis_display_nama'] ?><br/>
-
-													</td>																																																				
 													<td><?php echo $d['order_keterangan'] ?></td>																						
 													<td>																										
 														<input type="hidden" value="<?php echo $d['order_id'] ?>" class="form-control x_id_order<?php echo $n; ?>">
-														<input type="number" value="<?php echo $d['order_qty'] ?>" min="1" class="form-control x_qty<?php echo $n; ?>" style="width: 80px" disabled>
+														<input type="number" value="<?php echo $d['order_qty'] ?>" min="1" class="form-control x_qty<?php echo $n; ?>" style="width: 80px" readonly>
 													</td>																						
 													<td>													
-														<input type="number" value="<?php echo $d['order_harga_satuan'] ?>" min="1" class="form-control x_harga_satuan<?php echo $n; ?>" style="width: 110px" disabled>
+														<input type="text" value="Rp. <?php echo number_format( $d['order_harga_satuan']) ?>" min="1" class="form-control x_harga_satuan<?php echo $n; ?>" style="width: 110px" readonly>
 													</td>																						
-													<td><?php echo $d['order_harga_sub_total'] ?></td>																																		
+													<td>Rp. <?php echo number_format( $d['order_harga_sub_total']) ?></td>
 												</tr>
 												<?php
 											}
@@ -133,29 +114,19 @@
 
 							<div class="row">							
 								<div class="col-md-6">
-									<h4>Kostumer</h4>
+									<h4>Pelanggan</h4>
 									<?php 
-									$kos = mysqli_query($config,"select * from invoice,kostumer where invoice_id='$id_invoice' and invoice_kostumer=kostumer_id");
+									$kos = mysqli_query($config,"select * from transaksi,kostumer where trx_invoice='$id_invoice' and transaksi.trx_customer=kostumer.kostumer_id");
 									$k=mysqli_fetch_assoc($kos);
 									?>
 									<table class="xxx">
 										<tr>
-											<th>Kostumer</th>
+											<th>Nama Pelanggan</th>
 											<th>:</th>
 											<td><?php echo $k['kostumer_nama']; ?></td>
 										</tr>
 										<tr>
-											<th>Alamat</th>
-											<th>:</th>
-											<td><?php echo $k['kostumer_alamat']; ?></td>
-										</tr>
-										<tr>
-											<th>Email</th>
-											<th>:</th>
-											<td><?php echo $k['kostumer_email']; ?></td>
-										</tr>
-										<tr>
-											<th>No.Telp</th>
+											<th>No.Telp/HP</th>
 											<th>:</th>
 											<td><?php echo $k['kostumer_telp']; ?></td>
 										</tr>
@@ -165,47 +136,42 @@
 									<table class="xxx table">
 										<tr>
 											<th width="40%">Total</th>
-											<td width="60%"><input readonly="readonly" type="number" min="0" value="<?php echo $in['invoice_total']; ?>" name="" class="form-control total"></td>
+											<td width="60%"><input readonly="readonly" type="number" min="0" value="<?php echo $in['trx_total_pembayaran']; ?>" name="" class="form-control total"></td>
 											<td width="1%"></td>
 										</tr>
 										<tr>
 											<th>Disc</th>
-											<td><input type="number" min="0" max="100" name="disc" class="form-control disc" value="<?php echo $in['invoice_diskon']; ?>"></td>
+											<td><input type="number" min="0" max="100" name="disc" class="form-control disc" value="<?php echo $in['trx_diskon']; ?>"></td>
 											<td>%</td>
 										</tr>
 										<tr>
 											<th>Grand Total</th>
                                             <?php
-                                            $diskon = $in['invoice_diskon'];
-                                            $total =  $in['invoice_total'];
+                                            $diskon = $in['trx_diskon'];
+                                            $total =  $in['trx_total_pembayaran'];
                                             $totaldiskon = $total*$diskon/100;
                                             $grandtotal = $total - $totaldiskon;
                                             ?>
-											<td><input type="number" readonly="readonly" min="0" value="<?php if($in['invoice_diskon']==0){echo $in['invoice_total'];}else{echo $grandtotal;} ?>" name="grand_total" class="form-control grand_total"></td>
+											<td><input type="number" readonly="readonly" min="0" value="<?php if($in['trx_diskon']==0){echo $in['trx_total_pembayaran'];}else{echo $grandtotal;} ?>" name="grand_total" class="form-control grand_total"></td>
 											<td></td>
 										</tr>
 										<tr>
 											<th>DP</th>
-											<td><input type="number" min="0" name="dp" class="form-control dp" required="required" value="<?php echo $in['invoice_dp']; ?>"></td>
+											<td><input type="number" min="0" name="dp" class="form-control dp" required="required" value="<?php echo $in['trx_dp']; ?>"></td>
 											<td></td>
 										</tr>
 										<tr>
 											<th>Sisa Pembayaran</th>
-											<td><input type="number" min="0" value="<?php if($in['invoice_total']==$in['invoice_dp'] ){echo "0";}else{echo $in['invoice_ar']; }; ?>" name="ar" class="form-control ar" readonly></td>
+											<td><input type="number" min="0" value="<?php if($in['trx_total_pembayaran']==$in['trx_dp'] ){echo "0";}else{echo $in['trx_ar']; }; ?>" name="ar" class="form-control ar" readonly></td>
 											<td></td>
 										</tr>
-                                        <tr>
-                                            <th>Uang Kembalian</th>
-                                            <td><input type="number" min="0" value="" class="form-control cb"></td>
-                                            <td></td>
-                                        </tr>
 										<tr>
 											<th>Payment Method</th>
 											<td>
 												<select class="form-control" name="payment" required="required">
 													<option value="">- Pilih</option>
-													<option <?php if($in['invoice_payment']=="cash"){echo "selected='selected'";} ?> value="cash">Cash</option>
-													<option <?php if($in['invoice_payment']=="cheque"){echo "selected='selected'";} ?> value="cheque">Cheque</option>
+													<option <?php if($in['trx_jenis_pembayaran']=="Tunai"){echo "selected='selected'";} ?> value="Tunai">Tunai</option>
+													<option <?php if($in['trx_jenis_pembayaran']=="Transfer"){echo "selected='selected'";} ?> value="Transfer">Transfer</option>
 												</select>
 											</td>
 										</tr>										
@@ -213,12 +179,25 @@
 
 									<br/>
 									<br/>
-
-									<input type="submit" value="UPDATE" class="btn btn-primary">
-									&nbsp;
-									&nbsp;
-									&nbsp;
-									<a href="index.php" class="btn btn-primary">Kembali</a>
+                                    <?php
+                                    if($in['trx_status'] == 0) {
+                                        ?>
+                                        <input type="hidden" value="1" name="status">
+                                        <input type="submit" value="BAYAR" class="btn btn-lg btn-primary">
+                                        <?php
+                                    }elseif($in['trx_status'] == 1) {
+                                        ?>
+                                         <input type="hidden" value="1" name="status">
+                                        &nbsp;<input type="submit" value="UPDATE" class="btn btn-lg btn-primary">
+                                        &nbsp;<?php
+                                    }elseif ($in['trx_status'] == 2) {
+                                        ?>
+                                        &nbsp;<input type="hidden" value="3" name="status" class="btn btn-primary">
+                                        <input type="submit" value="SELESAI" class="btn btn-lg btn-success">
+                                        <?php
+                                    }
+                                    ?>
+                                    <span class="alpaca-float-right"><a href="index.php" class="btn btn-primary">Kembali</a></span>
 
 								</div>
 							</div>
@@ -246,18 +225,19 @@
 
 
 <script type="text/javascript">
-	$(document).ready(function(){		
 
+
+
+	$(document).ready(function(){
 		$("body").on("keyup", ".disc", function(){
-			
-			var total = $('.total').val();			
+			var total = $('.total').val();
 			var disc = $('.disc').val();	
 			var grand_total = $('.grand_total').val();			
 			var ar = $('.ar').val();
 
 			var x = total*disc/100;		
-			var xx = total-x;		
-			
+			var xx = total-x;
+
 			$('.grand_total').val(xx);
 
 			var aa = total-ar;					
@@ -268,7 +248,7 @@
 
 		$("body").on("keyup", ".dp", function(){
 			
-			var dp = $('.dp').val();			
+			var dp = $('.dp').val();
 			var ar = $('.ar').val();			
 			var cb = $('.cb').val();
 			var grand_total = $('.grand_total').val();

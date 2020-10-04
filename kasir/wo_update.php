@@ -41,7 +41,7 @@ $payment = $_POST['payment'];
 // }
 // mysqli_query($config,"update invoice set invoice_total='$tot' where invoice_id='$id_invoice'");
 
-mysqli_query($config,"update invoice set invoice_status='$status', invoice_diskon='$disc', invoice_dp='$dp', invoice_ar='$ar', invoice_payment='$payment' where invoice_id='$id_invoice'");
+mysqli_query($config,"update transaksi set trx_status='$status', trx_diskon='$disc', trx_dp='$dp', trx_ar='$ar', trx_jenis_pembayaran='$payment' where trx_invoice='$id_invoice'");
 
 
 header("location:wo_detail.php?id=$id_invoice&alert=data-update");

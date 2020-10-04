@@ -33,7 +33,7 @@ $id = $_GET['id'];
 // }
 // mysqli_query($config,"update invoice set invoice_total='$tot' where invoice_id='$id'");
 
-mysqli_query($config,"update invoice set invoice_status='2' where invoice_id='$id'");
+mysqli_query($config,"update transaksi set trx_status='2' where trx_invoice='$id'");
 
 
 header("location:index.php?alert=data-update");

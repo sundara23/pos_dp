@@ -30,39 +30,39 @@
 								<tbody>
 									<?php
 									$no = 1; 
-									$data = mysqli_query($config,"select * from invoice,kostumer where invoice_kostumer=kostumer_id order by invoice_id desc");		
+									$data = mysqli_query($config,"select * from transaksi,kostumer where transaksi.trx_customer=kostumer.kostumer_id order by trx_invoice desc");
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo $d['invoice_id'] ?></td>
-											<td><?php echo date('d-m-Y',strtotime($d['invoice_tgl'])); ?></td>
+											<td><?php echo $d['trx_invoice'] ?></td>
+											<td><?php echo date('d M Y',strtotime($d['trx_date'])); ?></td>
 											<td><?php echo $d['kostumer_nama'] ?></td>																			
 											<td>
 												<?php 												
-												if($d['invoice_status']=="0"){
+												if($d['trx_status']=="0"){
 													echo "Order";
-												}else if($d['invoice_status']=="1"){
+												}else if($d['trx_status']=="1"){
 													echo "Payment";
-												}else if($d['invoice_status']=="2"){
+												}else if($d['trx_status']=="2"){
 													echo "Print";
-												}else if($d['invoice_status']=="3"){
+												}else if($d['trx_status']=="3"){
 													echo "Done";
 												}
 												?>
 											</td>																										
 											<td>	
 												<?php 												
-												if($d['invoice_status']=="0"){													
+												if($d['trx_status']=="0"){
 													?>													
 													
 													<?php												
-												}else if($d['invoice_status']=="1"){													
+												}else if($d['trx_status']=="1"){
 													?>													
-													<a class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['invoice_id'];?>"><i class="icon-pencil"></i> Detail</a>
-													<a class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="wo_proses.php?id=<?php echo $d['invoice_id'];?>"><i class="icon-pencil"></i> Proses</a>
+													<a class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-pencil"></i> Detail</a>
+													<a class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="wo_proses.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-pencil"></i> Proses</a>
 													<?php												
-												}else if($d['invoice_status']=="2"){													
+												}else if($d['trx_status']=="2"){
 													?>
 													################
 													<?php												
