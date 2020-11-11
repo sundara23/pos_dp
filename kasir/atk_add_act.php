@@ -13,6 +13,7 @@ $trx_total_pembayaran = $_POST['trx_total_pembayaran'];
 $trx_jenis_pembayaran = $_POST['trx_jenis_pembayaran'];
 $trx_admin_id = $_POST['trx_admin_id'];
 $simpan_ke = $_POST['simpan_trx'];
+$ket_ak = $_POST['ket_ak'];
 $sisa = $trx_lunas - $trx_dp;
 $tgl = date('Y-m-d');
 //echo $trx_dp.' , '.$trx_lunas.' , '.$trx_costumer.' , '.$trx_id.' , '.$trx_admin_id.' , '.$trx_jenis_pembayaran.' , '.$trx_total_pembayaran.' , '.$sisa.' , '.$simpan_ke;

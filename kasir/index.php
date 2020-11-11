@@ -31,7 +31,7 @@
 									<?php
 									$no = 1;
 									$kdtoko = $_SESSION['kd_toko'];
-									$data = mysqli_query($config,"select * from transaksi where kd_toko='$kdtoko' and trx_status='1' order by trx_date desc");
+									$data = mysqli_query($config,"select * from transaksi where kd_toko='$kdtoko' and trx_status='1' and jenis_barang='CTK' order by trx_date desc");
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr>
