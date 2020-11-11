@@ -2,10 +2,7 @@
 
 include '../config.php';
 
-$id = $_GET['id'];
+$id_invoice = $_GET['id'];
 
-mysqli_query($config,"delete from orderan where order_invoice='$id'");
-
-mysqli_query($config,"delete from transaksi where trx_invoice='$id'");
-
-header("location:index.php?alert=data-hapus");
+mysqli_query($config,"update transaksi set trx_status='9' where trx_invoice='$id_invoice'");
+header("location:index.php?alert=data-batal");

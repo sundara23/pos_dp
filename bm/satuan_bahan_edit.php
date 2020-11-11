@@ -12,7 +12,7 @@
 				<!-- Traffic sources -->
 				<div class="panel panel-flat">
 					<div class="panel-heading">
-						<h4 class="panel-title">Edit jenis display</h4>
+						<h4 class="panel-title">Edit Satuan Bahan</h4>
 						<div class="heading-elements">
 							<a href="satuan_bahan.php" class="btn btn-sm btn-primary"><i class="icon-arrow-left12"></i> KEMBALI</a>
 						</div>

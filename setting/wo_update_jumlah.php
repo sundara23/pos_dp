@@ -3,7 +3,6 @@
 include '../config.php';
 
 $id_invoice = $_POST['id_invoice'];
-
 $harga_satuan = $_POST['harga_satuan'];
 $id_order = $_POST['id_order'];
 $qty = $_POST['qty'];

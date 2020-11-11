@@ -25,8 +25,8 @@
 										<th width="1%">No</th>
 										<th>Kode Bahan</th>
 										<th>Nama Bahan</th>
-										<th>Kategori</th>
-										<th>HPP</th>												
+										<th>Satuan</th>
+										<th>Harga Awal</th>
 										<th>Harga Jual</th>
 										<th width="15%">OPSI</th>
 									</tr>

@@ -406,130 +406,45 @@
                 <!--  modal end-->
                 <!--  HPP-->
 				<div class="row">
-<!--					<div class="col-md-6">-->
-<!--						<form action="index_tgl.php" method="get">-->
-<!--							<div class="row">-->
-<!--								<div class="col-md-6">-->
-<!--									<div class="form-group">-->
-<!--										<label>Date start:</label>-->
-<!--										<div class="input-group date">-->
-<!--											<div class="input-group-addon">-->
-<!--												<i class="icon-calendar"></i>-->
-<!--											</div>-->
-<!--											<input name="from" class="form-control pull-right tanggal" value="" type="text">-->
-<!--										</div>-->
-<!--
-<!-									</div></div>-->
-<!--									<div class="col-md-6">-->
-<!--										<div class="form-group">-->
-<!--											<label>Date finish:</label>-->
-<!--											<div class="input-group date">-->
-<!--												<div class="input-group-addon">-->
-<!--													<i class="icon-calendar"></i>-->
-<!--												</div>-->
-<!--												<input name="to" class="form-control pull-right tanggal" value="" type="text">-->
-<!--											</div>-->
-<!--											/.input group -->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--								<div class="row">-->
-<!--									<div class="col-md-offset-8 col-md-4">-->
-<!--										<div class="form-group">-->
-<!--											<input class="btn btn-primary form-control" value="Submit Date" type="submit">-->
-<!--										</div>-->
-<!--									</div>-->
-<!--								</div>-->
-<!--							</form>-->
-<!--						</div>-->
-<!--                    <div class="col-md-6">-->
-<!--							<table class="table table-bordered table-condensed table-hovered" style="background: white;" width="100%">-->
-<!--								<thead>-->
-<!--									<tr>-->
-<!--										<th colspan="3" class="text-center">Data Keuangan</th>-->
-<!--									</tr>-->
-<!--									<tr class="info">-->
-<!--										<th>HPP (Rp)</th>-->
-<!--										<th>PROFIT (Rp)</th>-->
-<!--										<th>TOTAL OMSET (Rp)</th>-->
-<!--									</tr>-->
-<!--								</thead>-->
-<!--								<tbody>-->
-<!--									<tr>-->
-<!--										<td align="right">-->
-<!--											<h3>-->
-<!--												<b>-->
-<!--													--><?php //
-//													$jenis_display = mysqli_query($config,"select sum(jenis_display_hpp) as hpp from jenis_display");
-//													$jd = mysqli_fetch_assoc($jenis_display);
-//													?><!--	-->
-<!--													--><?php //
-//													$jenis_finishing = mysqli_query($config,"select sum(jenis_finishing_hpp) as hpp from jenis_finishing");
-//													$jf = mysqli_fetch_assoc($jenis_finishing);
-//													?><!--	-->
-<!--													--><?php //
-//													$jenis_potong = mysqli_query($config,"select sum(jenis_potong_hpp) as hpp from jenis_potong");
-//													$jp = mysqli_fetch_assoc($jenis_potong);
-//													?><!--	-->
-<!--													--><?php //
-//													$bahan = mysqli_query($config,"select sum(bahan_hpp) as hpp from bahan");
-//													$b = mysqli_fetch_assoc($bahan);
-//													?><!--	-->
-<!--													--><?php //
-//													$mesin = mysqli_query($config,"select sum(mesin_hpp) as hpp from mesin");
-//													$m = mysqli_fetch_assoc($mesin);
-//													?><!--	-->
-<!--													--><?php //
-//													$total_hpp = $jd['hpp']+$jf['hpp']+$jp['hpp']+$b['hpp']+$m['hpp'];
-//													echo number_format($total_hpp);
-//													?>
-<!--												</b>		-->
-<!--											</h3>-->
-<!--										</td>-->
-<!--										<td align="right">-->
-<!--											<h3>-->
-<!--												<b>-->
-<!--													--><?php //
-//													$jumlah = mysqli_query($config,"select sum(hj_harga) as total from harga_jual");
-//													$j = mysqli_fetch_assoc($jumlah);
-//													if($j['total']>0){
-//														$b = $j['total'];
-//
-//													}else{
-//														$b=0;
-//														echo $b;
-//													}
-//													?><!--	-->
-<!--													--><?php //echo number_format($b-$total_hpp); ?>
-<!--												</b>		-->
-<!--											</h3>-->
-<!--										</td>-->
-<!--										<td align="right">-->
-<!--											<h3>-->
-<!--												<b>-->
-<!--													--><?php //echo number_format($b); ?>
-<!--												</b>												-->
-<!--											</h3>-->
-<!--										</td>-->
-<!---->
-<!--									</tr>-->
-<!--								</tbody>-->
-<!--							</table>-->
-<!--							<br>-->
-<!--						</div>-->
+					<div class="col-md-offset-1 col-md-9">
+						<form action="index_tgl.php" method="get">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-group">
+										<div class="input-group date">
+											<div class="input-group-addon">
+												<i class="icon-calendar"></i>
+											</div>
+											    <input name="from" class="form-control pull-right tanggal" value="" type="date">
+                                            <div class="input-group-addon">
+                                                <span>To</span>
+                                            </div>
+                                            <input name="to" class="form-control pull-right tanggal" value="" type="date">
+										</div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                        <div class="form-group">
+                                            <input class="btn btn-primary form-control" value="Submit Date" type="submit">
+                                        </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
                 </div>
 
 					<div class="col-lg-12">					
 						<!-- Daily sales -->
 						<div class="panel panel-flat">
 							<div class="panel-heading">	
-								<h5><i class="icon-chart"></i> Persentasi Omset per Produk</h5>
+                                <h5><i class="icon-chart"></i> Persentasi Omset per Produk  [<b>Faskal Pusat</b>]</h5>
 							</div>
 
 							<div class="panel-body">
 								<div class="row">
 									<div class="col-md-6">
-										<div id="chart-per-produk"></div>
+										<div id="chart-per-produk-faskal01"></div>
 									</div>
 									<div class="col-md-6">
 										<div class="table-responsive">							
@@ -552,7 +467,7 @@
 															<td>
 																<?php
 																$id_produk = $d['produk_id'];
-																$jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where orderan.order_produk_id='$id_produk'");
+																$jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where orderan.order_produk_id='$id_produk' and kd_toko='faskal01'");
 																$j = mysqli_fetch_assoc($jumlah);
                                                                 if($j['qty']== null){
                                                                     $j['qty']=0;
@@ -563,7 +478,7 @@
 															<td>Rp.
 																<?php
 																$id_produk = $d['produk_id'];
-																$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan where orderan.order_produk_id='$id_produk'");
+																$jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan where orderan.order_produk_id='$id_produk' and kd_toko='faskal01'");
 																$j = mysqli_fetch_assoc($jumlah);
 																if($j['total']>0){
 																	$xxx += $j['total'];
@@ -592,7 +507,7 @@
 								<div class="row">																	
 									<div class="col-md-12">
 										<h5>Grafik Penjualan (day-to-day)</h5>
-										<div id="chart-omset-per-mesin"></div>
+										<div id="chart-day-to-day-faskal01"></div>
 									</div>
 								</div>
 								<br/>
@@ -602,6 +517,87 @@
 
 
 						</div>
+                        <div class="panel panel-flat">
+                            <div class="panel-heading">
+                                <h5><i class="icon-chart"></i> Persentasi Omset per Produk  [<b>Faskal Cabang</b>]</h5>
+                            </div>
+
+                            <div class="panel-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div id="chart-per-produk-faskal02"></div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-hover table-striped">
+                                                <thead>
+                                                <tr>
+                                                    <th>Produk</th>
+                                                    <th>Jumlah</th>
+                                                    <th>Pendapatan</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                <?php
+                                                $xxx=0;
+                                                $data = mysqli_query($config,"select * from produk");
+                                                while($d=mysqli_fetch_array($data)){
+                                                    ?>
+                                                    <tr>
+                                                        <td><?php echo $d['produk_nama'] ?></td>
+                                                        <td>
+                                                            <?php
+                                                            $id_produk = $d['produk_id'];
+                                                            $jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where orderan.order_produk_id='$id_produk' and kd_toko='faskal02'");
+                                                            $j = mysqli_fetch_assoc($jumlah);
+                                                            if($j['qty']== null){
+                                                                $j['qty']=0;
+                                                            }
+                                                            echo $j['qty'];
+                                                            ?>
+                                                        </td>
+                                                        <td>Rp.
+                                                            <?php
+                                                            $id_produk = $d['produk_id'];
+                                                            $jumlah = mysqli_query($config,"select sum(order_harga_sub_total) as total from orderan where orderan.order_produk_id='$id_produk' and kd_toko='faskal02'");
+                                                            $j = mysqli_fetch_assoc($jumlah);
+                                                            if($j['total']>0){
+                                                                $xxx += $j['total'];
+                                                                echo number_format($j['total']);
+                                                            }else{
+                                                                echo "0";
+                                                            }
+                                                            ?>
+                                                        </td>
+                                                    </tr>
+                                                    <?php
+                                                }
+                                                ?>
+                                                <tr>
+                                                    <td colspan="2">TOTAL</td>
+                                                    <td><b>Rp. <?php echo number_format($xxx); ?></b></td>
+                                                </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                                <br/>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h5>Grafik Penjualan (day-to-day)</h5>
+                                        <div id="chart-day-to-day-faskal02"></div>
+                                    </div>
+                                </div>
+                                <br/>
+
+
+                            </div>
+
+
+                        </div>
 						<!-- /daily sales -->
 
 
@@ -633,7 +629,8 @@
 
 
     <script type="text/javascript">
-        Highcharts.chart('chart-per-produk', {
+        // script faskal 01
+        Highcharts.chart('chart-per-produk-faskal01', {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
@@ -676,7 +673,7 @@
                         $id_produk = $d['produk_id'];
                         $jumlah_produk = mysqli_query($config,"select * from produk");
                         $jj_produk = mysqli_num_rows($jumlah_produk);
-                        $jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where order_produk_id='$id_produk'");
+                        $jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where order_produk_id='$id_produk' and kd_toko='faskal01'");
                         $j = mysqli_fetch_assoc($jumlah);
                         if($j['qty']== null){
                             $j['qty']=0;
@@ -695,11 +692,7 @@
                     ]
             }]
         });
-
-
-
-
-        Highcharts.chart('chart-omset-per-mesin', {
+        Highcharts.chart('chart-day-to-day-faskal01', {
             chart: {
                 type: 'line'
             },
@@ -737,13 +730,13 @@
                     [
                         <?php
                         $xxxx = 0;
-                        $data = mysqli_query($config,"select * from transaksi");
+                        $data = mysqli_query($config,"select * from transaksi where kd_toko='faskal01'");
                         while($d=mysqli_fetch_array($data)){
                         ?>
 
                         <?php
                         $tgl = $d['trx_date'];
-                        $jumlah = mysqli_query($config,"select * from transaksi where trx_date='$tgl' order by date(trx_date) desc");
+                        $jumlah = mysqli_query($config,"select * from transaksi where trx_date='$tgl' and kd_toko='faskal01' order by date(trx_date) desc");
                         $j = mysqli_num_rows($jumlah);
                         ?>
                         ['<?php echo $d['trx_date'] ?>', <?php echo $j; ?>],
@@ -770,11 +763,138 @@
 
         });
 
+        // script faskal 02
+        Highcharts.chart('chart-per-produk-faskal02', {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: 'pie'
+            },
+            title: {
+                text: ''
+            },
+            tooltip: {
+                pointFormat: '{series.name} <br/> <b>{point.percentage:.0f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: true,
+                        format: '<b>{point.name}</b> <br/> {point.percentage:.0f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Produk',
+                type: 'pie',
+                colorByPoint: true,
+                data:
+                    [
+                        <?php
+                        $data = mysqli_query($config,"select * from produk order by produk_id desc");
+                        while($d=mysqli_fetch_array($data)){
+                        ?>
+
+
+                        <?php
+                        $nama_produk = $d['produk_nama'];
+                        $id_produk = $d['produk_id'];
+                        $jumlah_produk = mysqli_query($config,"select * from produk");
+                        $jj_produk = mysqli_num_rows($jumlah_produk);
+                        $jumlah = mysqli_query($config,"select sum(order_qty) as qty from orderan where order_produk_id='$id_produk' and kd_toko='faskal02'");
+                        $j = mysqli_fetch_assoc($jumlah);
+                        if($j['qty']== null){
+                            $j['qty']=0;
+                        }
+                        ?>
+                        {
+                            name: '<?php echo $nama_produk; ?>',
+                            y: <?php echo $j['qty']; ?>
+                        },
+                        <?php
+                        }
+                        ?>
 
 
 
-        //  Chart Day to Day
+                    ]
+            }]
+        });
+        Highcharts.chart('chart-day-to-day-faskal02', {
+            chart: {
+                type: 'line'
+            },
+            title: {
+                text: ''
+            },
+            subtitle: {
+                text: ''
+            },
+            xAxis: {
+                type: 'category',
+                labels: {
+                    rotation: -45,
+                    style: {
+                        fontSize: '11px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: ''
+                }
+            },
+            legend: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '<b>{point.y:.0f}</b>'
+            },
+            series: [{
+                name: 'Population',
+                data:
+                    [
+                        <?php
+                        $xxxx = 0;
+                        $data = mysqli_query($config,"select * from transaksi where kd_toko='faskal02'");
+                        while($d=mysqli_fetch_array($data)){
+                        ?>
 
+                        <?php
+                        $tgl = $d['trx_date'];
+                        $jumlah = mysqli_query($config,"select * from transaksi where trx_date='$tgl' and kd_toko='faskal02' order by date(trx_date) desc");
+                        $j = mysqli_num_rows($jumlah);
+                        ?>
+                        ['<?php echo $d['trx_date'] ?>', <?php echo $j; ?>],
+                        <?php
+                        }
+                        ?>
 
+                    ]
+
+                ,
+                dataLabels: {
+                    enabled: true,
+                    rotation: -90,
+                    color: '#FFFFFF',
+                    align: 'right',
+                    format: '{point.y:.0f}',
+                    y: 10,
+                    style: {
+                        fontSize: '13px',
+                        fontFamily: 'Verdana, sans-serif'
+                    }
+                }
+            }]
+
+        });
     </script>
     <?php include 'footer.php'; ?>

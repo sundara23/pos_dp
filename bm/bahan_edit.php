@@ -39,7 +39,7 @@
 											</td>
 										</tr>
 										<tr>
-											<th width="20%">Kategori</th>
+											<th width="20%">Satuan</th>
 											<td>
 												<select name="kategori" class="form-control" required="required">
 													<option value="">-Pilih-</option>
@@ -49,7 +49,7 @@
 											</td>
 										</tr>			
 										<tr>
-											<th width="20%">HPP</th>
+											<th width="20%">Harga Awal</th>
 											<td><input type="number" class="form-control" name="hpp" required="required" value="<?php echo $d['bahan_hpp']; ?>"></td>
 										</tr>
                                         <tr>

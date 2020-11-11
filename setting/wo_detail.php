@@ -1,180 +1,86 @@
-<?php include 'header3.php'; ?>
-<!-- Main content -->
-<style type="text/css">
-
-.xxx tr th,
-.xxx tr td{
-	padding: 10px;
-	font-size: 10pt;
-}
-</style>
-
-<?php 
-if(isset($_GET['id'])){
-	$id_invoice = $_GET['id'];
-}else{	
-	header("location:index.php");
-}
-?>
-
-
-<!-- Content area -->
-
-<div style="width: 90%;margin: 10px auto">
-	<div class="row">
-		<div class="col-md-6">
-			<h2>Digital Printing</h2>
-			<?php 
-			$kos = mysqli_query($config,"select * from invoice,kostumer where invoice_id='$id_invoice' and invoice_kostumer=kostumer_id");
-			$k=mysqli_fetch_assoc($kos);
-			?>
-			<table class="xxx">
-				<tr>
-					<th>No. WO</th>
-					<th>:</th>
-					<td><?php echo $k['invoice_id']; ?></td>
-				</tr>
-				<tr>
-					<th>Tanggal</th>
-					<th>:</th>
-					<td><?php echo date('d-m-Y',strtotime($k['invoice_tgl'])); ?></td>
-				</tr>
-				<tr>
-					<th>Status</th>
-					<th>:</th>
-					<td>
-						<?php 
-
-						if($k['invoice_status']=="0"){
-							echo "Order";
-						}else if($k['invoice_status']=="1"){
-							echo "Payment";
-						}else if($k['invoice_status']=="2"){
-							echo "Cancel";
-						}else if($k['invoice_status']=="3"){
-							echo "Done";
-						}
-						?>
-
-					</td>
-				</tr>				
-			</table>
-		</div>
-		<div class="col-md-6">
-			<h2>Bill To</h2>			
-			<table class="xxx">
-				<tr>
-					<th>Kostumer</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_nama']; ?></td>
-				</tr>
-				<tr>
-					<th>Alamat</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_alamat']; ?></td>
-				</tr>
-				<tr>
-					<th>Email</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_email']; ?></td>
-				</tr>
-				<tr>
-					<th>No.Telp</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_telp']; ?></td>
-				</tr>
-			</table>
-		</div>
+<?php include 'header.php'; ?>
+    <!-- Main content -->
+    <div class="content-wrapper">
+        <?php
+        if(isset($_GET['id'])){
+            $id_invoice = $_GET['id'];
+        }else{
+            header("location:cs.php");
+        }
+        ?>
+        <!-- Content area -->
+        <div class="content">
+            <?php show_alert(); ?>
+            <!-- Main charts -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- Traffic sources -->
+                    <div class="panel panel-flat">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">List Pesanan</h4>
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-hover table-datatable">
+                                    <thead>
+                                    <tr>
+                                        <th width="1%">No</th>
+                                        <th>Nama produk</th>
+                                        <th>Jumlah</th>
+                                        <th>Bahan</th>
+                                        <th>Keterangan</th>
+                                        <th>Finishing</th>
+                                        <th>Lokasi File</th>
+                                        <th>Opsi</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <?php
+                                    $id_admin = $_SESSION['id'];
+                                    $kd_toko = $_SESSION['kd_toko'];
+                                    $no = 1;
+                                    $data = mysqli_query($config,"select * from orderan, bahan, produk, transaksi, jenis_display, jenis_finishing, jenis_potong where orderan.order_bahan_id=bahan.bahan_id and orderan.jd_id=jenis_display.jenis_display_id and orderan.jf_id=jenis_finishing.jenis_finishing_id and orderan.jp_id=jenis_potong.jenis_potong_id and orderan.order_invoice=transaksi.trx_invoice and orderan.order_produk_id=produk.produk_id and orderan.order_invoice='$id_invoice'");
+                                    while($d=mysqli_fetch_array($data)){
+                                        ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td><?php echo $d['produk_nama'] ?></td>
+                                            <td><?php echo $d['order_qty'] ?></td>
+                                            <td><?php echo $d['bahan_nama'] ?></td>
+                                            <td><?php echo $d['order_keterangan']; ?></td>
+                                            <td width="300px">
+                                                <p>Jenis Display : <b><?php echo $d['jenis_display_nama']; ?></b></p>
+                                                <p>Jenis Finishing : <b><?php echo $d['jenis_finishing_nama']; ?></b></p>
+                                                <p>Jenis Potong : <b><?php echo $d['jenis_potong_nama']; ?></b></p>
+                                            </td>
+                                            <td><?php echo $d['lokasi_file']; ?></td>
+                                            <td>
+                                                <a data-placement="top" title="Edit Pesanan" class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['order_id'];?>&&inv=<?php echo $d['order_invoice'];?>"><i class="icon-wrench3"></i>Setting</a>
+                                            </td>
+                                        </tr>
+                                    <?php } ?>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <a href="index.php" class="btn btn-sm btn-primary alpaca-float-right mt-15" >Kembali</a>
+                        </div>
+                    </div>
 
 
+                </div>
 
-	</div>
-	<br/>
-	<br/>
-	<br/>
-	<br/>	
-	<div class="row">
-		<div class="col-md-12">
-			<table class="table table-bordered">						
-				<thead>
-					<tr>
-						<th width="1%">No</th>									
-						<th>PRODUK</th>																					
-						<th>BAHAN</th>																					
-						<th>MESIN</th>																					
-						<th>FINISHING</th>																					
-						<th>KETERANGAN</th>																					
-						<th>QTY</th>																					
-						<th>HARGA SATUAN</th>																					
-						<th>SUB TOTAL</th>																									
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					$kd_toko = $_SESSION['kd_toko'];
-					$id_admin = $_SESSION['id'];
-					$no = 1; 									
-					$data = mysqli_query($config,"select * from orderan,harga_jual,produk,bahan,mesin,jenis_finishing,jenis_potong,jenis_display where hj_produk=produk_id and hj_bahan=bahan_id and hj_mesin=mesin_id and hj_finishing=jenis_finishing_id and hj_potong=jenis_potong_id and hj_display=jenis_display_id and order_hj=hj_id and order_invoice='$id_invoice'");		
-					while($d=mysqli_fetch_array($data)){										
-						?>
-						<tr>
-							<td><?php echo $no++; ?></td>
-							<td>
-								<?php echo $d['produk_nama'] ?>
-								<br/>
-								<small class="text-muted"><?php echo date('H:i:s | d-m-Y',strtotime($d['order_datetime'])); ?></small>
-							</td>
-							<td><?php echo $d['bahan_nama'] ?></td>
-							<td><?php echo $d['mesin_nama'] ?></td>
-							<td><?php echo $d['jenis_finishing_nama'] ?></td>
-							<td><?php echo $d['order_keterangan'] ?></td>	
-							<td>																			
-								<?php echo $d['order_qty'] ?>
-							</td>	
-							<td><?php echo "Rp.". number_format($d['order_harga_satuan']) ?></td>	
-							<td><?php echo "Rp. ". number_format($d['order_harga_sub_total']) ?></td>																												
-						</tr>
-						<?php
-					}
-					?>		
-					<?php																
-					$data = mysqli_query($config,"select * from invoice where invoice_id='$id_invoice'");		
-					while($d=mysqli_fetch_array($data)){										
-						?>	
-						<tr></tr>						
-						<tr>										
-							<td colspan="7"><b>TOTAL</b></td>	
-							<td colspan="1">Rp. <?php echo number_format($d['invoice_total']); ?></td>	
-							<td></td>
-						</tr>	
-						<?php
-					}
-					?>																		
-				</tbody>
-			</table>
-
-			<br/>
-			<br/>
-			<br/>
-
-			<div class="col-md-4 col-md-offset-8">
-				<a target="_blank" href="wo_detail_cetak.php?id=<?php echo $id_invoice; ?>" class="btn btn-success btn-icon btn-xs"><i class="icon-printer"></i> Print</a>											
-				<a type="submit" href="index.php" class="btn btn-primary btn-icon btn-xs"><i class="glyphicon glyphicon-arrow-left"></i> Kembali</a>											
-			</div>
-		</div>
-	</div>
-</div>
+            </div>
 
 
+            <div class="footer text-muted">
 
+            </div>
 
-<script type="text/javascript">
-	$(document).ready(function(){
-		$('body').on("click",".pilih-kostumer",function(){
-			$('.modal-kostumer').modal();
-		});
-
-	});
-</script>
-
+        </div>
+    </div>
+    <script>
+        $(function () {
+            $('.btn-xs').tooltip()
+        })
+    </script>
 <?php include 'footer.php'; ?>

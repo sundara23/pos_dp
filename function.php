@@ -6,8 +6,10 @@ function show_alert(){
 		}else if($_GET['alert'] == "data-update"){
 			echo "<div class='alert alert-success'>Data Berhasil Di Update</div>";
 		}else if($_GET['alert'] == "data-hapus"){
-			echo "<div class='alert alert-success'>Data Berhasil Di Hapus</div>";
-		}
+			echo "<div class='alert alert-danger'>Data Berhasil Di Hapus</div>";
+		}else if($_GET['alert'] == "data-batal"){
+            echo "<div class='alert alert-danger'>Data Berhasil Di Batalkan</div>";
+        }
 	}
 
 }

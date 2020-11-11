@@ -14,7 +14,9 @@
 	<link href="../assets/css/components.css" rel="stylesheet" type="text/css">
 	<link href="../assets/css/colors.css" rel="stylesheet" type="text/css">
 	<link href="../assets/css/custom.css" rel="stylesheet" type="text/css">
-	<!-- /global stylesheets -->
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <!-- /global stylesheets -->
 
 	<!-- Core JS files -->	
 	<script type="text/javascript" src="../assets/js/core/libraries/jquery.min.js"></script>
@@ -31,6 +33,7 @@
 	<script type="text/javascript" src="../assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/select2/js/select2.min.js"></script>
 
 	<script type="text/javascript" src="../assets/js/core/app.js"></script>
 	<!-- <script type="text/javascript" src="../assets/js/pages/dashboard.js"></script> -->

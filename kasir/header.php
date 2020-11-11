@@ -32,6 +32,7 @@
 	<script type="text/javascript" src="../assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/select2/js/select2.min.js"></script>
 
 	<script type="text/javascript" src="../assets/js/core/app.js"></script>
 	<!-- <script type="text/javascript" src="../assets/js/pages/dashboard.js"></script> -->
@@ -117,15 +118,15 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="index.php" class="nav-link">
-                                                <i class="far fa-circle nav-icon"></i>
-                                                <p>Transaksi</p>
+                                            <a href="cs.php" class="nav-link">
+                                                <i class="fas fa-headset"></i>
+                                                <p>Customer Service</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="index.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Piutang</p>
+                                                <p>Transaksi</p>
                                             </a>
                                         </li>
                                     </ul>
@@ -140,20 +141,16 @@
                                         </a>
                                         <ul class="nav nav-treeview">
                                             <li class="nav-item">
-                                                <a href="#" class="nav-link">
+                                                <a href="atk.php" class="nav-link">
                                                     <i class="far fa-circle nav-icon"></i>
                                                     <p>Transaksi ATK</p>
-                                                </a>
-                                            </li>
-                                            <li class="nav-item">
-                                                <a href="#" class="nav-link">
-                                                    <i class="far fa-circle nav-icon"></i>
-                                                    <p>Piutang ATK</p>
                                                 </a>
                                             </li>
                                         </ul>
                                     </li>
                                 <?php } ?>
+                                <li><a href="arus_uang.php"><i class="fas fa-th"></i> <span>Arus Uang</span></a></li>
+                                <li><a href="piutang.php"><i class="fas fa-th"></i> <span>Piutang Transaksi</span></a></li>
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>
 							</ul>
 						</div>

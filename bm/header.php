@@ -18,6 +18,7 @@
     <!-- /global stylesheets -->
 
 	<!-- Core JS files -->	
+
 	<script type="text/javascript" src="../assets/js/core/libraries/jquery.min.js"></script>
 	<script type="text/javascript" src="../assets/js/core/libraries/bootstrap.min.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/loaders/blockui.min.js"></script>
@@ -32,6 +33,7 @@
 	<script type="text/javascript" src="../assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/select2/js/select2.min.js"></script>
 
 	<script  src="../assets/js/core/app.js"></script>
 
@@ -57,7 +59,7 @@
 	<div class="navbar navbar-default header-highlight">
 		<div class="navbar-header">
 			<a class="navbar-brand" href="index.php" style="color: #fff">
-				FASKAL
+                <?php echo $_SESSION['nama_toko']; ?>
 			</a>
 			<ul class="nav navbar-nav visible-xs-block">
 				<li><a data-toggle="collapse" data-target="#navbar-mobile"><i class="icon-tree5"></i></a></li>
@@ -150,19 +152,31 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="kategori_atk.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Kategori Produk</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="satuan_atk.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Satuan Produk</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="produk_atk.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Data Produk</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="level_harga.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Level Harga</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="data_stok.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Data Stok</p>
                                             </a>
@@ -178,13 +192,25 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="index.php" class="nav-link">
+                                            <a href="transaksi.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Laporan Transaksi</p>
+                                                <p>Laporan Transaksi Harian</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="transaksi2.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Laporan Transaksi Bulanan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="transaksi3.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Laporan Transaksi Tahunan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Laporan Piutang</p>
                                             </a>
@@ -200,13 +226,25 @@
                                     </a>
                                     <ul class="nav nav-treeview">
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="transaksi_atk.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
-                                                <p>Laporan Transaksi</p>
+                                                <p>Laporan Transaksi Harian</p>
                                             </a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="#" class="nav-link">
+                                            <a href="transaksi_atk2.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Laporan Transaksi Bulanan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="transaksi_atk3.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Laporan Transaksi Tahunan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang_atk.php" class="nav-link">
                                                 <i class="far fa-circle nav-icon"></i>
                                                 <p>Laporan Piutang</p>
                                             </a>

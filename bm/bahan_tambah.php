@@ -53,11 +53,11 @@
 										</td>
 									</tr>			
 									<tr>
-										<th width="20%">HPP</th>
+										<th width="20%">Harga Awal</th>
 										<td><input type="number" class="form-control" name="hpp" required="required"></td>
 									</tr>
                                     <tr>
-                                        <th width="20%">HPP</th>
+                                        <th width="20%">Harga Jual</th>
                                         <td><input type="number" class="form-control" name="jual" required="required"></td>
                                     </tr>
 									<tr>

@@ -8,17 +8,17 @@
 		<tr>
 			<th>Kostumer</th>
 			<th>:</th>
-			<td><?php echo $d['kostumer_nama']; ?></td>
+			<td><?php echo $id ?></td>
 		</tr>
 		<tr>
 			<th>Alamat</th>
 			<th>:</th>
-			<td><?php echo $d['kostumer_alamat']; ?></td>			
+			<td><?php echo $d['kostumer_id']; ?></td>
 		</tr>
 		<tr>
 			<th>Email</th>
 			<th>:</th>
-			<td><?php echo $d['kostumer_email']; ?></td>						
+			<td><?php echo $d['kostumer_id']; ?></td>
 		</tr>
 		<tr>
 			<th>No.Telp</th>

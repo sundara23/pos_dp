@@ -20,12 +20,16 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/bm" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/kasir" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pos_dp\kasir" />
+      <recent name="C:\xampp\htdocs\pos_dp\setting" />
+      <recent name="C:\xampp\htdocs\pos_dp\produksi" />
       <recent name="C:\xampp\htdocs\pos_dp\bm" />
+      <recent name="C:\xampp\htdocs\pos_dp\owner" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -39,6 +43,16 @@
         </RuleState>
       </list>
     </option>
+  </component>
+  <component name="RunManager">
+    <configuration name="wo_detail.php" type="JavascriptDebugType" temporary="true" nameIsGenerated="true" uri="http://localhost:63342/pos_dp/kasir/wo_detail.php" useBuiltInWebServerPort="true">
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="JavaScript Debug.wo_detail.php" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -59,7 +73,43 @@
       <workItem from="1601431556646" duration="273000" />
       <workItem from="1601670473855" duration="3566000" />
       <workItem from="1601704012775" duration="33298000" />
-      <workItem from="1601783879730" duration="8067000" />
+      <workItem from="1601783879730" duration="8770000" />
+      <workItem from="1601817133561" duration="7785000" />
+      <workItem from="1601999831845" duration="5535000" />
+      <workItem from="1602147606336" duration="1348000" />
+      <workItem from="1602342806812" duration="9897000" />
+      <workItem from="1602431497879" duration="3938000" />
+      <workItem from="1602601863425" duration="10008000" />
+      <workItem from="1602665677711" duration="1402000" />
+      <workItem from="1602778781391" duration="1605000" />
+      <workItem from="1602908303810" duration="596000" />
+      <workItem from="1602921950095" duration="3885000" />
+      <workItem from="1602992785527" duration="9577000" />
+      <workItem from="1603039694496" duration="2012000" />
+      <workItem from="1603074909124" duration="2305000" />
+      <workItem from="1603104045915" duration="17764000" />
+      <workItem from="1603203751135" duration="808000" />
+      <workItem from="1603337281154" duration="1199000" />
+      <workItem from="1603583251106" duration="25770000" />
+      <workItem from="1603732356126" duration="1760000" />
+      <workItem from="1603989264304" duration="7295000" />
+      <workItem from="1604065264111" duration="1373000" />
+      <workItem from="1604152654719" duration="11665000" />
+      <workItem from="1604213164429" duration="18336000" />
+      <workItem from="1604312909470" duration="1806000" />
+      <workItem from="1604328159552" duration="10062000" />
+      <workItem from="1604394196386" duration="1272000" />
+      <workItem from="1604413442411" duration="5427000" />
+      <workItem from="1604459441711" duration="4240000" />
+      <workItem from="1604598455301" duration="1227000" />
+      <workItem from="1604723612201" duration="3293000" />
+      <workItem from="1604727102478" duration="1662000" />
+      <workItem from="1604737867478" duration="21721000" />
+      <workItem from="1604801586474" duration="2469000" />
+      <workItem from="1604842949960" duration="14977000" />
+      <workItem from="1604889225915" duration="20225000" />
+      <workItem from="1604992663828" duration="1313000" />
+      <workItem from="1605019003651" duration="12339000" />
     </task>
     <servers />
   </component>
@@ -78,5 +128,21 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/owner/transaksi.php</url>
+          <line>59</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/owner/transaksi2.php</url>
+          <line>38</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

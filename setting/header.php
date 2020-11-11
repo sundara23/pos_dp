@@ -32,6 +32,7 @@
 	<script type="text/javascript" src="../assets/js/plugins/forms/selects/bootstrap_multiselect.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/ui/moment/moment.min.js"></script>
 	<script type="text/javascript" src="../assets/js/plugins/pickers/daterangepicker.js"></script>
+    <script type="text/javascript" src="../assets/js/plugins/select2/js/select2.min.js"></script>
 
 	<script type="text/javascript" src="../assets/js/core/app.js"></script>
 	<!-- <script type="text/javascript" src="../assets/js/pages/dashboard.js"></script> -->
@@ -108,6 +109,35 @@
 
 								<!-- Main -->
 								<li class="navigation-header"><span>Main</span> <i class="icon-menu" title="Main pages"></i></li>
+                                <li><a href="index.php"><i class="fas fa-th"></i> <span>Pesanan</span></a></li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon fas fa-th"></i>
+                                        <p>
+                                            Jenis Finishing
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="jd.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Jenis Display</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="jf.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Jenis Finishing</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="jp.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Jenis Potong</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>								
 							</ul>
 						</div>

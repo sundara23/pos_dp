@@ -16,6 +16,7 @@ if(mysqli_num_rows($cek) > 0){
 	$_SESSION['nama'] = $c['nama'];
 	$_SESSION['level'] = $c['level'];
 	$_SESSION['level_name'] = $c['level_name'];
+	$_SESSION['nama_toko'] = $c['nama_toko'];
 	$_SESSION['ket_toko'] = $c['ket_toko'];
 	$_SESSION['kd_toko'] = $c['kd_toko'];
 	$_SESSION['status'] = "login";

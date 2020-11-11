@@ -1,191 +1,238 @@
+
 <?php include 'header3.php'; ?>
-<!-- Main content -->
-<style type="text/css">
-
-.xxx tr th,
-.xxx tr td{
-	padding: 10px;
-	font-size: 10pt;
-}
-</style>
-
-<?php 
+<?php
+$kdtoko = $_SESSION['kd_toko'];
+$id_admin = $_SESSION['id'];
 if(isset($_GET['id'])){
-	$id_invoice = $_GET['id'];
-}else{	
-	header("location:index.php");
+    $id_invoice = $_GET['id'];
+}else{
+    header("location:index.php");
 }
 ?>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CETAK INVOICE FASKAL</title>
 
+    <style>
+        .invoice-box {
+            max-width: 800px;
+            margin: auto;
+            padding: 30px;
+            border: 1px solid #eee;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .15);
+            font-size: 16px;
+            line-height: 24px;
+            font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+            color: #555;
+        }
 
-<!-- Content area -->
+        .invoice-box table {
+            width: 100%;
+            line-height: inherit;
+            text-align: left;
+        }
 
-<div style="width: 90%;margin: 10px auto" class="xxx">
-	<div class="row">
-		<div class="col-md-4">
-			<h2>Digital Printing</h2>
-			<?php 
-			$kos = mysqli_query($config,"select * from invoice,kostumer where invoice_id='$id_invoice' and invoice_kostumer=kostumer_id");
-			$k=mysqli_fetch_assoc($kos);
-			?>
-			<table class="table">
-				<tr>
-					<th>No. WO</th>
-					<th>:</th>
-					<td><?php echo $k['invoice_id']; ?></td>
-				</tr>
-				<tr>
-					<th>Tanggal</th>
-					<th>:</th>
-					<td><?php echo date('d-m-Y',strtotime($k['invoice_tgl'])); ?></td>
-				</tr>
-				<tr>
-					<th>Status</th>
-					<th>:</th>
-					<td>
-						<?php 
+        .invoice-box table td {
+            padding: 5px;
+            vertical-align: top;
+        }
 
-						if($k['invoice_status']=="0"){
-							echo "Order";
-						}else if($k['invoice_status']=="1"){
-							echo "Payment";
-						}else if($k['invoice_status']=="2"){
-							echo "Cancel";
-						}else if($k['invoice_status']=="3"){
-							echo "Done";
-						}
-						?>
+        .invoice-box table tr td:nth-child(2) {
+            text-align: right;
+        }
 
-					</td>
-				</tr>				
-			</table>
-		</div>
-		<div class="col-md-4"></div>
-		<div class="col-md-4">
-			<h2>Bill To</h2>			
-			<table class="table">
-				<tr>
-					<th>Kostumer</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_nama']; ?></td>
-				</tr>
-				<tr>
-					<th>Alamat</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_alamat']; ?></td>
-				</tr>
-				<tr>
-					<th>Email</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_email']; ?></td>
-				</tr>
-				<tr>
-					<th>No.Telp</th>
-					<th>:</th>
-					<td><?php echo $k['kostumer_telp']; ?></td>
-				</tr>
-			</table>
-		</div>
+        .invoice-box table tr.top table td {
+            padding-bottom: 20px;
+        }
 
+        .invoice-box table tr.top table td.title {
+            font-size: 45px;
+            line-height: 45px;
+            color: #333;
+        }
 
+        .invoice-box table tr.information table td {
+            padding-bottom: 40px;
+        }
 
-	</div>
-	<br/>
-	<br/>	
-	<div class="row">
-		<div class="col-md-12">
-			<h2>Detail Order</h2>
-			<br/>
-			<br/>
-			<table class="table table-bordered">						
-				<thead>
-					<tr>
-						<th width="1%">No</th>									
-						<th>PRODUK</th>																					
-						<th>BAHAN</th>																					
-						<th>MESIN</th>																					
-						<th>FINISHING</th>																					
-						<th>KETERANGAN</th>																					
-						<th>QTY</th>																					
-						<th>HARGA SATUAN</th>																					
-						<th>SUB TOTAL</th>																									
-					</tr>
-				</thead>
-				<tbody>
-					<?php
-					$no = 1; 									
-					$data = mysqli_query($config,"select * from orderan,harga_jual,produk,bahan,mesin,jenis_finishing,jenis_potong,jenis_display where hj_produk=produk_id and hj_bahan=bahan_id and hj_mesin=mesin_id and hj_finishing=jenis_finishing_id and hj_potong=jenis_potong_id and hj_display=jenis_display_id and order_hj=hj_id and order_invoice='$id_invoice'");		
-					while($d=mysqli_fetch_array($data)){										
-						?>
-						<tr>
-							<td><?php echo $no++; ?></td>
-							<td>
-								<?php echo $d['produk_nama'] ?>
-								<br/>
-								<small class="text-muted"><?php echo date('H:i:s | d-m-Y',strtotime($d['order_datetime'])); ?></small>
-							</td>
-							<td><?php echo $d['bahan_nama'] ?></td>
-							<td><?php echo $d['mesin_nama'] ?></td>
-							<td><?php echo $d['jenis_finishing_nama'] ?></td>																						
-							<td><?php echo $d['order_keterangan'] ?></td>																						
-							<td>																			
-								<?php echo $d['order_qty'] ?>
-							</td>																						
-							<td><?php echo $d['order_harga_satuan'] ?></td>																						
-							<td><?php echo $d['order_harga_sub_total'] ?></td>																												
-						</tr>
-						<?php
-					}
-					?>																						
-				</tbody>
-			</table>
-			<br/>
-			<br/>
-			<div class="row">
-				<div class="col-md-3 col-md-offset-9">
-					<table class="table">
-						<tr>
-							<td>Total</td>
-							<td>:</td>
-							<td>Rp. <?php echo number_format($k['invoice_total']); ?></td>							
-						</tr>
-						<tr>
-							<td>Disc</td>
-							<td>:</td>
-							<td><?php echo number_format($k['invoice_diskon']);?> %</td>
-						</tr>						
-						<tr>
-							<td>DP</td>
-							<td>:</td>
-							<td>Rp. <?php echo number_format($k['invoice_dp']); ?></td>
-						</tr>
-						<tr>
-							<td>Sisa Pembayaran</td>
-							<td>:</td>
-							<td>Rp. <?php echo number_format($k['invoice_ar']); ?></td>
-						</tr>
-						<tr>
-							<td>Payment Method</td>
-							<td>:</td>
-							<td><?php echo $k['invoice_payment']; ?></td>
-						</tr>
-					</table>
-				</div>
-			</div>
+        .invoice-box table tr.heading td {
+            background: #eee;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
 
-			<br/>
-			<br/>
-			<br/>
+        .invoice-box table tr.details td {
+            padding-bottom: 20px;
+        }
 
-			
-		</div>
-	</div>
+        .invoice-box table tr.item td{
+            border-bottom: 1px solid #eee;
+        }
+
+        .invoice-box table tr.item.last td {
+            border-bottom: none;
+        }
+
+        .invoice-box table tr.total td:nth-child(2) {
+            border-top: 2px solid #eee;
+            font-weight: bold;
+        }
+
+        @media only screen and (max-width: 600px) {
+            .invoice-box table tr.top table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+
+            .invoice-box table tr.information table td {
+                width: 100%;
+                display: block;
+                text-align: center;
+            }
+        }
+
+        /** RTL **/
+        .rtl {
+            direction: rtl;
+            font-family: Tahoma, 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
+        }
+
+        .rtl table {
+            text-align: right;
+        }
+
+        .rtl table tr td:nth-child(2) {
+            text-align: left;
+        }
+    </style>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+</head>
+
+<body>
+<?php
+if(isset($_GET['id'])){
+    $id_invoice = $_GET['id'];
+}else{
+    header("location:index.php");
+}
+?>
+<div class="invoice-box">
+    <table cellpadding="0" cellspacing="0">
+        <tr class="top">
+            <td colspan="2">
+                <?php
+                $kos = mysqli_query($config,"select * from transaksi,kostumer where trx_invoice='$id_invoice' and trx_customer=kostumer_id");
+                $k=mysqli_fetch_assoc($kos);
+                ?>
+                <table>
+                    <tr>
+                        <td class="title">
+                            <img src="../images/faskallogo.png" style="width:100%; max-width:300px;">
+                        </td>
+                        <td >
+                            <?php
+                            $y =  date('Y', strtotime($k['trx_date']));
+                            $kd_toko = $_SESSION['kd_toko'];
+
+                            ?>
+                            <p style="margin-top: 30px;">
+                            No. Invoice : <?php echo $k['trx_invoice'].'/'.strtoupper($kd_toko).'/'.$y; ?><br>
+                            Tanggal Transaksi : <?php echo date('d-m-Y',strtotime($k['trx_date'])); ?><br>
+                            </b>
+                            </p>
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="information">
+            <td colspan="2">
+                <?php
+                $toko = mysqli_query($config,"select * from toko where kd_toko='$kd_toko'");
+                $t=mysqli_fetch_assoc($toko);
+                ?>
+                <table>
+                    <tr>
+                        <td>
+                            TOKO :<br>
+                            <b>CV. FASKAL JAYA ABADI</b>.<br>
+                            <?php echo $t['no_tlp']; ?> <br>
+                            <?php echo $t['alamat_toko']; ?>
+
+                        </td>
+
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+        <tr class="heading">
+            <td colspan="2">
+                Metode Pembayaran
+            </td>
+        </tr>
+
+        <tr class="details">
+            <td >
+                <?php
+                $jp = $k['trx_jenis_pembayaran'];
+                $koss = mysqli_query($config,"select * from jenis_pembayaran where jenis_pembayaran_id='$jp'");
+                $kk=mysqli_fetch_assoc($koss);
+                echo ucwords($kk['jenis_pembayaran_nama']);
+                ?>
+            </td>
+            <td>
+                <?php
+                if($k['trx_jenis_pembayaran']==2){
+                    echo 'Uang Muka : Rp. '.number_format($k['trx_dp']);
+                }
+                ?>
+            </td>
+
+        </tr>
+
+        <tr class="heading">
+            <td>Nama Barang</td>
+            <td>Sub Total Harga</td>
+        </tr>
+        <?php
+        $no = 1;
+        $data = mysqli_query($config,"select * from orderan,produk where orderan.order_produk_id=produk.produk_id and  order_invoice='$id_invoice'");
+        while($d=mysqli_fetch_array($data)){
+        ?>
+        <tr class="item">
+            <td><?php echo ucfirst($d['produk_nama']).' ('.$d['order_keterangan'].')'; ?></td>
+            <td>Rp. <?php echo number_format($d['order_harga_sub_total']) ?></td>
+        </tr>
+        <?php }
+        if($k['trx_diskon'] > 0){
+        ?>
+        <tr class="item">
+            <td>Diskon</td>
+            <td><?php echo number_format($k['trx_diskon']); ?></td>
+        </tr>
+        <?php }
+        if ($k['trx_pajak'] > 0){
+        ?>
+        <tr class="item">
+            <td>Pajak</td>
+            <td><?php echo $k['trx_pajak']; ?> %</td>
+        </tr>
+        <?php } ?>
+        <tr class="total">
+            <td ></td>
+
+            <td>
+                Total Harga : Rp. <?php echo number_format($k['trx_lunas']); ?>
+            </td>
+        </tr>
+    </table>
+    <a href="#" class="btn btn-success" id="cetak_nota" ><i class="fas fa-print"></i> Cetak Nota</a>
+    <a href="wo_detail_print.php?id=<?php echo $id_invoice; ?>" class="btn btn-danger" id="download_inv" ><i class="fas fa-print"></i> Cetak Invoice</a>
+    <span class="alpaca-float-right"><a href="index.php" class="btn btn-primary">Kembali</a></span>
 </div>
-<div class="col-md-4 col-md-offset-8">
-	<a class="btn btn-success btn-xs" href="wo_detail_print.php?id=<?php echo $id_invoice; ?>" target="_blank"><i class="icon-printer"></i> Print</a>											
-	<a type="submit" href="index.php" class="btn btn-primary btn-icon btn-xs"><i class="glyphicon glyphicon-arrow-left"></i> Kembali</a>											
-</div>
-
-
-
 <?php include 'footer.php'; ?>
