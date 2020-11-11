@@ -181,6 +181,86 @@
                                         </li>
                                     </ul>
                                 </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon icon-list"></i>
+                                        <p>
+                                            Laporan Keuangan
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="jurnal_umum.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Jurnal Umum</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="transaksi2.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Buku Besar</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="transaksi3.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Neraca Saldo</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Neraca</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Rugi Laba</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Saldo Akhir</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Saldo Periode</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Saldo Bulanan</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="piutang.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Saldo Tahunan</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                    <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon icon-list"></i>
+                                        <p>
+                                            Transaksi Keuangan
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="transaksi.php" class="nav-link">
+                                                <i class="far fa-circle nav-icon"></i>
+                                                <p>Pengeluaran Tunai</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>								
 							</ul>
 						</div>
