@@ -65,7 +65,7 @@ function tanggal_indo($tanggal)
                                             </div>
                                             <div class="col-md-3">
                                                 <div class="form-goup">
-                                                    <a href="arus_uang_export_excel.php?simpan_trx=<?php echo $getcashbox;?>&bulan=<?php echo $getbln;?>&tahun=<?php echo $getthn;?>" class="btn btn-success"><i class="far fa-file-excel"></i> Export excel</a>
+                                                    <a href="laporan_uang_export_excel.php?bulan=<?php echo $getbln;?>&tahun=<?php echo $getthn;?>" class="btn btn-success"><i class="far fa-file-excel"></i> Export excel</a>
                                                 </div>
                                             </div>
                                         </div>
