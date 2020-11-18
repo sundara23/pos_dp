@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 11 Nov 2020 pada 11.43
+-- Waktu pembuatan: 18 Nov 2020 pada 04.03
 -- Versi server: 10.4.11-MariaDB
 -- Versi PHP: 7.2.30
 
@@ -69,18 +69,33 @@ CREATE TABLE `ak_tabel` (
 --
 
 INSERT INTO `ak_tabel` (`id_ak`, `nama`, `ak_type`) VALUES
-(1111, 'KAS', 'Aset'),
-(1112, 'BANK BCA', 'Aset'),
-(1113, 'BANK BRI', 'Aset'),
-(1114, 'BANK BNI', 'Aset'),
-(1115, 'BANK MANDIRI', 'Aset'),
+(1111, 'KAS BESAR', 'Aset'),
+(1112, 'KAS KECIL', 'Aset'),
+(1113, 'BANK BCA', 'Aset'),
+(1114, 'BANK BJB', 'Aset'),
+(1115, 'TABUNGAN MESIN', 'Aset'),
 (2111, 'MODAL USAHA', 'Modal'),
 (3111, 'PENDAPATAN USAHA', 'Pemasukan'),
 (4111, 'BIAYA OPERASIONAL', 'Pengeluaran'),
 (4112, 'BIAYA GAJI', 'Pengeluaran'),
+(4113, 'PENJUALAN DAN PEMASARAN', 'Pengeluaran'),
+(4114, 'BIAYA USAHA LAIN', 'Pengeluaran'),
+(4115, 'BIAYA TRANSPORT/PERJALAN DINAS', 'Pengeluaran'),
+(4116, 'PEMBELIAN BARANG', 'Pengeluaran'),
+(4117, 'BEBAN LAIN LAIN', 'Pengeluaran'),
+(4118, 'BIAYA IKLAN & PROMOSI', 'Pengeluaran'),
+(4119, 'PIUTANG KARYAWAN', 'Pengeluaran'),
+(4120, 'BIAYA ADMINISTRASI', 'Pengeluaran'),
+(4121, 'BAHAN BANGUNAN', 'Pengeluaran'),
+(4122, 'BIAYA AIR', 'Pengeluaran'),
+(4123, 'BIAYA LISTRIK', 'Pengeluaran'),
+(4124, 'UTANG JANGKAPANJANG', 'Pengeluaran'),
+(4125, 'PAJAK BUNGA', 'Pengeluaran'),
+(4126, 'BIAYA WIFI', 'Pengeluaran'),
 (5111, 'PENDAPATAN DITERIMA DIMUKA', 'Hutang'),
 (5112, 'HUTANG USAHA', 'Hutang'),
-(6111, 'PIUTANG USAHA', 'Piutang');
+(6111, 'PIUTANG USAHA', 'Piutang'),
+(6112, 'PIUTANG KARYAWAN', 'Piutang');
 
 -- --------------------------------------------------------
 
@@ -90,12 +105,8 @@ INSERT INTO `ak_tabel` (`id_ak`, `nama`, `ak_type`) VALUES
 
 CREATE TABLE `arus_kas` (
   `id_arus_kas` int(50) NOT NULL,
-  `tgl_ak` date NOT NULL,
-  `id_ak` int(11) NOT NULL,
+  `tgl_ak` datetime NOT NULL,
   `kd_toko` varchar(25) NOT NULL,
-  `jenis_trx` varchar(25) NOT NULL,
-  `debit` int(11) NOT NULL,
-  `kredit` int(11) NOT NULL,
   `user` int(11) NOT NULL,
   `ket_ak` text NOT NULL,
   `admin_by` int(11) NOT NULL
@@ -105,15 +116,52 @@ CREATE TABLE `arus_kas` (
 -- Dumping data untuk tabel `arus_kas`
 --
 
-INSERT INTO `arus_kas` (`id_arus_kas`, `tgl_ak`, `id_ak`, `kd_toko`, `jenis_trx`, `debit`, `kredit`, `user`, `ket_ak`, `admin_by`) VALUES
-(1, '2020-11-08', 1111, 'faskal01', 'CTK', 94500, 0, 0, 'Penjualan', 2),
-(2, '2020-11-08', 1111, 'faskal01', 'CTK', 20000, 0, 0, 'Penjualan Kredit', 2),
-(3, '2020-11-08', 1111, 'faskal01', 'CTK', 44500, 0, 0, 'Penjualan Kredit', 2),
-(5, '2020-11-08', 1112, 'faskal01', 'CTK', 50000, 0, 5, 'Pembayaran Piutang', 2),
-(6, '2020-11-09', 1111, 'faskal01', '0', 0, 9000, 0, 'uang makan', 2),
-(7, '2020-11-09', 1111, 'faskal01', '0', 10000, 0, 0, 'Bayar hutang', 2),
-(8, '2020-11-10', 1111, 'faskal02', 'ATK', 0, 0, 8, 'Penjualan Kredit', 7),
-(9, '2020-11-10', 1111, 'faskal02', 'ATK', 51500, 0, 0, 'Penjualan Percetakan', 7);
+INSERT INTO `arus_kas` (`id_arus_kas`, `tgl_ak`, `kd_toko`, `user`, `ket_ak`, `admin_by`) VALUES
+(1, '2020-11-17 09:05:48', 'faskal02', 0, 'Penjualan Tunai ATK', 7),
+(2, '2019-09-17 15:38:58', 'faskal02', 12, 'Penjualan Kredit ATK', 7),
+(3, '2020-11-17 09:07:25', 'faskal02', 12, 'Pemasukan Sebagai Piutang dari Erik', 7),
+(4, '2020-11-17 09:11:22', 'faskal01', 13, 'Penjualan Kredit Percetakan', 2),
+(5, '2020-11-17 09:11:28', 'faskal01', 13, 'Pemasukan Sebagai Piutang dari Hanif', 2),
+(6, '2020-11-17 09:12:37', 'faskal02', 0, 'Penjualan Tunai Percetakan', 7),
+(7, '2020-11-17 09:19:10', 'faskal02', 12, 'Pembayaran Piutang Usaha', 7),
+(8, '2020-11-17 09:19:48', 'faskal01', 13, 'Pembayaran Piutang Usaha', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `arus_kas_subentry`
+--
+
+CREATE TABLE `arus_kas_subentry` (
+  `id_ak_subentry` int(11) NOT NULL,
+  `kd_toko` varchar(25) NOT NULL,
+  `arus_kas_id` int(11) NOT NULL,
+  `ak_tabel_id` int(11) NOT NULL,
+  `amount` int(11) NOT NULL,
+  `type` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data untuk tabel `arus_kas_subentry`
+--
+
+INSERT INTO `arus_kas_subentry` (`id_ak_subentry`, `kd_toko`, `arus_kas_id`, `ak_tabel_id`, `amount`, `type`) VALUES
+(1, 'faskal02', 1, 1112, 65750, 0),
+(2, 'faskal02', 1, 3111, 65750, 1),
+(3, 'faskal02', 2, 1112, 20000, 0),
+(4, 'faskal02', 2, 3111, 20000, 1),
+(5, 'faskal02', 3, 3111, 100000, 0),
+(6, 'faskal02', 3, 6111, 100000, 1),
+(7, 'faskal01', 4, 1112, 50000, 0),
+(8, 'faskal01', 4, 3111, 50000, 1),
+(9, 'faskal01', 5, 0, 233500, 0),
+(10, 'faskal01', 5, 0, 233500, 1),
+(11, 'faskal02', 6, 1112, 210000, 0),
+(12, 'faskal02', 6, 3111, 210000, 1),
+(13, 'faskal02', 7, 1112, 100000, 0),
+(14, 'faskal02', 7, 6111, 100000, 1),
+(15, 'faskal01', 8, 1112, 233500, 0),
+(16, 'faskal01', 8, 6111, 233500, 1);
 
 -- --------------------------------------------------------
 
@@ -150,24 +198,6 @@ INSERT INTO `bahan` (`bahan_id`, `bahan_nama`, `bahan_kategori`, `bahan_hpp`, `b
 -- --------------------------------------------------------
 
 --
--- Struktur dari tabel `buku_besar`
---
-
-CREATE TABLE `buku_besar` (
-  `id_catatan_ak` int(11) NOT NULL,
-  `tgl_ak` date NOT NULL,
-  `kd_toko` varchar(25) NOT NULL,
-  `jenis_trx` varchar(25) NOT NULL,
-  `id_ak` int(11) NOT NULL,
-  `debit` int(11) NOT NULL,
-  `kredit` int(11) NOT NULL,
-  `ket_ak` int(11) NOT NULL,
-  `admin_by` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- --------------------------------------------------------
-
---
 -- Struktur dari tabel `data_stok`
 --
 
@@ -188,7 +218,57 @@ INSERT INTO `data_stok` (`kd_stok`, `kd_produk`, `stok_masuk`, `stok_keluar`, `s
 (5, 'ATK0001', 1, 0, 90, '2020-10-19 17:04:06'),
 (6, 'ATK0001', 1, 0, 20, '2020-10-19 17:51:23'),
 (7, 'ATK0001', 0, 1, 5, '2020-10-19 17:51:38'),
-(8, 'ATK0002', 1, 0, 100, '2020-11-10 16:45:12');
+(8, 'ATK0002', 1, 0, 100, '2020-11-10 16:45:12'),
+(9, 'ATK0001', 0, 1, 5, '2020-11-13 07:29:23'),
+(10, 'ATK0002', 0, 1, 2, '2020-11-13 07:29:23'),
+(11, 'ATK0001', 0, 1, 5, '2020-11-13 07:30:33'),
+(12, 'ATK0002', 0, 1, 2, '2020-11-13 07:30:33'),
+(13, 'ATK0001', 0, 1, 5, '2020-11-13 07:52:44'),
+(14, 'ATK0002', 0, 1, 2, '2020-11-13 07:52:44'),
+(15, 'ATK0001', 0, 1, 5, '2020-11-13 16:41:19'),
+(16, 'ATK0002', 0, 1, 2, '2020-11-13 16:41:19'),
+(17, 'ATK0001', 0, 1, 5, '2020-11-13 17:15:58'),
+(18, 'ATK0002', 0, 1, 2, '2020-11-13 17:15:58'),
+(19, 'ATK0001', 0, 1, 5, '2020-11-13 17:49:49'),
+(20, 'ATK0002', 0, 1, 2, '2020-11-13 17:49:49'),
+(21, 'ATK0001', 0, 1, 5, '2020-11-13 17:51:01'),
+(22, 'ATK0002', 0, 1, 2, '2020-11-13 17:51:01'),
+(23, 'ATK0001', 0, 1, 5, '2020-11-13 17:51:54'),
+(24, 'ATK0002', 0, 1, 2, '2020-11-13 17:51:54'),
+(25, 'ATK0001', 0, 1, 5, '2020-11-13 18:20:36'),
+(26, 'ATK0002', 0, 1, 2, '2020-11-13 18:20:36'),
+(27, 'ATK0001', 0, 1, 5, '2020-11-13 18:33:49'),
+(28, 'ATK0002', 0, 1, 2, '2020-11-13 18:33:49'),
+(29, 'ATK0001', 0, 1, 5, '2020-11-13 19:38:10'),
+(30, 'ATK0002', 0, 1, 2, '2020-11-13 19:38:10'),
+(31, 'ATK0001', 0, 1, 10, '2020-11-13 19:46:01'),
+(32, 'ATK0002', 0, 1, 15, '2020-11-13 19:46:01'),
+(33, 'ATK0001', 0, 1, 12, '2020-11-13 19:54:55'),
+(34, 'ATK0002', 0, 1, 12, '2020-11-13 19:54:55'),
+(35, 'ATK0001', 0, 1, 18, '2020-11-15 07:10:41'),
+(36, 'ATK0002', 0, 1, 15, '2020-11-15 07:31:56'),
+(37, 'ATK0002', 0, 1, 6, '2020-11-15 19:41:58'),
+(38, 'ATK0001', 0, 1, 5, '2020-11-16 08:12:11'),
+(39, 'ATK0002', 0, 1, 15, '2020-11-16 08:12:11'),
+(40, 'ATK0001', 0, 1, 5, '2020-11-16 08:29:14'),
+(41, 'ATK0002', 0, 1, 15, '2020-11-16 08:29:14'),
+(42, 'ATK0001', 1, 0, 50, '2020-11-16 13:21:35'),
+(43, 'ATK0002', 1, 0, 100, '2020-11-16 13:21:44'),
+(44, 'ATK0001', 1, 0, 50, '2020-11-16 13:22:38'),
+(45, 'ATK0001', 0, 1, 85, '2020-11-16 13:23:53'),
+(46, 'ATK0001', 1, 0, 15, '2020-11-16 13:24:42'),
+(47, 'ATK0001', 0, 1, 31, '2020-11-16 13:35:31'),
+(48, 'ATK0002', 0, 1, 5, '2020-11-16 13:35:31'),
+(49, 'ATK0002', 0, 1, 15, '2020-11-16 17:32:54'),
+(50, 'ATK0002', 0, 1, 10, '2020-11-16 17:35:34'),
+(51, 'ATK0002', 0, 1, 10, '2020-11-16 17:52:32'),
+(52, 'ATK0002', 0, 1, 10, '2020-11-16 17:57:04'),
+(53, 'ATK0002', 0, 1, 10, '2020-11-16 18:01:50'),
+(54, 'ATK0001', 1, 0, 100, '2020-11-17 09:00:00'),
+(55, 'ATK0001', 0, 1, 29, '2020-11-17 09:05:48'),
+(56, 'ATK0002', 0, 1, 20, '2020-11-17 09:05:48'),
+(57, 'ATK0001', 0, 1, 50, '2020-11-17 09:07:15'),
+(58, 'ATK0002', 0, 1, 10, '2020-11-17 09:07:15');
 
 -- --------------------------------------------------------
 
@@ -375,14 +455,8 @@ CREATE TABLE `kostumer` (
 
 INSERT INTO `kostumer` (`kostumer_id`, `kostumer_nama`, `kostumer_telp`, `kostumer_alamat`, `kostumer_email`, `kd_toko`) VALUES
 (0, 'admin', '0', '0', '0', 'faskal01'),
-(1, 'joko', '0897282828', 'Lebak', 'joko@gmail.com', 'faskal01'),
-(2, '', '88888', '88888', '888', 'faskal01'),
-(3, '', '7878', 'kjk', 'kjjkkj', 'faskal01'),
-(4, 'wer', '222', '222', 'tytytyt', 'faskal01'),
-(5, 'test', '2323', 'fs', 'Sasa@ggg', 'faskal01'),
-(6, 'uuu', '888', 'kkk', 'iii@ii', 'faskal01'),
-(7, 'uuu', '888', 'kkk', 'iii@ii', 'faskal01'),
-(8, '111', '1111', '111', '111', 'faskal02');
+(12, 'Erik', '0983737373', 'Rangkasbitung', 'Erikonco@gmail.com', 'faskal02'),
+(13, 'Hanif', '0873737373', 'Lebak', 'Hanif@gmail.com', 'faskal01');
 
 -- --------------------------------------------------------
 
@@ -464,12 +538,9 @@ CREATE TABLE `orderan` (
 --
 
 INSERT INTO `orderan` (`order_id`, `kd_toko`, `order_invoice`, `order_jenis_produk`, `order_produk_id`, `order_bahan_id`, `jd_id`, `jf_id`, `jp_id`, `order_keterangan`, `lokasi_file`, `order_qty`, `order_harga_satuan`, `biaya_tambahan`, `order_harga_sub_total`, `order_datetime`, `admin1`, `admin2`) VALUES
-(1, 'faskal01', 'INV000000001', 'CTK', 'CTK002', 'BHN002', 1, 2, 1, '1 x 1,4 Meter', 'PC 4 folder a aa.png', '1.40', 30000, 3000, 45000, '2020-11-01', 4, 3),
-(3, 'faskal01', 'INV000000001', 'CTK', 'CTK002', 'BHN001', 1, 1, 1, '2 x 2,3 Meter', 'Pc 4 folder a bb.png', '4.60', 20000, 15000, 107000, '2020-11-01', 4, 3),
-(4, 'faskal01', 'INV000000001', 'CTK', 'CTK002', 'BHN002', 1, 1, 1, '2 x 3 Meter', 'pc 4 folder a cc.cdr', '6.00', 30000, 20000, 200000, '2020-11-01', 4, 3),
-(5, 'faskal01', 'INV000000002', 'CTK', 'CTK002', '0', 0, 0, 0, '1', '', '0.00', 0, 0, 0, '2020-11-01', 0, 0),
-(7, 'faskal01', 'INV000000003', 'CTK', 'CTK002', 'BHN001', 1, 1, 1, '1 x 4 Meter', 'Pc 4 ', '4.00', 20000, 20000, 100000, '2020-11-02', 4, 3),
-(8, 'faskal02', 'INV000000004', 'CTK', '', '0', 0, 0, 0, '', '', '0.00', 0, 0, 0, '2020-11-10', 0, 0);
+(1, 'faskal01', 'INV000000001', 'CTK', 'CTK001', 'BHN004', 1, 1, 1, '2 BOX', 'Pc 7', '2.00', 65000, 0, 130000, '2020-11-17', 4, 0),
+(2, 'faskal01', 'INV000000001', 'CTK', 'CTK002', 'BHN001', 1, 1, 1, '2 x 4 Meter', 'PC 4', '8.00', 20000, 0, 160000, '2020-11-17', 4, 0),
+(3, 'faskal02', 'INV000000002', 'CTK', 'CTK001', 'BHN005', 1, 1, 1, '3 BOX', 'PC 5', '3.00', 70000, 0, 210000, '2020-11-17', 6, 0);
 
 -- --------------------------------------------------------
 
@@ -493,8 +564,10 @@ CREATE TABLE `orderan_atk` (
 --
 
 INSERT INTO `orderan_atk` (`order_atk_id`, `kd_toko`, `order_atk_inv`, `kd_produk`, `id_level_harga`, `order_qty`, `order_harga_subtotal`, `order_date`) VALUES
-(3, 'faskal02', 'INV000000004', 'ATK0001', 1, 10, 20000, '2020-11-10 17:58:45'),
-(4, 'faskal02', 'INV000000004', 'ATK0002', 4, 21, 31500, '2020-11-10 17:58:58');
+(1, 'faskal02', 'INV000000003', 'ATK0001', 2, 29, 50750, '2020-11-17 09:04:05'),
+(2, 'faskal02', 'INV000000003', 'ATK0002', 4, 20, 30000, '2020-11-17 09:04:22'),
+(3, 'faskal02', 'INV000000004', 'ATK0001', 1, 50, 100000, '2020-11-17 09:06:24'),
+(4, 'faskal02', 'INV000000004', 'ATK0002', 3, 10, 20000, '2020-11-17 09:06:35');
 
 -- --------------------------------------------------------
 
@@ -658,10 +731,10 @@ CREATE TABLE `transaksi` (
 --
 
 INSERT INTO `transaksi` (`id`, `trx_invoice`, `kd_toko`, `trx_date`, `jenis_barang`, `trx_diskon`, `trx_dp`, `trx_lunas`, `trx_pajak`, `trx_customer`, `trx_ar`, `trx_total_pembayaran`, `trx_jenis_pembayaran`, `trx_status`, `trx_admin_id`) VALUES
-(1, 'INV000000001', 'faskal01', '2020-11-01', 'CTK', 32000, 0, 320000, 0, 1, 0, 352000, 2, 2, 2),
-(2, 'INV000000002', 'faskal01', '2020-11-01', 'CTK', 0, 0, 0, 0, 0, 0, 0, 0, 9, 2),
-(5, 'INV000000003', 'faskal01', '2020-11-02', 'CTK', 10000, 0, 94500, 5, 5, 0, 100000, 2, 2, 2),
-(6, 'INV000000004', 'faskal02', '2020-11-10', 'ATK', 0, 0, 51500, 0, 0, 0, 51500, 1, 1, 7);
+(1, 'INV000000001', 'faskal01', '2020-11-17', 'CTK', 20000, 0, 283500, 5, 13, 0, 290000, 2, 2, 2),
+(2, 'INV000000002', 'faskal02', '2020-11-17', 'CTK', 0, 0, 210000, 0, 0, 0, 210000, 1, 2, 7),
+(3, 'INV000000003', 'faskal02', '2020-11-17', 'ATK', 15000, 0, 65750, 0, 0, 0, 80750, 1, 3, 7),
+(4, 'INV000000004', 'faskal02', '2020-11-17', 'ATK', 0, 0, 120000, 0, 12, 0, 120000, 2, 1, 7);
 
 -- --------------------------------------------------------
 
@@ -711,16 +784,16 @@ ALTER TABLE `arus_kas`
   ADD PRIMARY KEY (`id_arus_kas`);
 
 --
+-- Indeks untuk tabel `arus_kas_subentry`
+--
+ALTER TABLE `arus_kas_subentry`
+  ADD PRIMARY KEY (`id_ak_subentry`);
+
+--
 -- Indeks untuk tabel `bahan`
 --
 ALTER TABLE `bahan`
   ADD PRIMARY KEY (`bahan_id`);
-
---
--- Indeks untuk tabel `buku_besar`
---
-ALTER TABLE `buku_besar`
-  ADD PRIMARY KEY (`id_catatan_ak`);
 
 --
 -- Indeks untuk tabel `data_stok`
@@ -862,19 +935,19 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT untuk tabel `arus_kas`
 --
 ALTER TABLE `arus_kas`
-  MODIFY `id_arus_kas` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_arus_kas` int(50) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT untuk tabel `buku_besar`
+-- AUTO_INCREMENT untuk tabel `arus_kas_subentry`
 --
-ALTER TABLE `buku_besar`
-  MODIFY `id_catatan_ak` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `arus_kas_subentry`
+  MODIFY `id_ak_subentry` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT untuk tabel `data_stok`
 --
 ALTER TABLE `data_stok`
-  MODIFY `kd_stok` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kd_stok` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT untuk tabel `harga_jual`
@@ -922,7 +995,7 @@ ALTER TABLE `kategori_atk`
 -- AUTO_INCREMENT untuk tabel `kostumer`
 --
 ALTER TABLE `kostumer`
-  MODIFY `kostumer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `kostumer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT untuk tabel `level_harga`
@@ -940,7 +1013,7 @@ ALTER TABLE `mesin`
 -- AUTO_INCREMENT untuk tabel `orderan`
 --
 ALTER TABLE `orderan`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `orderan_atk`
@@ -976,7 +1049,7 @@ ALTER TABLE `toko`
 -- AUTO_INCREMENT untuk tabel `transaksi`
 --
 ALTER TABLE `transaksi`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT untuk tabel `user_level`
