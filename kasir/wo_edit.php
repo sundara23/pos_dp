@@ -93,8 +93,10 @@
 														<input type="text" value="Rp. <?php echo number_format( $d['order_harga_satuan']) ?>" min="1" class="form-control x_harga_satuan<?php echo $n; ?>" style="width: 110px" readonly>
 													</td>
                                                     <td width="150px">
-                                                        <p><input type="text" name="biaya_tambahan" value="<?php echo $d['biaya_tambahan'] ?>" min="0" class="form-control mata-uang" onkeyup="inputTerbilang();" ></p>
+                                                        <p><input type="text" name="biaya_tambahan" value="<?php echo $d['biaya_tambahan'] ?>" min="0" class="form-control mata-uang" onkeyup="inputTerbilang();" <?php if($in['trx_jenis_pembayaran'] == 0){ }else{ echo 'readonly'; } ?> ></p>
+                                                        <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                                         <p><input type="submit" value="Update" class="btn btn-xs btn-warning"></p>
+                                                        <?php } ?>
                                                     </td>
 													<td width="150px">Rp. <?php echo number_format( $d['order_harga_sub_total']) ?></td>
 												</tr>
@@ -242,6 +244,7 @@
                                             <td>Rp. <?php echo number_format($grandtotalpajak); ?></td>
 											<td></td>
 										</tr>
+                                        <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                         <tr>
                                             <td colspan="3"> <a data-toggle="modal" href="#diskon" class="btn btn-primary btn-xs"> Tambah/Edit Diskon</a> <a data-toggle="modal" href="#pajak" class="btn btn-warning btn-xs"> Tambah/Edit Pajak</a></td>
                                         </tr>
@@ -269,9 +272,9 @@
                                         <tr>
                                             <th>Simpan Ke</th>
                                             <td>
-                                                <select class="form-control"  name="simpan_trx" required="required">
+                                                <select class="form-control"  name="simpan_trx[]" required="required">
                                                     <?php
-                                                    $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset'");
+                                                    $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset' and id_ak>'1111' and id_ak<'1115'");
                                                     while($sk=mysqli_fetch_array($simpanke)){
                                                         ?>
                                                         <option value="<?php echo $sk['id_ak']; ?>"><?php echo $sk['nama']; ?></option>
@@ -281,11 +284,15 @@
                                                 </select>
                                             </td>
                                         </tr>
+                                        <?php } ?>
 									</table>
 
 									<br/>
 									<br/>
                                     <input type="hidden" name="jenis_barang" value="CTK">
+                                    <input type="hidden" name="simpan_trx[]" value="3111">
+                                    <input type="hidden" name="type[]" value="0">
+                                    <input type="hidden" name="type[]" value="1">
                                     <input type="hidden" name="trx_lunas" value="<?php echo $grandtotalpajak; ?>">
                                     <input type="hidden" name="trx_total_pembayaran" value="<?php echo $jumlahtrx; ?>">
                                     <input type="hidden" name="trx_admin_id" value="<?php echo $id_admin; ?>">
@@ -297,8 +304,8 @@
 
                                     }else{
                                     ?>
-                                    <a href="#" class="btn btn-success" id="cetak_nota" ><i class="fas fa-print"></i> Cetak Nota</a>
-                                    <a href="#" class="btn btn-danger" id="download_inv" ><i class="fas fa-download"></i> Download Invoice</a>
+                                    <a target="_blank" href="cetak_nota_ctk.php?id=<?php echo $id_invoice; ?>" class="btn btn-success" id="cetak_nota" ><i class="fas fa-print"></i> Cetak Nota</a>
+<!--                                    <a href="#" class="btn btn-danger" id="download_inv" ><i class="fas fa-download"></i> Download Invoice</a>-->
                                     <?php } ?>
                                     <span class="alpaca-float-right"><a href="index.php" class="btn btn-primary">Kembali</a></span>
 

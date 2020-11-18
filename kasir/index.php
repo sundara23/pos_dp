@@ -79,7 +79,7 @@
                                                 <?php
                                                 if($d['trx_total_pembayaran'] != 0 && $d['trx_jenis_pembayaran'] != 0){
                                                     ?>
-                                                    <a data-placement="top" title="Detail Pesanan" class="btn border-green text-green btn-flat btn-icon btn-xs" href="wo_detail.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-list3"></i></a>
+                                                    <a data-placement="top" title="Detail Pesanan" class="btn border-green text-green btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-list3"></i></a>
                                                     <a data-toggle="modal" data-placement="top" title="Lanjutkan Proses Cetak" class="btn btn-success btn-xs" href="wo_next_act.php?id=<?php echo $d['trx_invoice'];?>&&status=2"><i class="fas fa-check-circle fa-lg"></i></a>
                                                 <?php }else{ ?>
                                                 <a data-placement="top" title="Proses Pembayaran" class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="wo_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-pencil"></i></a>

@@ -152,7 +152,6 @@
                     </div>
                 </div>
 			</div>
-
 			<br>
 			<div class="panel">
 				<div class="panel-body">
@@ -200,35 +199,12 @@
 
                 </div>
 			</div>
-
-
-
-
-
-
-
-
-
-
-
 			<!-- Footer -->
 			<div class="footer text-muted">
-
 			</div>
 			<!-- /footer -->
-
 		</div>
 		<!-- /content area -->
-
-
-
-
-
-
-
-
-
-
 	</div>
 	<!-- /main content -->
 

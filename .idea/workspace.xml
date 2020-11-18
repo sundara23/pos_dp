@@ -20,16 +20,16 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/kasir" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/owner" />
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\xampp\htdocs\pos_dp\owner" />
       <recent name="C:\xampp\htdocs\pos_dp\kasir" />
       <recent name="C:\xampp\htdocs\pos_dp\setting" />
       <recent name="C:\xampp\htdocs\pos_dp\produksi" />
       <recent name="C:\xampp\htdocs\pos_dp\bm" />
-      <recent name="C:\xampp\htdocs\pos_dp\owner" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -111,6 +111,16 @@
       <workItem from="1604992663828" duration="1313000" />
       <workItem from="1605019003651" duration="12339000" />
       <workItem from="1605095705973" duration="2788000" />
+      <workItem from="1605118837888" duration="2374000" />
+      <workItem from="1605197268488" duration="8563000" />
+      <workItem from="1605245726538" duration="5773000" />
+      <workItem from="1605273650996" duration="14513000" />
+      <workItem from="1605339137042" duration="636000" />
+      <workItem from="1605372624149" duration="12282000" />
+      <workItem from="1605419113574" duration="26541000" />
+      <workItem from="1605502142590" duration="4774000" />
+      <workItem from="1605529075266" duration="12958000" />
+      <workItem from="1605600848650" duration="2028000" />
     </task>
     <servers />
   </component>
@@ -133,11 +143,6 @@
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="php">
-          <url>file://$PROJECT_DIR$/owner/transaksi.php</url>
-          <line>59</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="php">
           <url>file://$PROJECT_DIR$/owner/transaksi2.php</url>
           <line>38</line>

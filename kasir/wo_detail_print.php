@@ -1,13 +1,4 @@
 <?php include 'header3.php'; ?>
-<?php
-$kdtoko = $_SESSION['kd_toko'];
-$id_admin = $_SESSION['id'];
-if(isset($_GET['id'])){
-    $id_invoice = $_GET['id'];
-}else{
-    header("location:index.php");
-}
-?>
 <html>
 <head>
     <meta charset="utf-8">
@@ -110,6 +101,8 @@ if(isset($_GET['id'])){
 
 <body>
 <?php
+$kdtoko = $_SESSION['kd_toko'];
+$id_admin = $_SESSION['id'];
 if(isset($_GET['id'])){
     $id_invoice = $_GET['id'];
 }else{

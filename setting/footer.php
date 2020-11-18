@@ -6,13 +6,14 @@
 
 
 	<script type="text/javascript">
+        $(document).ready(function() {
+            window.setTimeout(function() {
+                $(".alert").fadeTo(500, 0).slideUp(500, function(){
+                    $(this).remove();
+                });
+            }, 2000);
+        });
 		$(document).ready(function(){
-
-
-			$('body').on("click",".btn-hide-alert",function(){						
-				var alert = $(this).parent();
-				$(alert).slideUp();	
-			});
 
 			$('body').on("click",".btn-delete",function(){
 				var link = $(this).attr('id');

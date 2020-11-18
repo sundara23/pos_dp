@@ -42,7 +42,7 @@ $box = mysqli_fetch_assoc($cashbox);
 					<div class="panel-body">
                         <div class="row">
                             <div class="rw">
-                                <div class="col-md-10">
+                                <div class="col-md-12">
                                         <div class="row">
                                             <div class="col-md-3">
                                                 <div class="form-group">
@@ -66,7 +66,7 @@ $box = mysqli_fetch_assoc($cashbox);
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-2">
                                                 <div class="form-group">
                                                     <div class="input-group date">
                                                         <div class="input-group-addon">
@@ -77,74 +77,105 @@ $box = mysqli_fetch_assoc($cashbox);
 
                                                 </div>
                                             </div>
-                                            <div class="col-md-3">
+                                            <div class="col-md-4">
                                                 <div class="form-goup">
                                                     <a href="arus_uang_export_excel.php?simpan_trx=<?php echo $getcashbox;?>&bulan=<?php echo $getbln;?>&tahun=<?php echo $getthn;?>" class="btn btn-success"><i class="far fa-file-excel"></i> Export excel</a>
+                                                    <a target="_blank" href="arus_uang_export_pdf.php?simpan_trx=<?php echo $getcashbox;?>&bulan=<?php echo $getbln;?>&tahun=<?php echo $getthn;?>" class="btn btn-danger"><i class="fas fa-file-pdf"></i> Export PDF</a>
                                                 </div>
                                             </div>
                                         </div>
                                 </div>
                             </div>
                         </div>
-						<div class="table-responsive">
-							<table class="table table-bordered table-hover table-datatable">
-								<thead>
-									<tr class="bg-grey-300">
-										<th colspan="2" class="text-center">MASUK</th>
-										<th colspan="2" class="text-center">KELUAR</th>
-										<th colspan="2" class="text-center">SALDO</th>
-									</tr>
-                                    <tr>
-                                        <?php
-                                        $kdtoko = $_SESSION['kd_toko'];
-                                        $id_admin = $_SESSION['id'];
-                                        $trx = mysqli_query($config,"select sum(debit) as totalmasuk, sum(kredit) as totalkeluar from arus_kas where kd_toko='$kdtoko' and id_ak = '$getcashbox' and month(tgl_ak)='$getbln' and year(tgl_ak)='$getthn'");
-                                        $total = mysqli_fetch_assoc($trx);
-                                        $totalmasuk= $total['totalmasuk'];
-                                        $totalkeluar = $total['totalkeluar'];
-                                        $saldo = $totalmasuk - $totalkeluar;
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-hover table-datatable">
+                                <thead>
+                                <tr class="bg-grey-300">
+                                    <th colspan="2" class="text-center">MASUK</th>
+                                    <th colspan="2" class="text-center">KELUAR</th>
+                                    <th colspan="2" class="text-center">SALDO</th>
+                                </tr>
+                                <tr>
+                                    <?php
+                                    $kdtoko = $_SESSION['kd_toko'];
+                                    $id_admin = $_SESSION['id'];;
+                                    $masuk = 0;
+                                    $keluar = 0;
+                                    $datamasuk = mysqli_query($config,"select * from arus_kas_subentry where kd_toko='$kdtoko' and ak_tabel_id>'1111' and ak_tabel_id<'1115' and type='0'");
+                                    while($d=mysqli_fetch_array($datamasuk)){
+                                        $data1x = mysqli_query($config,"select * from arus_kas where id_arus_kas='".$d['arus_kas_id']."'");
+                                        $arus_kasx = mysqli_fetch_assoc($data1x);
+                                        if(date('m',strtotime($arus_kasx['tgl_ak'])) == $getbln && date('Y',strtotime($arus_kasx['tgl_ak'])) == $getthn && $d['ak_tabel_id'] == $getcashbox) {
+                                            $masuk += $d['amount'];
+                                        }
+                                    }
+                                    $datakeluar = mysqli_query($config,"select * from arus_kas_subentry where kd_toko='$kdtoko' and ak_tabel_id>'1111' and ak_tabel_id<'1115' and type='1'");
+                                    while($d=mysqli_fetch_array($datakeluar)){
+                                        $data2x = mysqli_query($config,"select * from arus_kas where id_arus_kas='".$d['arus_kas_id']."'");
+                                        $arus_kasxx = mysqli_fetch_assoc($data2x);
+                                        if(date('m',strtotime($arus_kasxx['tgl_ak'])) == $getbln && date('Y',strtotime($arus_kasxx['tgl_ak'])) == $getthn && $d['ak_tabel_id'] == $getcashbox) {
+                                            $keluar += $d['amount'];
+                                        }
+                                    }
+                                    $saldo = $masuk - $keluar;
+                                    ?>
+                                    <th colspan="2" class="text-center text-blue">Rp. <?php echo number_format($masuk); ?></th>
+                                    <th colspan="2" class="text-center text-danger">Rp. <?php echo number_format($keluar); ?></th>
+                                    <th colspan="2" class="text-center text-green-600">Rp. <?php echo number_format($saldo); ?></th>
+                                </tr>
+                                <tr class="bg-grey-300">
+                                    <th colspan="6" class="text-center">DATA TRANSAKSI</th>
+                                </tr>
+                                <tr>
+                                    <th width="1%">No</th>
+                                    <th>Keterangan</th>
+                                    <th>User</th>
+                                    <th>Debit</th>
+                                    <th>Kredit</th>
+                                    <th>Jenis Kas</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <?php
+                                $no = 1;
+                                $kdtoko = $_SESSION['kd_toko'];
+                                //									$data = mysqli_query($config,"select * from arus_kas, admin where arus_kas.admin_by=admin.id and arus_kas.kd_toko='$kdtoko' order by tgl_ak desc");
+                                $data = mysqli_query($config,"select * from arus_kas_subentry where kd_toko='$kdtoko' and ak_tabel_id>'1111' and ak_tabel_id<'1115' order by arus_kas_id desc");
+                                while($d=mysqli_fetch_array($data)){
+                                    $data1 = mysqli_query($config,"select * from arus_kas where id_arus_kas='".$d['arus_kas_id']."'");
+                                    $arus_kas = mysqli_fetch_assoc($data1);
+                                    $data2 = mysqli_query($config,"select * from admin where id='".$arus_kas['admin_by']."'");
+                                    $admin = mysqli_fetch_assoc($data2);
+                                    $data3 = mysqli_query($config,"select * from ak_tabel where id_ak='".$d['ak_tabel_id']."'");
+                                    $ak_tabel = mysqli_fetch_assoc($data3);
+                                    if(date('m',strtotime($arus_kas['tgl_ak'])) == $getbln && date('Y',strtotime($arus_kas['tgl_ak'])) == $getthn && $d['ak_tabel_id'] == $getcashbox) {
                                         ?>
-                                        <th colspan="2" class="text-center text-blue">Rp. <?php echo number_format($totalmasuk); ?></th>
-                                        <th colspan="2" class="text-center text-danger">Rp. <?php echo number_format($totalkeluar); ?></th>
-                                        <th colspan="2" class="text-center text-green-600">Rp. <?php echo number_format($saldo); ?></th>
-                                    </tr>
-                                    <tr class="bg-grey-300">
-                                        <th colspan="6" class="text-center">DATA TRANSAKSI</th>
-                                    </tr>
-                                    <tr>
-                                        <th width="1%">No</th>
-                                        <th>Keterangan</th>
-                                        <th>User</th>
-                                        <th>Debit</th>
-                                        <th>Kredit</th>
-                                        <th>KAS / BANK</th>
-                                    </tr>
-								</thead>
-								<tbody>
-									<?php
-									$no = 1;
-									$kdtoko = $_SESSION['kd_toko'];
-									$data = mysqli_query($config,"select * from arus_kas, kostumer, ak_tabel where arus_kas.id_ak=ak_tabel.id_ak and arus_kas.user=kostumer.kostumer_id and arus_kas.kd_toko='$kdtoko' and arus_kas.id_ak = '$getcashbox' and month(arus_kas.tgl_ak)='$getbln' and year(arus_kas.tgl_ak)='$getthn' order by tgl_ak desc");
-									while($d=mysqli_fetch_array($data)){
-										?>
-										<tr>
-											<td><?php echo $no++; ?></td>
-											<td><?php echo $d['ket_ak'] ?>
+                                        <tr>
+                                            <td><?php echo $no++; ?></td>
+                                            <td width="30%"><?php echo $arus_kas['ket_ak'] ?>
                                                 <br/>
-                                                <small class="text-muted"><?php echo date('d/m/Y',strtotime($d['tgl_ak'])); ?> </small>
+                                                <small class="text-muted"><?php echo date('d/m/Y H:i:s', strtotime($arus_kas['tgl_ak'])); ?> </small>
                                             </td>
-											<td><?php echo $d['kostumer_nama'] ?></td>
-											<td>Rp. <?php echo number_format($d['debit']) ?> </td>
-											<td>Rp. <?php echo number_format($d['kredit']) ?></td>
-											<td> <?php echo $d['nama'] ?></td>
-										</tr>
-										<?php
-									}
-									?>
-								</tbody>
-							</table>
-						</div>					
-					</div>					
+                                            <td><?php echo $admin['nama'] ?></td>
+                                            <td><?php if ($d['type'] == 0) {
+                                                    echo number_format($d['amount']);
+                                                } else {
+                                                    echo '0';
+                                                } ?> </td>
+                                            <td><?php if ($d['type'] == 1) {
+                                                    echo number_format($d['amount']);
+                                                } else {
+                                                    echo '0';
+                                                } ?></td>
+                                            <td> <?php echo $ak_tabel['nama'] ?></td>
+                                        </tr>
+                                        <?php
+                                    } }
+                                ?>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
 				</div>
 			</div>
 		</div>

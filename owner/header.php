@@ -247,7 +247,7 @@
                                 </li>
                                     <li class="nav-item has-treeview">
                                     <a href="#" class="nav-link">
-                                        <i class="nav-icon icon-list"></i>
+                                        <i class="nav-icon far fa-credit-card"></i>
                                         <p>
                                             Transaksi Keuangan
                                         </p>

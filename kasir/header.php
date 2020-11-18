@@ -151,6 +151,28 @@
                                 <?php } ?>
                                 <li><a href="arus_uang.php"><i class="fas fa-th"></i> <span>Arus Uang</span></a></li>
                                 <li><a href="piutang.php"><i class="fas fa-th"></i> <span>Piutang Transaksi</span></a></li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="nav-icon far fa-credit-card"></i>
+                                        <p>
+                                            Transaksi Keuangan
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="pengeluaran.php" class="nav-link">
+                                                <i class="fas fa-external-link-alt nav-icon"></i>
+                                                <p>Pengeluaran Umum</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="pemasukan.php" class="nav-link">
+                                                <i class="fas fa-cloud-download-alt nav-icon"></i>
+                                                <p>Pemasukan Lain-Lain</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
 								<li><a href="logout.php"><i class="icon-switch2"></i> <span>Logout</span></a></li>
 							</ul>
 						</div>

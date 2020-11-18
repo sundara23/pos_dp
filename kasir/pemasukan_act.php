@@ -2,16 +2,26 @@
 
 include '../config.php';
 
-$id_invoice = $_POST['id_invoice'];
 $np = $_POST['nilai_pemasukan'];
 $pemasukan = str_replace(".", "", $np);
 $ket_pemasukan = $_POST['ket_pemasukan'];
-$simpanke = $_POST['simpan_trx'];
-$tgl = date('Y-m-d');
-$trx_admin_id = $_POST['trx_admin_id'];
+$simpanke = $_POST['pemasukan'];
+$datetime = date('Y-m-d H:i:s');
+$trx_admin_id = $_POST['id_admin'];
 $kd_toko= $_POST['kd_toko'];
-//echo $id_invoice.' , '.$piutang.' , '.$simpanke;
+$type = $_POST['type'];
+$jumlahtype = count($type);
 
-mysqli_query($config,"INSERT INTO arus_kas VALUES ('','$tgl','$simpanke','$kd_toko','0','$pemasukan','','0','$ket_pemasukan','$trx_admin_id')");
-
-header("location:arus_uang.php?alert=data-add");
+$data = mysqli_query($config,"INSERT INTO arus_kas VALUES ('','$datetime','$kd_toko','0','$ket_pemasukan','$trx_admin_id')");
+if($data == TRUE){
+    $tampil = mysqli_query($config, "SELECT LAST_INSERT_ID()");
+    while ($r=mysqli_fetch_array($tampil)) {
+        $id = $r[0];
+        for ($x = 0; $x < $jumlahtype; $x++) {
+            mysqli_query($config, "INSERT INTO arus_kas_subentry VALUES ('','$kd_toko','$id','$simpanke[$x]','$pemasukan','$type[$x]')");
+        }
+    }
+    header("location:pemasukan.php?alert=data-add");
+}else{
+    header("location:pemasukan.php?alert=data-kesalahansistem");
+}

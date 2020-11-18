@@ -51,6 +51,13 @@
                                                 $pembayaranpajak = $pembayarandiskon * $d['trx_pajak'] / 100;
                                                 $totalpembayaran = $pembayarandiskon + $pembayaranpajak;
                                                 ?>
+                                                <p><b>
+                                                        <?php if($d['jenis_barang'] == 'CTK'){
+                                                            echo 'Penjualan Percetakan';
+                                                        }else{
+                                                            echo 'Penjualan ATK';
+                                                        } ?>
+                                                    </b></p>
                                                 Rp. <?php echo number_format($totalpembayaran);?>
                                                 <br/>
                                                 <small class="text-muted">Grand Total : Rp. <?php echo $d['trx_total_pembayaran']; ?> </small>
@@ -106,9 +113,9 @@
                                                         <input type="hidden" name="trx_admin_id" value="<?php echo $id_admin; ?>">
                                                         <input type="hidden" name="trx_costumer" value="<?php echo $d['kostumer_id']; ?>">
 
-                                                        <select class="form-control"  name="simpan_trx" required="required">
+                                                        <select class="form-control"  name="simpan_trx[]" required="required">
                                                             <?php
-                                                            $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset'");
+                                                            $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset' and id_ak>'1111' and id_ak<'1115'");
                                                             while($sk=mysqli_fetch_array($simpanke)){
                                                                 ?>
                                                                 <option value="<?php echo $sk['id_ak']; ?>"><?php echo $sk['nama']; ?></option>
@@ -116,6 +123,10 @@
                                                             }
                                                             ?>
                                                         </select>
+                                                        <input type="hidden" name="simpan_trx[]" value="6111">
+                                                        <input type="hidden" name="type[]" value="0">
+                                                        <input type="hidden" name="type[]" value="1">
+                                                        <input type="hidden" name="ket_piutang" value="Pembayaran Piutang Usaha dari <?php echo $d['kostumer_nama'] ?>">
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button class="btn btn-danger" type="submit">Simpan</button>

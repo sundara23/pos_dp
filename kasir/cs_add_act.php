@@ -12,9 +12,11 @@ $ket_produk = $_POST['ket_produk'];
 $datetime = date('Y-m-d H:i:s');
 $tgl = date('Y-m-d');
 
-mysqli_query($config,"INSERT INTO transaksi VALUES ('', '$trx_id', '$kd_toko', '$tgl', '$jns_brg', '', '', '', '', '', '', '','', '8', '$id_admin')");
+$data1 = mysqli_query($config,"INSERT INTO transaksi VALUES ('', '$trx_id', '$kd_toko', '$tgl', '$jns_brg', '', '', '', '', '', '', '','', '8', '$id_admin')");
+$data2 = mysqli_query($config,"INSERT INTO orderan VALUES ('','$kd_toko','$trx_id','$jns_brg','$produk_id','$id_bahan','','','','$ket_produk','','','','','','$datetime','','')");
 
-mysqli_query($config,"INSERT INTO orderan VALUES ('','$kd_toko','$trx_id','$jns_brg','$produk_id','$id_bahan','','','','$ket_produk','','','','','','$datetime','','')");
-
-
-header("location:cs_edit.php?id=$trx_id&alert=data-add");
+if ($data1 == TRUE && $data2 == TRUE ){
+    header("location:cs_edit.php?id=$trx_id&alert=data-add");
+	 }else{
+    header("location:cs_edit.php?id=$trx_id&alert=data-gagal");
+}

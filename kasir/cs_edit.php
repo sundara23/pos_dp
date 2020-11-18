@@ -113,6 +113,8 @@
                                                 echo "Pesanan Selesai";
                                             }else if($d['trx_status']=="9"){
                                                 echo "Dibatalkan";
+                                            }else if($d['trx_status']=="8"){
+                                                echo "Costumer Service";
                                             }
                                             ?>
                                         </td>

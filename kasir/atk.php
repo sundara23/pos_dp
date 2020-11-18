@@ -32,7 +32,7 @@
 									<?php
 									$no = 1;
 									$kdtoko = $_SESSION['kd_toko'];
-									$data = mysqli_query($config,"select * from transaksi where kd_toko='$kdtoko' and jenis_barang='ATK' order by trx_date desc");
+									$data = mysqli_query($config,"select * from transaksi where kd_toko='$kdtoko' and jenis_barang='ATK' and trx_status='1' order by trx_date desc");
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr>
@@ -63,14 +63,33 @@
                                                 <?php
                                                 if($d['trx_total_pembayaran'] != 0 && $d['trx_jenis_pembayaran'] != 0){
                                                     ?>
-                                                    <a data-placement="top" title="Detail Pesanan" class="btn border-green text-green btn-flat btn-icon btn-xs" href="wo_detail.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-list3"></i></a>
-                                                    <a data-toggle="modal" data-placement="top" title="Lanjutkan Proses Cetak" class="btn btn-success btn-xs" href="wo_next_act.php?id=<?php echo $d['trx_invoice'];?>&&status=2"><i class="fas fa-check-circle fa-lg"></i></a>
+                                                    <a data-placement="top" title="Detail Pesanan" class="btn border-green text-green btn-flat btn-icon btn-xs" href="atk_trx_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-list3"></i></a>
+                                                    <a data-toggle="modal" data-placement="top" title="Transaksi Selesai" class="btn btn-success btn-xs" href="atk_next_act.php?id=<?php echo $d['trx_invoice'];?>&&status=3"><i class="fas fa-check-circle fa-lg"></i></a>
                                                 <?php }else{ ?>
                                                 <a data-placement="top" title="Proses Pembayaran" class="btn border-blue text-blue btn-flat btn-icon btn-xs" href="atk_trx_edit.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-pencil"></i></a>
-                                                <a data-placement="top" title="Batalkan pesanan" class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="wo_cancel.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-trash-alt"></i></a>
+                                                <a data-toggle="modal" data-placement="top" title="Batalkan pesanan" class="btn border-danger text-danger btn-flat btn-icon btn-xs" href="#cancel<?php echo $d['trx_invoice'];?>"><i class="icon-trash-alt"></i></a>
                                                 <?php } ?>
                                             </td>
 										</tr>
+                                        <!-- Modal Cancel-->
+                                        <div class="modal fade" id="cancel<?php echo $d['trx_invoice'];?>" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLongTitle">Anda Yakin Ingin Membatalkan Pesanan Ini? </h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <a class="btn btn-danger" href="atk_cancel.php?id=<?php echo $d['trx_invoice'];?>"><i class="icon-trash-alt"></i> Ya</a>
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
 										<?php
 									}
 									?>

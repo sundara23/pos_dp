@@ -14,10 +14,6 @@
 						<h4 class="panel-title">Arus Uang</h4>
 					</div>
 					<div class="panel-body">
-                        <a data-toggle="modal" href="#pengeluaran" class="btn btn-sm btn-primary"><i class="icon-plus22"></i> Pengeluaran Umum </a>
-                        <a data-toggle="modal" href="#pemasukan" class="btn btn-sm btn-primary"><i class="icon-plus22"></i> Pemasukan Lain-lain </a>
-                        <br/>
-                        <br/>
                         <div class="row">
                             <div class="rw">
                                 <div class="col-md-10">
@@ -32,7 +28,7 @@
                                                         <select class="form-control"  name="simpan_trx" required="required">
                                                             <option value="">- Pilih -</option>
                                                             <?php
-                                                            $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset'");
+                                                            $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset' and id_ak>'1111' and id_ak<'1115'");
                                                             while($sk=mysqli_fetch_array($simpanke)){
                                                                 ?>
                                                                 <option value="<?php echo $sk['id_ak']; ?>"><?php echo $sk['nama']; ?></option>
@@ -111,14 +107,16 @@
                                         <?php
                                         $kdtoko = $_SESSION['kd_toko'];
                                         $id_admin = $_SESSION['id'];
-                                        $trx = mysqli_query($config,"select sum(debit) as totalmasuk, sum(kredit) as totalkeluar from arus_kas where kd_toko='$kdtoko'");
-                                        $total = mysqli_fetch_assoc($trx);
-                                        $totalmasuk= $total['totalmasuk'];
-                                        $totalkeluar = $total['totalkeluar'];
-                                        $saldo = $totalmasuk - $totalkeluar;
+                                        $debit = mysqli_query($config,"select sum(amount) as debit from arus_kas_subentry where kd_toko='$kdtoko' and type='0' and ak_tabel_id>'1111' and ak_tabel_id<'1115'");
+                                        $totaldebit = mysqli_fetch_assoc($debit);
+                                        $masuk= $totaldebit['debit'];
+                                        $kredit = mysqli_query($config,"select sum(amount) as kredit from arus_kas_subentry where kd_toko='$kdtoko' and type='1' and ak_tabel_id>'1111' and ak_tabel_id<'1115'");
+                                        $totalkredit = mysqli_fetch_assoc($kredit);
+                                        $keluar= $totalkredit['kredit'];
+                                        $saldo = $masuk - $keluar;
                                         ?>
-                                        <th colspan="2" class="text-center text-blue">Rp. <?php echo number_format($totalmasuk); ?></th>
-                                        <th colspan="2" class="text-center text-danger">Rp. <?php echo number_format($totalkeluar); ?></th>
+                                        <th colspan="2" class="text-center text-blue">Rp. <?php echo number_format($masuk); ?></th>
+                                        <th colspan="2" class="text-center text-danger">Rp. <?php echo number_format($keluar); ?></th>
                                         <th colspan="2" class="text-center text-green-600">Rp. <?php echo number_format($saldo); ?></th>
                                     </tr>
                                     <tr class="bg-grey-300">
@@ -130,26 +128,35 @@
                                         <th>User</th>
                                         <th>Debit</th>
                                         <th>Kredit</th>
-                                        <th>KAS / BANK</th>
+                                        <th>Jenis Kas</th>
                                     </tr>
 								</thead>
 								<tbody>
 									<?php
 									$no = 1;
 									$kdtoko = $_SESSION['kd_toko'];
-									$data = mysqli_query($config,"select * from arus_kas, kostumer, ak_tabel where arus_kas.id_ak=ak_tabel.id_ak and arus_kas.user=kostumer.kostumer_id and arus_kas.kd_toko='$kdtoko' order by tgl_ak desc");
+//									$data = mysqli_query($config,"select * from arus_kas, admin where arus_kas.admin_by=admin.id and arus_kas.kd_toko='$kdtoko' order by tgl_ak desc");
+									$data = mysqli_query($config,"select * from arus_kas_subentry where kd_toko='$kdtoko' and ak_tabel_id>'1111' and ak_tabel_id<'1115' order by arus_kas_id desc");
 									while($d=mysqli_fetch_array($data)){
 										?>
 										<tr>
+                                            <?php
+                                            $data1 = mysqli_query($config,"select * from arus_kas where id_arus_kas='".$d['arus_kas_id']."'");
+                                            $arus_kas = mysqli_fetch_assoc($data1);
+                                            $data2 = mysqli_query($config,"select * from admin where id='".$arus_kas['admin_by']."'");
+                                            $admin = mysqli_fetch_assoc($data2);
+                                            $data3 = mysqli_query($config,"select * from ak_tabel where id_ak='".$d['ak_tabel_id']."'");
+                                            $ak_tabel = mysqli_fetch_assoc($data3);
+                                            ?>
 											<td><?php echo $no++; ?></td>
-											<td><?php echo $d['ket_ak'] ?>
+											<td width="30%"><?php echo $arus_kas['ket_ak'] ?>
                                                 <br/>
-                                                <small class="text-muted"><?php echo date('d/m/Y',strtotime($d['tgl_ak'])); ?> </small>
+                                                <small class="text-muted"><?php echo date('d/m/Y H:i:s',strtotime($arus_kas['tgl_ak'])); ?> </small>
                                             </td>
-											<td><?php echo $d['kostumer_nama'] ?></td>
-											<td>Rp. <?php echo number_format($d['debit']) ?> </td>
-											<td>Rp. <?php echo number_format($d['kredit']) ?></td>
-											<td> <?php echo $d['nama'] ?></td>
+											<td><?php echo $admin['nama'] ?></td>
+											<td><?php if($d['type'] == 0){ echo number_format($d['amount']); } else { echo '0';} ?> </td>
+											<td><?php if($d['type'] == 1){ echo number_format($d['amount']); } else { echo '0';} ?></td>
+											<td> <?php echo $ak_tabel['nama'] ?></td>
 										</tr>
 										<?php
 									}
@@ -165,94 +172,6 @@
 		</div>
 	</div>
 </div>
-    <!-- Modal pengeluaran-->
-    <div class="modal fade" id="pengeluaran" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pengeluaran Umum</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="pengeluaran_act.php" method="post">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>Tanggal : <?php echo date('d/m/Y'); ?></p>
-                                <p>Keterangan</p>
-                                <input type="hidden" name="id_invoice" value="<?php echo $id_invoice; ?>">
-                                <input type="hidden" name="kd_toko" value="<?php echo $kdtoko; ?>">
-                                <input type="hidden" name="trx_admin_id" value="<?php echo $id_admin; ?>">
-                                <p><input type="text" name="ket_pengeluaran" min="0" class="form-control col-md-4"></p>
-                                <p>Nilai (Rp)</p>
-                                <p><input type="number" name="nilai_pengeluaran" min="0" class="form-control col-md-4 mata-uang" onkeyup="inputTerbilang();" ></p>
-                                <p>Diambil Dari</p>
-                                <select class="form-control col-md-4"  name="simpan_trx" required="required">
-                                    <?php
-                                    $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset'");
-                                    while($sk=mysqli_fetch_array($simpanke)){
-                                        ?>
-                                        <option value="<?php echo $sk['id_ak']; ?>"><?php echo $sk['nama']; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Modal Pemasukan-->
-    <div class="modal fade" id="pemasukan" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Tambah Pemasukan Lain-lain</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form action="pemasukan_act.php" method="post">
-                    <div class="modal-body">
-                        <div class="row">
-                            <div class="col-md-4">
-                                <p>Tanggal : <?php echo date('d/m/Y'); ?></p>
-                                <p>Keterangan</p>
-                                <input type="hidden" name="id_invoice" value="<?php echo $id_invoice; ?>">
-                                <input type="hidden" name="kd_toko" value="<?php echo $kdtoko; ?>">
-                                <input type="hidden" name="trx_admin_id" value="<?php echo $id_admin; ?>">
-                                <p><input type="text" name="ket_pemasukan" min="0" class="form-control col-md-4"></p>
-                                <p>Nilai (Rp)</p>
-                                <p><input type="number" name="nilai_pemasukan" min="0" class="form-control col-md-4 mata-uang" onkeyup="inputTerbilang();" ></p>
-                                <p>Simpan Ke</p>
-                                <select class="form-control col-md-4"  name="simpan_trx" required="required">
-                                    <?php
-                                    $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset'");
-                                    while($sk=mysqli_fetch_array($simpanke)){
-                                        ?>
-                                        <option value="<?php echo $sk['id_ak']; ?>"><?php echo $sk['nama']; ?></option>
-                                        <?php
-                                    }
-                                    ?>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Simpan</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tidak</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
     <script src="../assets/js/jquery.mask.min.js"></script>
     <script>
         function inputTerbilang() {

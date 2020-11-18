@@ -38,12 +38,13 @@
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <form action="atk_trx_edit_act.php" method="post">
-                                                    <input type="hidden" class="jenis_barang" name="jenis_barang" value="CTK">
+                                                    <input type="hidden" class="jenis_barang" name="jenis_barang" value="ATK">
                                                     <input type="hidden" class="kd_toko" name="kd_toko" value="<?php echo $_SESSION['kd_toko'];?>">
                                                     <input type="hidden" class="id_admin" name="id_admin" value="<?php echo $_SESSION['id'];?>">
                                                     <div class="table-responsive">
                                                         <table class="table table-bordered">
                                                             <h2>No. Invoice : <b><?php echo $id_invoice; ?></b></h2>
+                                                            <?php if($in['trx_jenis_pembayaran'] == 0){?>
                                                             <tr class="">
                                                                 <input type="hidden" name="id_invoice" value="<?php echo $id_invoice; ?>">
                                                                 <th width="15%">Pilih Produk</th>
@@ -64,6 +65,7 @@
                                                                     <input type="submit" class="form-control btn btn-primary" value="Tambahkan">
                                                                 </td>
                                                             </tr>
+                                                            <?php } ?>
                                                         </table>
                                                     </div>
                                                 </form>
@@ -81,9 +83,13 @@
                                                 <th>PRODUK</th>
                                                 <th>LEVEL HARGA</th>
                                                 <th>QTY</th>
+                                                <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                                 <th>OPSI</th>
+                                                <?php } ?>
                                                 <th>HARGA SUBTOTAL</th>
+                                                <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                                 <th></th>
+                                                <?php } ?>
                                             </tr>
                                             </thead>
                                             <tbody>
@@ -96,9 +102,17 @@
                                                 <form action="atk_trx_hitung.php" method="post">
                                                     <tr>
                                                         <td><?php echo $n; ?></td>
-                                                        <td><?php echo $d['nama_produk'] ?></td>
+                                                        <?php
+                                                        $id_produk = $d['kd_produk'] ;
+                                                        $jumlah_stok_masuk = mysqli_query($config,"select sum(stok) as jml_stok_masuk from data_stok where kd_produk='$id_produk' and stok_masuk='1'");
+                                                        $jumlah_stok_keluar = mysqli_query($config,"select sum(stok) as jml_stok_keluar from data_stok where kd_produk='$id_produk' and stok_keluar='1'");
+                                                        $jmasuk = mysqli_fetch_assoc($jumlah_stok_masuk);
+                                                        $jkeluar = mysqli_fetch_assoc($jumlah_stok_keluar);
+                                                        $jumlah_stok = $jmasuk['jml_stok_masuk'] - $jkeluar['jml_stok_keluar'];
+                                                        ?>
+                                                        <td><?php echo $d['nama_produk'].' - Sisa Stok <b>('.$jumlah_stok.')</b>' ?></td>
                                                         <td width="300px">
-                                                            <select class="form-control" name="level_harga">
+                                                            <select class="form-control" name="level_harga" required="required">
                                                                 <option value="">Pilih -</option>
                                                                 <?php
                                                                 $kdproduk = $d['kd_produk'];
@@ -114,14 +128,18 @@
                                                                 ?>
                                                             </select>
                                                         </td>
-                                                        <td width="150px"><input type="number" name="jumlah_order" value="<?php echo $d['order_qty'] ?>" min="0" class="form-control"></td>
+                                                        <td width="150px"><input type="number" name="jumlah_order" value="<?php echo $d['order_qty'] ?>" min="0" class="form-control" <?php if($in['trx_jenis_pembayaran'] != 0){ echo 'readonly'; }?>></td>
+                                                        <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                                         <td width="100px">
                                                             <input type="hidden" name="id_order_atk" value="<?php echo $d['order_atk_id'] ?>">
                                                             <input type="hidden" name="id_invoice" value="<?php echo $id_invoice ?>">
                                                             <p><input type="submit" value="Hitung" class="btn btn-xs btn-warning"></p>
                                                         </td>
+                                                        <?php } ?>
                                                         <td width="300px">Rp. <?php echo number_format( $d['order_harga_subtotal']) ?></td>
+                                                        <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                                         <td width="50px"><a class="btn border-danger text-danger btn-flat btn-icon btn-xs"  href="atk_order_hapus.php?id=<?php echo $d['order_atk_id'];?>&id_invoice=<?php echo $id_invoice;?>"><i class="icon-trash-alt"></i></a></td>
+                                                        <?php } ?>
                                                     </tr>
                                                 </form>
                                                 <?php
@@ -185,7 +203,7 @@
                                     </form>
                                 </div>
                                 <div class="col-md-4">
-                                    <form action="wo_add_act.php" method="post">
+                                    <form action="atk_add_act.php" method="post">
                                         <a class="pilih-kostumer btn btn-primary btn-sm form-kostumer"><i class="icon-user"></i> Pilih Kostumer</a>
                                         <br><br>
                                         <table class="xxx form-kostumer">
@@ -266,6 +284,7 @@
                                             <td>Rp. <?php echo number_format($grandtotalpajak); ?></td>
                                             <td></td>
                                         </tr>
+                                        <?php if($in['trx_jenis_pembayaran'] == 0){ ?>
                                         <tr>
                                             <td colspan="3"> <a data-toggle="modal" href="#diskon" class="btn btn-primary btn-xs"> Tambah/Edit Diskon</a> <a data-toggle="modal" href="#pajak" class="btn btn-warning btn-xs"> Tambah/Edit Pajak</a></td>
                                         </tr>
@@ -293,9 +312,9 @@
                                         <tr>
                                             <th>Simpan Ke</th>
                                             <td>
-                                                <select class="form-control"  name="simpan_trx" required="required">
+                                                <select class="form-control"  name="simpan_trx[]" required="required">
                                                     <?php
-                                                    $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset'");
+                                                    $simpanke = mysqli_query($config,"select * from ak_tabel where ak_type='Aset' and id_ak>'1111' and id_ak<'1115'");
                                                     while($sk=mysqli_fetch_array($simpanke)){
                                                         ?>
                                                         <option value="<?php echo $sk['id_ak']; ?>"><?php echo $sk['nama']; ?></option>
@@ -305,11 +324,21 @@
                                                 </select>
                                             </td>
                                         </tr>
+                                        <?php } ?>
                                     </table>
 
                                     <br/>
                                     <br/>
+                                    <?php
+                                    $item = mysqli_query($config,"select * from orderan_atk where  order_atk_inv='$id_invoice'");
+                                    while($i=mysqli_fetch_array($item)){ ?>
+                                        <input type="hidden" name="item[]" value="<?php echo $i['kd_produk'] ?>">
+                                        <input type="hidden" name="itemqty[]" value="<?php echo $i['order_qty'] ?>">
+                                    <?php } ?>
                                     <input type="hidden" name="jenis_barang" value="ATK">
+                                    <input type="hidden" name="simpan_trx[]" value="3111">
+                                    <input type="hidden" name="type[]" value="0">
+                                    <input type="hidden" name="type[]" value="1">
                                     <input type="hidden" name="trx_lunas" value="<?php echo $grandtotalpajak; ?>">
                                     <input type="hidden" name="trx_total_pembayaran" value="<?php echo $jumlahtrx; ?>">
                                     <input type="hidden" name="trx_admin_id" value="<?php echo $id_admin; ?>">
@@ -321,8 +350,8 @@
 
                                     }else{
                                         ?>
-                                        <a href="#" class="btn btn-success" id="cetak_nota" ><i class="fas fa-print"></i> Cetak Nota</a>
-                                        <a href="#" class="btn btn-danger" id="download_inv" ><i class="fas fa-download"></i> Download Invoice</a>
+                                        <a target="_blank" href="cetak_nota_atk.php?id=<?php echo $id_invoice; ?>" class="btn btn-success" id="cetak_nota" ><i class="fas fa-print"></i> Cetak Nota</a>
+<!--                                        <a href="#" class="btn btn-danger" id="download_inv" ><i class="fas fa-download"></i> Download Invoice</a>-->
                                     <?php } ?>
                                     <span class="alpaca-float-right"><a href="atk.php" class="btn btn-primary">Kembali</a></span>
 

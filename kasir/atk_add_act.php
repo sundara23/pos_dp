@@ -4,6 +4,9 @@ include '../config.php';
 
 $trx_id = $_POST['trx_id'];
 $kd_toko= $_POST['kd_toko'];
+$item = $_POST['item'];
+$type = $_POST['type'];
+$itemqty = $_POST['itemqty'];
 $jenis_barang = $_POST['jenis_barang'];
 $dp = $_POST['trx_dp'];
 $trx_dp = str_replace(".", "", $dp);
@@ -13,17 +16,49 @@ $trx_total_pembayaran = $_POST['trx_total_pembayaran'];
 $trx_jenis_pembayaran = $_POST['trx_jenis_pembayaran'];
 $trx_admin_id = $_POST['trx_admin_id'];
 $simpan_ke = $_POST['simpan_trx'];
-$ket_ak = $_POST['ket_ak'];
 $sisa = $trx_lunas - $trx_dp;
 $tgl = date('Y-m-d');
+$datetime = date('Y-m-d H:i:s');
+$jumlahitem = count($item);
+$jumlahtype = count($type);
+
 //echo $trx_dp.' , '.$trx_lunas.' , '.$trx_costumer.' , '.$trx_id.' , '.$trx_admin_id.' , '.$trx_jenis_pembayaran.' , '.$trx_total_pembayaran.' , '.$sisa.' , '.$simpan_ke;
 
 if ($trx_jenis_pembayaran == 2 ){
-    mysqli_query($config,"UPDATE transaksi SET jenis_barang='$jenis_barang', trx_dp='$trx_dp', trx_lunas='$trx_lunas', trx_customer='$trx_costumer', trx_ar='$sisa', trx_jenis_pembayaran='$trx_jenis_pembayaran', trx_total_pembayaran='$trx_total_pembayaran', trx_admin_id='$trx_admin_id' WHERE trx_invoice='$trx_id'");
-    mysqli_query($config,"INSERT INTO arus_kas VALUES ('','$tgl','$simpan_ke','$kd_toko','$jenis_barang','$trx_dp','','$trx_costumer','Penjualan ATK Kredit','$trx_admin_id')");
-}else{
-    mysqli_query($config,"UPDATE transaksi SET jenis_barang='$jenis_barang', trx_lunas='$trx_lunas', trx_jenis_pembayaran='$trx_jenis_pembayaran', trx_total_pembayaran='$trx_total_pembayaran', trx_admin_id='$trx_admin_id' WHERE trx_invoice='$trx_id'");
-    mysqli_query($config,"INSERT INTO arus_kas VALUES ('','$tgl','$simpan_ke','$kd_toko','$jenis_barang','$trx_lunas','','0','Penjualan ATK','$trx_admin_id')");
-}
 
-header("location:atk_detail.php?id=$trx_id");
+    $data1 = mysqli_query($config,"UPDATE transaksi SET jenis_barang='$jenis_barang', trx_dp='$trx_dp', trx_lunas='$trx_lunas', trx_customer='$trx_costumer', trx_ar='$sisa', trx_jenis_pembayaran='$trx_jenis_pembayaran', trx_total_pembayaran='$trx_total_pembayaran', trx_admin_id='$trx_admin_id' WHERE trx_invoice='$trx_id'");
+    $data2 = mysqli_query($config,"INSERT INTO arus_kas VALUES ('','$datetime','$kd_toko','$trx_costumer','Penjualan Kredit ATK','$trx_admin_id')");
+    if ($data1 == TRUE && $data2 == TRUE){
+        $tampil = mysqli_query($config, "SELECT LAST_INSERT_ID()");
+        while ($r=mysqli_fetch_array($tampil)){
+            $id = $r[0];
+            for ($x = 0; $x < $jumlahtype; $x++) {
+                mysqli_query($config, "INSERT INTO arus_kas_subentry VALUES ('','$kd_toko','$id','$simpan_ke[$x]','$trx_dp','$type[$x]')");
+            }
+        }
+        for($x=0;$x<$jumlahitem;$x++){
+            mysqli_query($config,"INSERT INTO data_stok VALUES ('','$item[$x]','0','1','$itemqty[$x]','$datetime')");
+        }
+        header("location:piutang_setting.php?id=$trx_id");
+    }else{
+        header("location:atk_trx_edit.php?id=$trx_id&alert=data-kesalahansistem");
+    }
+}else{
+    $data3 = mysqli_query($config,"UPDATE transaksi SET jenis_barang='$jenis_barang', trx_lunas='$trx_lunas', trx_jenis_pembayaran='$trx_jenis_pembayaran', trx_total_pembayaran='$trx_total_pembayaran', trx_admin_id='$trx_admin_id' WHERE trx_invoice='$trx_id'");
+    $data4 = mysqli_query($config,"INSERT INTO arus_kas VALUES ('','$datetime','$kd_toko','$trx_costumer','Penjualan Tunai ATK','$trx_admin_id')");
+    if ($data3 == TRUE && $data4 == TRUE){
+        $tampil = mysqli_query($config, "SELECT LAST_INSERT_ID()");
+        while ($r=mysqli_fetch_array($tampil)) {
+            $id = $r[0];
+            for ($x = 0; $x < $jumlahtype; $x++) {
+                mysqli_query($config, "INSERT INTO arus_kas_subentry VALUES ('','$kd_toko','$id','$simpan_ke[$x]','$trx_lunas','$type[$x]')");
+            }
+        }
+        for($x=0;$x<$jumlahitem;$x++){
+            mysqli_query($config,"INSERT INTO data_stok VALUES ('','$item[$x]','0','1','$itemqty[$x]','$datetime')");
+        }
+        header("location:atk_trx_edit.php?id=$trx_id");
+    }else{
+        header("location:atk_trx_edit.php?id=$trx_id&alert=data-kesalahansistem");
+    }
+}
