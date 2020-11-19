@@ -1,6 +1,6 @@
 <html>
 <head>
-    <title> Faskal Laporan</title>
+    <title> Faskal Laporan Excel</title>
 </head>
 <body>
 
