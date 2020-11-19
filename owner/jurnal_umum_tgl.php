@@ -1,5 +1,6 @@
 <?php include 'header.php'; ?>
 <?php
+$gettoko = $_GET['toko'];
 $getbln = $_GET['bulan'];
 $getthn = $_GET['tahun'];
 function tanggal_indo($tanggal)
@@ -32,6 +33,21 @@ function tanggal_indo($tanggal)
                             <div class="col-md-10">
                                 <form action="jurnal_umum_tgl.php" method="get">
                                     <div class="row">
+                                    <div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            Toko
+                                                        </div>
+                                                        <select name="toko" class="form-control" required="required">
+                                                            <option value="">- Pilih -</option>
+                                                            <option value="faskal01">Faskal 1</option>
+                                                            <option value="faskal02">Faskal 2</option>
+                                                            <option value="all">Semua</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         <div class="col-md-3">
                                             <div class="form-group">
                                                 <div class="input-group date">
@@ -126,7 +142,17 @@ function tanggal_indo($tanggal)
                         <tbody>
                         <?php
                         $no = 1;
+                        if ($gettoko=='all'){
+
                         $aruskas = mysqli_query($config,"select * from arus_kas where month(tgl_ak)='$getbln' and year(tgl_ak)='$getthn' order by tgl_ak desc");
+
+
+                        }else{
+
+
+                         $aruskas = mysqli_query($config,"select * from arus_kas where kd_toko='$gettoko' and month(tgl_ak)='$getbln' and year(tgl_ak)='$getthn' order by tgl_ak desc");
+
+                        }
                         while($ak=mysqli_fetch_array($aruskas)){
                             ?>
                             <tr>

@@ -10,6 +10,21 @@
                                 <div class="col-md-10">
                                     <form action="jurnal_umum_tgl.php" method="get">
                                         <div class="row">
+                                        	<div class="col-md-3">
+                                                <div class="form-group">
+                                                    <div class="input-group date">
+                                                        <div class="input-group-addon">
+                                                            Toko
+                                                        </div>
+                                                        <select name="toko" class="form-control" required="required">
+                                                            <option value="">- Pilih -</option>
+                                                            <option value="faskal01">Faskal 1</option>
+                                                            <option value="faskal02">Faskal 2</option>
+                                                            <option value="all">Semua</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
                                             <div class="col-md-3">
                                                 <div class="form-group">
                                                     <div class="input-group date">
@@ -32,7 +47,6 @@
                                                             <option value="12">Desember</option>
                                                         </select>
                                                     </div>
-
                                                 </div>
                                             </div>
                                             <div class="col-md-3">
