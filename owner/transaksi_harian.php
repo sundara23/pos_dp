@@ -20,11 +20,11 @@ $to = $_GET['to'];
                                         <div class="input-group-addon">
                                             <i class="icon-calendar"></i>
                                         </div>
-                                        <input name="from" class="form-control pull-right tanggal" value="<?php echo $from; ?>" type="text">
+                                        <input name="from" class="form-control pull-right tanggal" value="<?php echo $from; ?>" type="date">
                                         <div class="input-group-addon">
                                             <span>To</span>
                                         </div>
-                                        <input name="to" class="form-control pull-right tanggal" value="<?php echo $to; ?>" type="text">
+                                        <input name="to" class="form-control pull-right tanggal" value="<?php echo $to; ?>" type="date">
                                     </div>
 
                                 </div>

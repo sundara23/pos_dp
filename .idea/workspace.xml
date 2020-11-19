@@ -121,6 +121,8 @@
       <workItem from="1605502142590" duration="4774000" />
       <workItem from="1605529075266" duration="12958000" />
       <workItem from="1605600848650" duration="2028000" />
+      <workItem from="1605724347180" duration="353000" />
+      <workItem from="1605759475942" duration="1065000" />
     </task>
     <servers />
   </component>
@@ -147,6 +149,11 @@
           <url>file://$PROJECT_DIR$/owner/transaksi2.php</url>
           <line>38</line>
           <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/owner/index_tgl.php</url>
+          <line>185</line>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

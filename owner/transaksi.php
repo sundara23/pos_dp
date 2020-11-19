@@ -16,11 +16,11 @@
 											<div class="input-group-addon">
 												<i class="icon-calendar"></i>
 											</div>
-                                            <input name="from" class="form-control pull-right tanggal" value="" type="text">
+                                            <input name="from" class="form-control pull-right tanggal" value="" type="date">
                                             <div class="input-group-addon">
                                                 <span>To</span>
                                             </div>
-                                            <input name="to" class="form-control pull-right tanggal" value="" type="text">
+                                            <input name="to" class="form-control pull-right tanggal" value="" type="date">
 										</div>
 
 									</div>
