@@ -128,6 +128,8 @@ $pdf->SetFont('');
 foreach ($headertrxjdl as $kolomjdl) {
     $pdf->Cell($kolomjdl['length'], 10, $kolomjdl['label'], 1, '0', $kolomjdl['align'], true);
 }
+
+
 $pdf->Ln();
 $pdf->SetFont('Arial','',8);
 $no = 1;

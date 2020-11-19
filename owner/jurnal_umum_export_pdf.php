@@ -21,7 +21,20 @@ function tanggal_indo($tanggal)
     $split = explode('-', $tanggal);
     return $bulan[ (int)$split[0] ];
 }
+
+require_once  '../assets/mpdf7/vendor/autoload.php';
+$mpdf = new \Mpdf\Mpdf();
+$mpdf->AddPageByArray([
+    'margin-left' => 0,
+    'margin-right' => 0,
+    'margin-top' => 0,
+    'margin-bottom' => 0,
+]);
+// Buffer the following html with PHP so we can store it to a variable later
+ob_start();
 ?>
+
+
 <!-- Main content -->
 <div class="content-wrapper">
 
@@ -168,4 +181,15 @@ function tanggal_indo($tanggal)
 </div>
 <!-- /main content -->
 
+<?php
+// Now collect the output buffer into a variable
+$html = ob_get_contents();
+ob_end_clean();
+$nama_file = 'struk-kasir';
+// send the captured HTML from the output buffer to the mPDF class for processing
+$mpdf->WriteHTML($html);
+$mpdf->Output($nama_file."-".date("Y/m/d H:i:s").".pdf" ,'I');
+?>
+
 <?php include 'footer.php'; ?>
+

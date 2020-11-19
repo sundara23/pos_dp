@@ -20,7 +20,7 @@
                                                             <option value="">- Pilih -</option>
                                                             <option value="faskal01">Faskal 1</option>
                                                             <option value="faskal02">Faskal 2</option>
-                                                            <option value="all">Semua</option>
+                                                            <option value="All">Semua</option>
                                                         </select>
                                                     </div>
                                                 </div>
